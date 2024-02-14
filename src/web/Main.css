@@ -1,0 +1,106 @@
+.main-container{
+}
+
+
+.main-start{
+    background-color: #7CD7A0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+.img-logo{
+    width: 300px;
+}
+.text-logo{
+    width: 800px;
+}
+/* .main-start>h1{
+    font-size: 100px;
+} */
+.scrollBtn{
+    color:#FFFEF7;
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 30px;
+    transition: 0.5s;
+}
+.scrollBtn:hover{
+    bottom: 20px;
+}
+
+
+.menu-container{
+    height: 100vh;
+    /* width: 1000px; */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.logo-img{
+    width: 150px;
+}
+.main-menu{
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-menu>li{
+    width: 100%;
+    background-color: rgb(208, 208, 208);
+    height: 250px;
+}
+.main-menu>li>a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+.main-menu>li>a>span{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.info-container{
+    height: 100vh;
+    background-image: url('../web/images/play-dots.png');
+    text-align: center;
+}
+.info-container>div{
+    width: 1000px;
+    margin: auto;
+    padding-top: 100px;
+}
+.info-container>div>p{
+    margin-top: 50px;
+}
+
+.member-container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+.member{
+    display: flex;
+    gap: 200px;
+}
+.member>li{
+    text-align: center;
+}
+.member>li>img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}

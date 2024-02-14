@@ -1,0 +1,41 @@
+.join-container{
+    height: 100vh;
+    /* padding: 200px; */
+    margin: auto;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+}
+.join-container>h1{
+    font-size: 50px;
+}
+.joinBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.inBtn{
+    width: 100px;
+    color: white;
+    background-color: #FF8FAA;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+}
+.upBtn{
+    width: 100px;
+    color: white;
+    background-color: #62AB7F;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+}
