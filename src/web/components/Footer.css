@@ -1,5 +1,5 @@
 footer{
-    padding: 30px;
+    padding: 50px;
     color: white;
     background-color: #718B8B;
     display: flex;
@@ -17,17 +17,38 @@ footer{
     margin-top: 50px;
     width: 100%;
     display: flex;
-    gap: 200px;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0 50px;
 }
 .footer-menu{
     display: flex;
     gap: 100px;
 }
 .footer-icon{
+    display: flex;
+    gap: 20px;
     font-size: 30px;
 }
 
 hr{
     width: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+    .footer-nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        margin-top: 20px;
+    }
+
+    .footer-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
 }

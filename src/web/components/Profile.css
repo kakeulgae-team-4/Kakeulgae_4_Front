@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+    gap: 50px;
+    text-align: center;
+}
+
+.profile-container>div>h1 {
+    font-size: 50px;
+    font-family: 'Cafe24Ssurround';
+}
+.profile-container>div>p {
+    color: gray;
+}
+.profile-container>img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}
+
+.profile-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.profile-btn>button:nth-of-type(1) {
+    width: 120px;
+    color: white;
+    background-color: #FF8FAA;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    border: none;
+}
+.profile-btn>button:nth-of-type(1)>a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+}
+.profile-btn>button:nth-of-type(2) {
+    width: 120px;
+    color: white;
+    background-color: #62AB7F;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    border: none;
+}
+.profile-btn>button:nth-of-type(2)>a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+}
+
+.profile-info {
+    display: flex;
+    gap: 70px;
+}
+.profile-info>div>p {
+    margin-top: 10px;
+}
+.profile-info>div span {
+    color: #FB6A3D;
+    font-weight: bold;
+}

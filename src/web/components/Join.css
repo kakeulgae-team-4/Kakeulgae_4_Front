@@ -1,6 +1,5 @@
 .join-container{
-    height: 100vh;
-    /* padding: 200px; */
+    padding: 100px;
     margin: auto;
     width: 800px;
     display: flex;
@@ -13,29 +12,39 @@
 .join-container>h1{
     font-size: 50px;
 }
-.joinBtn{
+.join-btn{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
 }
-.inBtn{
+.in-btn{
     width: 100px;
     color: white;
     background-color: #FF8FAA;
-    padding: 10px;
     border-radius: 10px;
     font-size: 20px;
     font-weight: bold;
     line-height: 20px;
+    border: none;
 }
-.upBtn{
+.in-btn>a{
+    display: block;
+    width: 100%;
+    padding: 10px;
+}
+.up-btn{
     width: 100px;
     color: white;
     background-color: #62AB7F;
-    padding: 10px;
     border-radius: 10px;
     font-size: 20px;
     font-weight: bold;
     line-height: 20px;
+    border: none;
+}
+.up-btn>a{
+    display: block;
+    width: 100%;
+    padding: 10px;
 }

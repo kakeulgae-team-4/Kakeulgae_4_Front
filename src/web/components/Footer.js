@@ -7,7 +7,6 @@ import textLogo from '../../web/images/text_logo.png';
 const Footer = () => {
     return (
         <footer>
-            {/* <h1>GOAL KEEPER</h1> */}
             <img src={textLogo} alt="" id='text-logo'/>
 
             <div className="footer-nav">
