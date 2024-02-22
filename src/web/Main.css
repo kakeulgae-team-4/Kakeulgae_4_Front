@@ -160,6 +160,7 @@
 }
 .member>li{
     text-align: center;
+    width: calc(100%/5);
 }
 .member>li>img{
     width: 180px;
