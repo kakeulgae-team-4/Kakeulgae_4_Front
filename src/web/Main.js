@@ -58,8 +58,8 @@ const Main = () => {
                         <img src={menu1} alt="" />
                         <div className='menu-info info1'>
                             <span className='menu-title'>관심공고</span>
-                            <h3>관심 키워드를 등록하여 공고를 확인해보세요</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure laborum odio maiores, ipsam illo doloribus nemo</p>
+                            <h3>관심 키워드 등록 후, 공고를 확인해보세요</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         </div>
                         <p className='menu-icon'>📌</p>
                     </a></li>
@@ -67,7 +67,7 @@ const Main = () => {
                         <div className='menu-info info2'>
                             <span className='menu-title'>전체공고</span>
                             <h3>IT 직무 전체 공고를 확인해보세요</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure laborum odio maiores, ipsam illo doloribus nemo</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         </div>
                         <img src={menu2} alt="" />
                         <p className="menu-icon">📑</p>
@@ -79,7 +79,7 @@ const Main = () => {
                         <div className='menu-info info3'>
                             <span className='menu-title'>즐겨찾기</span>
                             <h3>즐겨찾기 목록을 확인해보세요</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure laborum odio maiores, ipsam illo doloribus nemo</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         </div>
                         <p className="menu-icon">⭐</p>
                     </a></li>
@@ -87,7 +87,7 @@ const Main = () => {
                         <div className='menu-info info4'>
                             <span className='menu-title'>캘린더</span>
                             <h3>캘린더로 일정을 한눈에 확인해보세요</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure laborum odio maiores, ipsam illo doloribus nemo</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         </div>
                         <img src={menu4} alt="" />
                         <p className="menu-icon">📆</p>
@@ -104,7 +104,7 @@ const Main = () => {
             </div>
 
             <div className="member-container">
-                <ul className="member member1">
+                <ul className="member">
                     <li>
                         <img src={mem1} alt="" />
                         <h3>Jake Kwon</h3>
@@ -120,8 +120,6 @@ const Main = () => {
                         <h3>Def-heon</h3>
                         <p>developer</p>
                     </li>
-                </ul>
-                <ul className="member member2">
                     <li>
                         <img src={mem4} alt="" />
                         <h3>Bini</h3>
@@ -134,7 +132,7 @@ const Main = () => {
                     </li>
                     <li>
                         <img src={mem6} alt="" />
-                        <h3>koo - tae brother</h3>
+                        <h3>kt-brother</h3>
                         <p>crawling</p>
                     </li>
                 </ul>

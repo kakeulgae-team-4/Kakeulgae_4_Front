@@ -1,7 +1,6 @@
 .join-container{
     padding: 100px;
     margin: auto;
-    width: 800px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,6 +10,9 @@
 }
 .join-container>h1{
     font-size: 50px;
+}
+.join-container>p{
+    width: 800px;
 }
 .join-btn{
     display: flex;
@@ -47,4 +49,12 @@
     display: block;
     width: 100%;
     padding: 10px;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+    .join-container>p {
+        width: 100%;
+    }
 }

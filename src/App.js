@@ -5,7 +5,7 @@ import Footer from './web/components/Footer';
 import Main from './web/Main';
 import Signin from './web/routes/Signin';
 import Signup from './web/routes/Signup';
-import Mypage from './web/components/Mypage';
+import Mypage from './web/routes/Mypage';
 
 const App = () => {
     return (
