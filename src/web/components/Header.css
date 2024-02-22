@@ -35,3 +35,64 @@ header{
 .bell-icon{
     cursor: pointer;
 }
+
+
+.navbar-icon {
+    font-size: 40px;
+    color: #FFFEF7;
+    /* cursor: pointer; */
+    display: none;
+    position: relative;
+    cursor: pointer;
+}
+.toggle-nav>ul {
+    cursor: default;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    padding-top: 50px;
+    gap: 40px;
+    background-color: #7cd7a0b6;
+    font-size: 20px;
+    font-weight: bold;
+}
+.toggle-nav>ul>li>a {
+    transition: .4s;
+}
+.toggle-nav>ul>li>:hover {
+    letter-spacing: .5em;
+    color: #4E4E4E;
+}
+.hide-nav {
+    display: none;
+}
+
+
+@media screen and (max-width: 1000px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-icon {
+        display: block;
+    }
+
+    .navbar {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    header {
+        padding: 30px 20px;
+    }
+    .logo>a>img{
+        width: 300px;
+    }
+}

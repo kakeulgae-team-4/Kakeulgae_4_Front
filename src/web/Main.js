@@ -4,13 +4,8 @@ import mainImg from '../web/images/logo1_1.png';
 import logoImg from '../web/images/logo1.png';
 import textLogo from '../web/images/text_logo.png';
 import textLogo2 from '../web/images/text_logo2.png';
-import profile from '../web/images/cute.jpg';
 import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 import { useRef, useEffect, useState } from 'react';
-import { TbHeartQuestion } from "react-icons/tb";
-import { FaEarthAsia } from "react-icons/fa6";
-import { BsFillBookmarkStarFill } from "react-icons/bs";
-import { IoCalendarOutline } from "react-icons/io5";
 import Join from './components/Join';
 import Profile from './components/Profile';
 
@@ -47,9 +42,9 @@ const Main = () => {
             </div>
 
             {/* 로그인 이후 화면 */}
-            {/* <div>
+            <div>
                 <Profile />
-            </div> */}
+            </div>
 
             <div className="menu-container">
                 <img src={logoImg} alt="" className='logo-img' />
