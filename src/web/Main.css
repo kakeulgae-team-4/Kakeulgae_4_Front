@@ -196,6 +196,9 @@
 }
 
 @media screen and (max-width: 600px) {
+    .img-logo {
+        width: 200px;
+    }
     .text-logo {
         width: 100%;
     }
@@ -212,6 +215,13 @@
         height: 200px;
     }
 
+    .info-container>div>h1 {
+        font-size: 30px;
+    }
+    .info-container>div>img {
+        width: 250px;
+    }
+
     .member-container{
         padding: 50px 0;
     }
@@ -225,5 +235,14 @@
     }
     .member>li>img{
         width: 100px;
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .img-logo {
+        width: 150px;
+    }
+    .text-logo {
+        width: 300px;
     }
 }

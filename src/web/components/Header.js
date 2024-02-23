@@ -8,8 +8,8 @@ import { IoClose } from "react-icons/io5";
 const Header = () => {
     const[menu, setMenu] = useState(false); // 메뉴의 초기값을 false로 설정
     const toggleMenu = () => {
-    setMenu(menu=>!menu); // on, off
-}
+        setMenu(menu=>!menu); // on, off
+    }
 
     const name = '최혜빈';
 
@@ -40,8 +40,8 @@ const Header = () => {
                         <li><a href="">채용공고</a></li>
                         <li><a href="">즐겨찾기</a></li>
                         <li><a href="">캘린더</a></li>
-                        <li><a href="">마이페이지</a></li>
-                        <li><a href="">로그아웃</a></li>
+                        <li><a href="/mypage">마이페이지</a></li>
+                        <li><a href="/">로그아웃</a></li>
                     </ul>
                 </div>
             </span>
