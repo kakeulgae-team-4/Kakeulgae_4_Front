@@ -58,7 +58,7 @@ const Main = () => {
                         </div>
                         <p className='menu-icon'>📌</p>
                     </a></li>
-                    <li className='menu menu2'><a href="">
+                    <li className='menu menu2'><a href="/allrecruit">
                         <div className='menu-info info2'>
                             <span className='menu-title'>전체공고</span>
                             <h3>IT 직무 전체 공고를 확인해보세요</h3>
