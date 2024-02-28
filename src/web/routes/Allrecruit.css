@@ -1,0 +1,17 @@
+.container-box {
+  display: flex;
+  flex-direction: column;
+  justify-content:left;
+  align-items:start;
+  padding: 100px 100px 30px 100px;
+  gap: 10px;
+  text-align: center;
+}
+.container-box > p {
+  color: #5EAEDB;
+  font-weight: 700;
+}
+.container-box > p > span {
+  color: #bebebe;
+  font-weight: 700;
+}
