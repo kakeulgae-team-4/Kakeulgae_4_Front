@@ -34,6 +34,10 @@ hr{
     width: 100%;
 }
 
+footer>p{
+    text-align: center;
+}
+
 @media screen and (max-width: 1000px) {
     .footer-nav {
         display: flex;
@@ -50,5 +54,14 @@ hr{
         align-items: center;
         justify-content: center;
         gap: 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #text-logo {
+        width: 100%;
+    }
+    footer {
+        padding: 50px 10px;
     }
 }
