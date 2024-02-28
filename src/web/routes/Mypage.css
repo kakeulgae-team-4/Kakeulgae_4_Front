@@ -1,0 +1,102 @@
+/* Body 스타일 */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f7fafc; /* Tailwind CSS에서 가져온 배경색 */
+}
+
+/* 프로필 이미지 스타일 */
+.profile-image {
+    width: 200px; /* 프로필 이미지 너비 */
+    height: 200px; /* 프로필 이미지 높이 */
+    border-radius: 50%; /* 원형 모양으로 만듭니다 */
+}
+
+/* 버튼 스타일 */
+.button {
+    background-color: #3b82f6; /* Tailwind CSS에서 가져온 버튼 색상 */
+    color: #ffffff; /* 텍스트 색상 */
+    padding: 0.75rem 1.5rem; /* 내부 여백 */
+    border-radius: 0.375rem; /* 모서리를 둥글게 만듭니다 */
+    transition: background-color 0.2s ease; /* 배경색 전환 애니메이션 */
+}
+
+.button:hover {
+    background-color: #2563eb; /* 호버 시 배경색 전환 */
+}
+
+/* 입력 필드 스타일 */
+.input-field {
+    border: 1px solid #e2e8f0; /* 테두리 스타일 */
+    border-radius: 0.375rem; /* 모서리를 둥글게 만듭니다 */
+    padding: 0.5rem; /* 내부 여백 */
+    width: calc(100% - 2rem); /* 너비를 조정합니다. */
+}
+
+/* 셀렉트 박스 스타일 */
+.select-box {
+    border: 1px solid #e2e8f0; /* 테두리 스타일 */
+    border-radius: 0.375rem; /* 모서리를 둥글게 만듭니다 */
+    padding: 0.5rem; /* 내부 여백 */
+}
+
+/* 체크박스 스타일 */
+.checkbox {
+    margin-right: 0.5rem; /* 오른쪽 여백 */
+}
+
+.mb-4 {
+    display: flex;
+    flex-direction: column;
+}
+
+.mypage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.category-checkbox:checked + label {
+    background-color: #4F46E5;
+    color: white;
+}
+
+/* 추가된 부분 */
+@media screen and (max-width: 768px) {
+    .mypage {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .profile-image {
+        margin-right: 0; /* 작은 화면에서 프로필 이미지와 닉네임이 세로로 배치되도록 설정 */
+        margin-bottom: 20px; /* 프로필 이미지와 닉네임 사이 여백 조정 */
+    }
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .keyword-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .change-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .info-title {
+    text-align: center;
+  }
