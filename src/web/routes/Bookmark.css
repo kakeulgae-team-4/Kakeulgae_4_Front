@@ -1,0 +1,107 @@
+.mainLocation{
+    padding-left: 5%;
+}
+
+.customer{
+    padding: 10px;
+    display: flex;
+    padding-left: 5%;
+}
+
+.customer1{
+    font-weight: bold;
+    color: gray;
+}
+
+.customer2{
+    font-weight: bold;
+    color: violet;
+}
+
+.gelleryandlist{
+    padding-left: 5%;
+    padding-top: 3%;
+    display: flex;
+}
+
+.colorless-button{
+    background-color: transparent;
+    border: none;
+    color:gray;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2rem;
+    font-family: Arial, sans-serif;
+    outline: none;
+}
+
+.search{
+    margin-left: 60%;
+    background-color: lightgray;
+    color: gray;
+    border-radius: 7px;
+    width: 15%;
+    height: 30px;
+    border: none;
+    margin-top: 2%;
+}
+
+.divider{
+    border-top : 1px solid lightgray;
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.search-icon{
+    background-color: transparent;
+    border: none;
+    color:gray;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 25px;
+    font-family: Arial, sans-serif;
+    outline: none;
+    margin-top: 1%;
+}
+
+.galleyLayout {
+    border: 2px solid lightgray;
+    border-radius: 15px;
+    margin-top: 1%;
+    margin-left: 10%;
+    margin-right: 10%;
+    /*padding-left: 5%;*/
+}
+
+.companyname {
+    padding-left: 3%;
+    padding-top: 1%;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.postname {
+    padding-top: 4%;
+    padding-left: 3%;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.deadline {
+    margin-left: 80%;
+    margin-bottom: 1%;
+}
+
+.noBookmark {
+    font-size: 20px;
+    font-weight: 500px;
+    margin-left: 7%;
+    margin-bottom: 10%;
+}
+
+.bottomShape { 
+    margin-bottom: 5%;
+}

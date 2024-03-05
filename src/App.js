@@ -6,6 +6,8 @@ import Main from './web/Main';
 import Signin from './web/routes/Signin';
 import Signup from './web/routes/Signup';
 import Mypage from './web/routes/Mypage';
+import Bookmark from './web/routes/Bookmark';
+import PostBookmark from './web/routes/PostBookmark';
 
 const App = () => {
     return (
@@ -16,6 +18,8 @@ const App = () => {
                     <Route path='/signin' element={<Signin />} />
                     <Route path='/signup' element={<Signup />} />
                     <Route path='/mypage' element={<Mypage />}/>
+                    <Route path='/bookmark' element={<Bookmark />} />
+                    <Route path='/test/bookmark' element={<PostBookmark />} />
                 </Routes>
                 <Footer />
             </div>
