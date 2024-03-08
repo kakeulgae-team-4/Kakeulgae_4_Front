@@ -18,8 +18,8 @@ const Profile = () => {
             <img src={profile} alt="" />
 
             <div className='profile-btn'>
-                <button><a href="/mypage">My Page</a></button>
-                <button><a href="">Log out</a></button>
+                <a href="/mypage">My Page</a>
+                <a href="/">Log out</a>
             </div>
 
             <div className='profile-info'>
