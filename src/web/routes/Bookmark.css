@@ -34,6 +34,23 @@
     font-size: 2rem;
     font-family: Arial, sans-serif;
     outline: none;
+    position: relative;
+    display: inline-block;
+}
+
+.colorless-button::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: gray;
+    transition: width 0.3s ease;
+}
+
+.colorless-button:hover::after{
+    width: 100%;
 }
 
 .search{
@@ -42,16 +59,20 @@
     color: gray;
     border-radius: 7px;
     width: 15%;
-    height: 30px;
+    height: 32px;
     border: none;
+    outline-color: darkgray;
+    float: left;
     margin-top: 2%;
+    line-height: 30px;
+    padding-left: 10px;
 }
+
 
 .divider{
     border-top : 1px solid lightgray;
     margin-left: 6%;
     margin-right: 6%;
-    margin-top: 1%;
     margin-bottom: 1%;
 }
 
@@ -65,6 +86,23 @@
     font-family: Arial, sans-serif;
     outline: none;
     margin-top: 1%;
+    position: relative;
+    display: inline-block;
+}
+
+.search-icon::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: gray;
+    transition: width 0.3s ease;
+}
+
+.search-icon:hover::after{
+    width: 100%;
 }
 
 .galleyLayout {
@@ -98,10 +136,41 @@
 .noBookmark {
     font-size: 20px;
     font-weight: 500px;
-    margin-left: 7%;
-    margin-bottom: 10%;
+    margin-top: 3%;
 }
 
 .bottomShape { 
-    margin-bottom: 5%;
+    margin-bottom: 10%;
+}
+
+.test-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-layout{
+    border: 1px solid lightgray;
+    height: 230px;
+    width: 18%;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, lightgray 70%, white 30%);
+    margin: 0.5%;
+}
+
+.gallery-companyName{
+    margin-top: 60%;
+    margin-left: 3%;
+}
+
+.gallery-postName{
+    padding-left: 3%;
+    padding-top: 2%;
+    font-weight: bold;
+}
+
+.gallery-deadline{
+    font-size: 12px;
+    text-align: right;
+    padding-right: 3%;
 }
