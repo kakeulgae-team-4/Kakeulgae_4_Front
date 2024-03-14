@@ -11,7 +11,7 @@ const Profile = () => {
     return (
         <div className="profile-container">
             <div>
-                <h1>🔔Welcome, {name}</h1>
+                <h1>Welcome, <span>{name}!</span></h1>
                 <p>{email}</p>
             </div>
 
