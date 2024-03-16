@@ -78,7 +78,7 @@ const Main = () => {
                         </div>
                         <p className="menu-icon">⭐</p>
                     </a></li>
-                    <li className='menu menu4'><a href="">
+                    <li className='menu menu4'><a href="/calendar">
                         <div className='menu-info info4'>
                             <span className='menu-title'>캘린더</span>
                             <h3>캘린더로 일정을 한눈에 확인해보세요</h3>
