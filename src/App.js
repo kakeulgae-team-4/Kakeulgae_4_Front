@@ -18,7 +18,7 @@ const App = () => {
                     <Route path='/signin' element={<Signin />} />
                     <Route path='/signup' element={<Signup />} />
                     <Route path='/mypage' element={<Mypage />}/>
-                    <Route path='/bookmark' element={<Bookmark />} />
+                    <Route path='/bookmarks/likes' element={<Bookmark />} />
                     <Route path='/test/bookmark' element={<PostBookmark />} />
                 </Routes>
                 <Footer />

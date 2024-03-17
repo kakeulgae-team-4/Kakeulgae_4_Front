@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Bookmark.css';
+import GalleryComponent from './GalleryComponent.js';
+import ListComponent from './ListComponent.js';
 import Header from '../components/Header';
 import search_icon from '../images/search_icon.png';
 
@@ -10,25 +12,23 @@ const Bookmark = () => {
     const accessToken = '토큰 입력';
 
     useEffect(() => {
-        let i = 1;
         const fetchData = async () => {
             try {
-                const response = await axios.get('bookmark/' + i,
-                    {   
+                const response = await axios.get('/bookmarks/likes',
+                    {
                         params: {
-                            name: name
+                            name : name
                         },
                         headers: {
                           Authorization: `Bearer ${accessToken}`
                         },
                     }
                 );
-                setBookmarkList(response.data);
+                setBookmarkList(response.data.content);
             } catch (error) {
                 console.log('에러 발생:', error);
             }
         };
-
         fetchData();
     }, []);
     
@@ -58,20 +58,9 @@ const Bookmark = () => {
                 <button className='search-icon'><img src={search_icon} alt=""/></button>
             </div>
             <div className='divider'></div>
-            
             {bookmarkList.length > 0 ? (
                 bookmarkList.map((bookmark, index) => (
-                    <div key={index} className='galleyLayout'>
-                        <div className='companyname'>
-                            {bookmark.companyName}
-                        </div>
-                        <div className='postname'>
-                            {bookmark.postName}
-                        </div>
-                        <div className='deadline'>
-                            {bookmark.deadline} 에 마감하는 공고
-                        </div>
-                    </div>
+                    <ListComponent key={index} bookmark={bookmark} /> // 리스트 컴포넌트 실행 -> 즐겨찾기 정보가 필요하므로 bookmark에 즐겨찾기 정보를 담음
                 ))
             ) : (
                 <div className='noBookmark'> 
@@ -81,17 +70,7 @@ const Bookmark = () => {
             <div className='test-container'>
                 {bookmarkList.length > 0 ? (
                     bookmarkList.map((bookmark, index) => (
-                        <div key={index} className='gallery-layout'>
-                            <div className='gallery-companyName'>
-                                {bookmark.companyName}
-                            </div>
-                            <div className='gallery-postName'>
-                                {bookmark.postName}
-                            </div>
-                            <div className='gallery-deadline'>
-                                {bookmark.deadline}
-                            </div>
-                        </div>
+                        <GalleryComponent key={index} bookmark={bookmark} /> // 갤러리 컴포넌트 실행 -> 즐겨찾기 정보가 필요하므로 bookmark에 즐겨찾기 정보를 담음
                     ))
                 ) : (
                     <div className='noBookmark'> 
