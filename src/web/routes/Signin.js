@@ -1,6 +1,7 @@
 import React from 'react'
 import './Signin.css';
 import { FcGoogle } from "react-icons/fc";
+import { signInGoogle } from './firebaseAuth';
 
 const Signin = () => {
     return (
@@ -29,12 +30,13 @@ const Signin = () => {
 
                 <div className="signin-btn">
                     <button>로그인</button>
-                    <button><FcGoogle className='g-icon' />구글로 로그인</button>
+                    <button className='g-signin' onClick={signInGoogle}><FcGoogle className='g-icon' />구글로 로그인</button>
                 </div>
             </form>
 
         </div>
     )
 }
+
 
 export default Signin
