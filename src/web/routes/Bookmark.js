@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Bookmark.css';
-import GalleryComponent from './GalleryComponent.js';
-import ListComponent from './ListComponent.js';
+import GalleryComponent from '../components/GalleryComponent.js';
+import ListComponent from '../components/ListComponent.js';
 import Header from '../components/Header';
 import search_icon from '../images/search_icon.png';
 

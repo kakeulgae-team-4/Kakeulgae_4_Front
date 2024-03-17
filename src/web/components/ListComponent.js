@@ -1,4 +1,4 @@
-import './Bookmark.css';
+import '../routes/Bookmark.css';
 import React from 'react';
 
 const ListComponent = ({bookmark}) => { // 매개변수로 bookmark를 받음. 회사명, 공고명, 마감일 데이터가 담겨 있음.ex) bookmark = { companyName : '우아한 형제들', postName : 'Back 모집', deadlist : '2024-04-15' } 형태로 넣어서 확인 가능
