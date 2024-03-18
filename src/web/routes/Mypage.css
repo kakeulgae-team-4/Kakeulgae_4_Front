@@ -100,3 +100,31 @@ body {
   .info-title {
     text-align: center;
   }
+
+  .alarm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #추가
+  body {
+    font-family: 'Open Sans', sans-serif;
+}
+.notification-item {
+    border-bottom: 1px solid #E5E7EB;
+}
+.notification-item:last-child {
+    border-bottom: none;
+}
+.notification-dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+}
+.unread-dot {
+    background-color: #F59E0B;
+}
+.read-dot {
+    background-color: #9CA3AF;
+}

@@ -158,6 +158,47 @@ const Mypage = () => {
                 </div>
                 <button className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">수정완료</button>
             </div>
+            <div className="container mx-auto px-4 py-8">
+                {/* 주어진 HTML 코드 */}
+
+            <div className='alarm'>                
+                <div className="mb-6">
+                    <h1 className="text-2xl font-bold mb-2">읽지 않은 알림 20개</h1>
+                    <p className="text-sm mb-4">내가 받은 알림 중 아직 읽지않은 알림의 갯수를 표시해줍니다.</p>
+                    <label htmlFor="mark-all-read" className="flex items-center cursor-pointer">
+                        <input id="mark-all-read" type="checkbox" className="form-checkbox h-5 w-5 text-blue-600" />
+                        <span className="ml-2 text-sm">모두 읽음 표시</span>
+                    </label>
+                </div>
+                <div className="mb-6">
+                    <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300">확인</button>
+                </div>
+                <div className="mb-6">
+                    {/* Notifications List */}
+                    <div className="space-y-4" id="notification-list">
+                        {/* Unread Notifications */}
+                        <div className="notification-item flex items-center justify-between py-2">
+                            <span className="notification-dot unread-dot"></span>
+                            <span className="ml-4 flex-1">[현대자동차] 신입공채</span>
+                            <span className="text-sm text-gray-500">1일전</span>
+                        </div>
+                        {/* ... more unread notifications */}
+                        {/* Read Notifications */}
+                        <div className="notification-item flex items-center justify-between py-2">
+                            <span className="notification-dot read-dot"></span>
+                            <span className="ml-4 flex-1">[티웨이] 신입공채</span>
+                            <span className="text-sm text-gray-500">4일전</span>
+                        </div>
+                        {/* ... more read notifications */}
+                    </div>
+                </div>
+                <div className="flex items-center justify-between">
+                    <button className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 transition duration-300">prev</button>
+                    <span className="text-sm">현재 페이지 표시</span>
+                    <button className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 transition duration-300">next</button>
+                </div>
+            </div>
+        </div>
         </div>
     );
 }
