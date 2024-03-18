@@ -14,7 +14,6 @@ const Profile = () => {
 
     const handleLogout = () => {
       setIsLogged(false);
-      // 로그아웃 후 추가적인 동작
     };
 
     return (

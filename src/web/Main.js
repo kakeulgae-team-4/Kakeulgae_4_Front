@@ -9,11 +9,6 @@ import { useRef, useEffect, useState } from 'react';
 import Join from './components/Join';
 import Profile from './components/Profile';
 
-import menu1 from '../web/images/menu1.jpg';
-import menu2 from '../web/images/menu2.jpg';
-import menu3 from '../web/images/menu3.png';
-import menu4 from '../web/images/menu4.jpg';
-
 import mem1 from '../web/images/mem1.jpg';
 import mem2 from '../web/images/mem2.jpg';
 import mem3 from '../web/images/mem3.png';
@@ -21,7 +16,6 @@ import mem4 from '../web/images/mem4.jpg';
 import mem5 from '../web/images/mem5.png';
 import mem6 from '../web/images/mem6.jpg';
 
-import { PiSoccerBallFill } from "react-icons/pi";
 import { useAuth } from './AuthProvider';
 
 const Main = () => {
@@ -50,14 +44,6 @@ const Main = () => {
                     <Join />
                 </div>
             }
-            
-            {/* <div ref={move1}>
-                <Join />
-            </div>
-
-            <div>
-                <Profile />
-            </div> */}
 
             <div className="menu-container">
                 <nav>
