@@ -13,18 +13,19 @@ export const AuthProvider = ({ children }) => {
       if(firebaseUser) { // firebaseUser가 존재하면
         const token = await firebaseUser.getIdToken(); // firebaseUser의 토큰을 가져와서 token 변수에 할당
         defaultHeaders.Authorization = `Bearer ${token}`; // defaultHeaders의 Authorization에 token을 넣어줌
-        const res = await fetch("/api/v1/member/info", {
+        const res = await fetch("http://localhost:8080/api/v1/member/info", {
           method: "GET",
           headers: defaultHeaders,
         });
+        localStorage.setItem("idToken", token); // token을 localStorage에 저장
         if(res.status === 200) {
           const user = await res.json(); // res의 json을 user 변수에 할당
           setUser(user); // setUser 함수를 사용하여 user 상태를 user로 변경
         } else if (res.status === 401) {
           const data = await res.json();
-          if(data.code === "USER_NOT_FOUND") {
+          if(data.code === -13000) {
             setRegisterFormOpen(true); // setRegisterFormOpen 함수를 사용하여 registerFormOpen 상태를 true로 변경
-          } 
+          }
         } 
       } else {
         delete defaultHeaders.Authorizations; // defaultHeaders의 Authorization을 삭제
@@ -34,10 +35,10 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}> // UserContext.Provider를 사용하여 user와 setUser를 value로 넘겨줌
+    <UserContext.Provider value={{ user, setUser }}>
       {(registerFormOpen) ? // registerFormOpen이 true이면 RegisterForm을, 아니면 children을 렌더링
         (<RegisterForm setRegisterFormOpen={setRegisterFormOpen} />) :
-        (children)
+        (children) // children는 App.js에서 AuthProvider로 감싼 컴포넌트
       }
     </UserContext.Provider>
   );

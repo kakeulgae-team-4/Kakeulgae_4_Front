@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './Main.css';
 import mainImg from '../web/images/logo1_1.png';
 import logoImg from '../web/images/logo1.png';
 import textLogo from '../web/images/text_logo.png';
 import textLogo2 from '../web/images/text_logo2.png';
 import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
 import Join from './components/Join';
 import Profile from './components/Profile';
 
@@ -22,8 +22,10 @@ import mem5 from '../web/images/mem5.png';
 import mem6 from '../web/images/mem6.jpg';
 
 import { PiSoccerBallFill } from "react-icons/pi";
+import {UserContext} from "./components/AuthProvider";
 
 const Main = () => {
+    const { user }  = useContext(UserContext);
     const move1 = useRef();  //특정 DOM을 가리킬 때 사용하는 Hook함수
     const moveScroll = () => {    
         move1.current.scrollIntoView({ behavior: 'smooth', block: 'start' });  
@@ -39,14 +41,10 @@ const Main = () => {
             </div>
 
             {/* 로그인 이전 화면 */}
-            <div ref={move1}>
-                <Join />
-            </div>
+            {!user &&<div ref={move1}><Join /></div>}
 
             {/* 로그인 이후 화면 */}
-            <div>
-                <Profile />
-            </div>
+            {user && <Profile />}
 
             <div className="menu-container">
                 <nav>
