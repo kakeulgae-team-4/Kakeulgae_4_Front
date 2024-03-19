@@ -37,9 +37,9 @@ const Header = () => {
                 <div className={menu ? "toggle-nav" : "hide-nav"}>
                     <ul>
                         <li><a href="">관심공고</a></li>
-                        <li><a href="">채용공고</a></li>
+                        <li><a href="/allrecruit">채용공고</a></li>
                         <li><a href="">즐겨찾기</a></li>
-                        <li><a href="">캘린더</a></li>
+                        <li><a href="/calendar">캘린더</a></li>
                         <li><a href="">마이페이지</a></li>
                         <li><a href="">로그아웃</a></li>
                     </ul>
