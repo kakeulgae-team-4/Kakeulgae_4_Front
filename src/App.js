@@ -2,13 +2,13 @@ import React from 'react'
 import './App.css';
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Footer from './web/components/Footer';
-import Filter from './web/components/Filter';
 import Main from './web/Main';
 import Signin from './web/routes/Signin';
 import Signup from './web/routes/Signup';
 import Mypage from './web/routes/Mypage';
 import Allrecruit from './web/routes/Allrecruit';
 import { AuthProvider } from './web/AuthProvider';
+import Calendar from './web/routes/Calendar';
 
 const App = () => {
     return (
@@ -24,6 +24,7 @@ const App = () => {
                     </Routes>
                     <Footer />
                 </AuthProvider>
+
             </div>
         </BrowserRouter>
     )
