@@ -1,11 +1,12 @@
 @font-face {
-    font-family: 'Cafe24Ssurround';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
-    font-weight: normal;
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
     font-style: normal;
 }
 
 .profile-container {
+    color: #363636;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,18 +14,20 @@
     padding: 100px;
     gap: 50px;
     text-align: center;
+    font-family: "SUITE-Regular";
 }
 
 .profile-container>div>h1 {
-    font-size: 50px;
-    font-family: 'Cafe24Ssurround';
+    word-break: keep-all;
 }
 .profile-container>div>p {
+    padding-top: 10px;
     color: gray;
 }
 .profile-container>img {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
     border-radius: 50%;
 }
 
@@ -42,9 +45,9 @@
     font-weight: bold;
     line-height: 20px;
     padding: 10px;
-    color: white;
 }
 .profile-btn>a:nth-of-type(1) {
+    color: white;
     background-color: #FF8FAA;
 }
 .profile-btn>a:nth-of-type(2) {
@@ -65,21 +68,21 @@
 }
 
 
-
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1100px) {
     .profile-container {
         padding: 100px 20px;
     }
-    .profile-container>div>h1 {
-        font-size:25px;
-    }
-    .profile-container>div>p {
-        font-size: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .profile-container {
+        padding: 50px 20px;
+        margin-top: 50px;
     }
 
     .profile-container>img {
-        width: 60%;
-        height: auto;
+        width: 150px;
+        height: 150px;
     }
 
     .profile-btn {
@@ -87,8 +90,6 @@
     }
     .profile-btn>a {
         width: 100%;
-        font-size: 15px;
-        padding: 5px;
     }
 
     .profile-info>div>h3, .profile-info>div>p {

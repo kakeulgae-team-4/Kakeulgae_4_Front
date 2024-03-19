@@ -18,6 +18,7 @@
 }
 
 .main-container{
+    color: #363636;
     width: 100%;
     font-family: "SUITE-Regular";
 }
@@ -180,7 +181,6 @@
 .info-content>p>b {
     font-size: 30px;
     color: #4E4E4E;
-    font-family: "Cafe24Ssurround";
 }
 .info-content>p>span {
     font-weight: bold;
@@ -265,11 +265,15 @@
     .main-start{
         padding: 50px 20px;
     }
+
     .img-logo {
-        width: 100px;
+        width: 60%;
     }
     .text-logo {
         width: 100%;
+    }
+    .scrollBtn {
+        display: none;
     }
 
     .menu-container {
@@ -305,6 +309,9 @@
     }
     .member {
         gap: 100px;
+    }
+    .member>li>a>img{
+        width: 100px;
     }
 }
 
