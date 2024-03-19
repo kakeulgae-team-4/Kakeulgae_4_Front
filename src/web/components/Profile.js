@@ -1,6 +1,8 @@
 import React from 'react'
 import './Profile.css';
 import profile from '../images/cute.jpg';
+import { useAuth } from '../AuthProvider';
+
 
 const Profile = () => {
     const name = '우루루파도';
@@ -8,10 +10,16 @@ const Profile = () => {
     const bookmark = 13;
     const prefer = 159;
 
+    const { setIsLogged } = useAuth();
+
+    const handleLogout = () => {
+      setIsLogged(false);
+    };
+
     return (
         <div className="profile-container">
             <div>
-                <h1>🔔Welcome, {name}</h1>
+                <h1>Welcome, <span>{name}!</span></h1>
                 <p>{email}</p>
             </div>
 
@@ -19,7 +27,7 @@ const Profile = () => {
 
             <div className='profile-btn'>
                 <a href="/mypage">My Page</a>
-                <a href="/">Log out</a>
+                <a href="/" onClick={handleLogout}>Log out</a>
             </div>
 
             <div className='profile-info'>
