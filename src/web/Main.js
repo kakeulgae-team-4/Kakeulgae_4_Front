@@ -9,11 +9,6 @@ import { useRef, useEffect, useState } from 'react';
 import Join from './components/Join';
 import Profile from './components/Profile';
 
-import menu1 from '../web/images/menu1.jpg';
-import menu2 from '../web/images/menu2.jpg';
-import menu3 from '../web/images/menu3.png';
-import menu4 from '../web/images/menu4.jpg';
-
 import mem1 from '../web/images/mem1.jpg';
 import mem2 from '../web/images/mem2.jpg';
 import mem3 from '../web/images/mem3.png';
@@ -21,13 +16,15 @@ import mem4 from '../web/images/mem4.jpg';
 import mem5 from '../web/images/mem5.png';
 import mem6 from '../web/images/mem6.jpg';
 
-import { PiSoccerBallFill } from "react-icons/pi";
+import { useAuth } from './AuthProvider';
 
 const Main = () => {
     const move1 = useRef();  //특정 DOM을 가리킬 때 사용하는 Hook함수
     const moveScroll = () => {    
         move1.current.scrollIntoView({ behavior: 'smooth', block: 'start' });  
     };
+
+    const { isLogged } = useAuth();
 
     return (
         <div className="main-container">
@@ -38,15 +35,15 @@ const Main = () => {
                 <p className='scrollBtn' onClick={moveScroll}><MdOutlineKeyboardDoubleArrowDown /></p>
             </div>
 
-            {/* 로그인 이전 화면 */}
-            <div ref={move1}>
-                <Join />
-            </div>
-
-            {/* 로그인 이후 화면 */}
-            <div>
-                <Profile />
-            </div>
+            
+            { isLogged ? 
+                <div ref={move1}>
+                    <Profile/> 
+                </div> : 
+                <div ref={move1}>
+                    <Join />
+                </div>
+            }
 
             <div className="menu-container">
                 <nav>
@@ -82,7 +79,7 @@ const Main = () => {
                 <div className='info-content'>
                     <img src={logoImg} alt=""/>
                     <p>
-                        <b>IT's G⚽AL KEEPER</b>는 IT 계열 직무를 희망하고 있는 취업 준비생들을 위해 여러 취업 사이트를 취합하여 <span>IT 계열 채용 모집 공고를 한 눈에 볼 수 있도록 제공</span>해주는 플랫폼입니다. 관심 키워드를 설정하면 관심 공고만 따로 확인할 수 있고 즐겨찾기를 등록하여 해당 공고글에 대한 알림을 지속적으로 받을 수 있습니다. 채용 공고를 놓치지 않고 확인할 수 있도록 메일 알림과 사이트 내 알림을 보내줌으로써 관심 공고 확인을 보다 쉽게 접할 수 있습니다.
+                        <b>IT's GOAL KEEPER</b>는 IT 계열 직무를 희망하고 있는 취업 준비생들을 위해 여러 취업 사이트를 취합하여 <span>IT 계열 채용 모집 공고를 한 눈에 볼 수 있도록 제공</span>해주는 플랫폼입니다. 관심 키워드를 설정하면 관심 공고만 따로 확인할 수 있고 즐겨찾기를 등록하여 해당 공고글에 대한 알림을 지속적으로 받을 수 있습니다. 채용 공고를 놓치지 않고 확인할 수 있도록 메일 알림과 사이트 내 알림을 보내줌으로써 관심 공고 확인을 보다 쉽게 접할 수 있습니다.
                     </p>
                 </div>
             </div>
