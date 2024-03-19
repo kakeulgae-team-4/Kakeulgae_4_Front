@@ -1,10 +1,8 @@
 import React, {useContext} from 'react'
 import './Profile.css';
 import profile from '../images/cute.jpg';
-// 생각
-import { useAuth } from '../AuthProvider';
-
 import {UserContext} from "./AuthProvider";
+import {signOut} from "../routes/firebaseAuth";
 
 const Profile = () => {
     const { user }  = useContext(UserContext);
@@ -12,7 +10,6 @@ const Profile = () => {
     const email = user.email;
     const bookmark = 13;
     const prefer = 159;
-
     return (
         <div className="profile-container">
             <div>
@@ -24,8 +21,7 @@ const Profile = () => {
 
             <div className='profile-btn'>
                 <a href="/mypage">My Page</a>
-              //생각
-                <a href="/" onClick={handleLogout}>Log out</a>
+                <a href="/" onClick={signOut}>Log out</a>
             </div>
 
             <div className='profile-info'>

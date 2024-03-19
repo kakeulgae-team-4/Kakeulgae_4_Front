@@ -16,9 +16,7 @@ import mem4 from '../web/images/mem4.jpg';
 import mem5 from '../web/images/mem5.png';
 import mem6 from '../web/images/mem6.jpg';
 
-// 생각
 import {UserContext} from "./components/AuthProvider";
-import { useAuth } from './AuthProvider';
 
 const Main = () => {
     const { user }  = useContext(UserContext);
@@ -26,8 +24,6 @@ const Main = () => {
     const moveScroll = () => {    
         move1.current.scrollIntoView({ behavior: 'smooth', block: 'start' });  
     };
-
-    const { isLogged } = useAuth();
 
     return (
         <div className="main-container">
@@ -38,13 +34,7 @@ const Main = () => {
                 <p className='scrollBtn' onClick={moveScroll}><MdOutlineKeyboardDoubleArrowDown /></p>
             </div>
 
-            {/* 로그인 이전 화면 */}
-            {!user &&<div ref={move1}><Join /></div>}
-
-            {/* 로그인 이후 화면 */}
-            {user && <Profile />}
-            //생각
-            { isLogged ?
+            { user ?
                 <div ref={move1}>
                     <Profile/>
                 </div> :
