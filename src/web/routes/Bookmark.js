@@ -1,37 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Bookmark.css';
-import GalleryComponent from '../components/GalleryComponent.js';
-import ListComponent from '../components/ListComponent.js';
+import Gallery from '../components/Gallery.js';
+import List from '../components/List.js';
 import Header from '../components/Header';
 import search_icon from '../images/search_icon.png';
 
 const Bookmark = () => {
     const name = "백예린"
-    const [bookmarkList, setBookmarkList] = useState([]);
-    const accessToken = '토큰 입력';
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('/bookmarks/likes',
-                    {
-                        params: {
-                            name : name
-                        },
-                        headers: {
-                          Authorization: `Bearer ${accessToken}`
-                        },
-                    }
-                );
-                setBookmarkList(response.data.content);
-            } catch (error) {
-                console.log('에러 발생:', error);
-            }
-        };
-        fetchData();
-    }, []);
-    
+    // test 데이터
+    const bookmarkList = [
+        {
+            companyName : "우아한 형제들",
+            postName : "백엔드 모집",
+            deadline : "2024-03-19",
+            startline : "2024-01-20",
+            career : ["신입", "정규직"],
+            education : "학력무관",
+            jobDetail : ["증강현실", "AI", "메타버스", "Kafka", "docker", "selenium", "데이터베이스"],
+            workTypes : ["정규직", "계약직"]
+        }, {
+            companyName : "토스뱅크",
+            postName : "AI developer",
+            deadline : "2024-04-03",
+            startline : "2024-02-20",
+            career : ["경력"],
+            education : "학력무관",
+            jobDetail : ["ML", "NLP", "Vision", "selenium", "redis"],
+            workTypes : ["정규직"]
+        },  {
+            companyName : "토스뱅크",
+            postName : "AI developer",
+            deadline : "2024-04-03",
+            startline : "2024-02-20",
+            career : ["경력"],
+            education : "학력무관",
+            jobDetail : ["ML", "NLP", "Vision", "selenium", "redis"],
+            workTypes : ["신입"]
+        }
+    ]
+
     return (
         <div>
             <Header />
@@ -59,21 +68,21 @@ const Bookmark = () => {
             </div>
             <div className='divider'></div>
             {bookmarkList.length > 0 ? (
-                bookmarkList.map((bookmark, index) => (
-                    <ListComponent key={index} bookmark={bookmark} /> // 리스트 컴포넌트 실행 -> 즐겨찾기 정보가 필요하므로 bookmark에 즐겨찾기 정보를 담음
+                bookmarkList.map((response, index) => (
+                    <List key={index} response={response} /> // 리스트 컴포넌트 실행 -> 즐겨찾기 정보가 필요하므로 bookmark에 즐겨찾기 정보를 담음
                 ))
             ) : (
-                <div className='noBookmark'> 
+                <div className='noBookmark'>
                     <center>즐겨찾기 공고가 없어요</center>
                 </div>
             )}
             <div className='test-container'>
                 {bookmarkList.length > 0 ? (
-                    bookmarkList.map((bookmark, index) => (
-                        <GalleryComponent key={index} bookmark={bookmark} /> // 갤러리 컴포넌트 실행 -> 즐겨찾기 정보가 필요하므로 bookmark에 즐겨찾기 정보를 담음
+                    bookmarkList.map((response, index) => (
+                        <Gallery key={index} response={response} /> // 갤러리 컴포넌트 실행 -> 즐겨찾기 정보가 필요하므로 bookmark에 즐겨찾기 정보를 담음
                     ))
                 ) : (
-                    <div className='noBookmark'> 
+                    <div className='noBookmark'>
                         <center>즐겨찾기 공고가 없어요</center>
                     </div>
                 )}
