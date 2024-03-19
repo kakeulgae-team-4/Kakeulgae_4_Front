@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
 .signin-container{
     height: 100vh;
     background-color: #7CD7A0;
@@ -5,10 +12,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-family: "SUITE-Regular";
+    color: #4E4E4E;
 }
 
 form {
-    /* padding: 30px 50px; */
     padding: 50px;
     width: 500px;
     background-color: #FFFEF7;
@@ -18,6 +26,10 @@ form {
     align-items: center;
     justify-content: center;
     gap: 30px;
+}
+
+.signin_logo {
+    width: 300px;
 }
 
 .signin-form{
@@ -43,10 +55,16 @@ form {
     border: 1px solid #626262;
     background-color: #FFFEF7;
 }
-.signin-form>ul>li{
+.signin-form>ul{
     display: flex;
+    gap: 40px;
     font-size: 12px;
     color: #626262;
+}
+
+input {
+    outline: none;
+    font-family: "SUITE-Regular";
 }
 
 .signin-btn{
@@ -68,6 +86,7 @@ form {
     cursor: pointer;
     height: 40px;
     line-height: 40px;
+    font-family: "SUITE-Regular";
 }
 .signin-btn>button:nth-child(2){
     width: 100%;
@@ -79,6 +98,7 @@ form {
     height: 40px;
     line-height: 40px;
     position: relative;
+    font-family: "SUITE-Regular";
 }
 .g-icon{
     font-size: 30px;
