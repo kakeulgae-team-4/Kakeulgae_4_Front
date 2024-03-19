@@ -1,6 +1,9 @@
 import React, {useContext} from 'react'
 import './Profile.css';
 import profile from '../images/cute.jpg';
+// 생각
+import { useAuth } from '../AuthProvider';
+
 import {UserContext} from "./AuthProvider";
 
 const Profile = () => {
@@ -13,7 +16,7 @@ const Profile = () => {
     return (
         <div className="profile-container">
             <div>
-                <h1>🔔Welcome, {name}</h1>
+                <h1>Welcome, <span>{name}!</span></h1>
                 <p>{email}</p>
             </div>
 
@@ -21,7 +24,8 @@ const Profile = () => {
 
             <div className='profile-btn'>
                 <a href="/mypage">My Page</a>
-                <a href="/">Log out</a>
+              //생각
+                <a href="/" onClick={handleLogout}>Log out</a>
             </div>
 
             <div className='profile-info'>
