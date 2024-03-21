@@ -78,8 +78,8 @@ const Gallery = ({response}) => { // 매개변수로 response를 받음
                 </div>
                 <div className='gallery-subContainer'>
                     <div className='gallery-jobDetail'>
-                        {response.jobDetail.length > 0 ? (
-                            response.jobDetail.map((response, index) => (
+                        {response.job.length > 0 ? (
+                            response.job.map((response, index) => (
                                 index < 3 ? (
                                     response + ' '
                                 ) : null

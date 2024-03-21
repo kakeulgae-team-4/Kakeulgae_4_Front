@@ -26,7 +26,6 @@ const App = () => {
                     </Routes>
                     <Footer />
                 </AuthProvider>
-
             </div>
         </BrowserRouter>
     )

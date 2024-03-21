@@ -4,7 +4,7 @@ import HeartButton from './HeartButton';
 
 const List = ({response}) => { // 매개변수로 response를 받음
     
-    const parseStartline = parseDateString(response.startline);
+    const parseStartline = parseDateString(response.createAt);
     const parseDeadline = parseDateString(response.deadline);
     const checkToday = dateIsTodayChecking(response.deadline);
 
@@ -74,8 +74,8 @@ const List = ({response}) => { // 매개변수로 response를 받음
                         )}
                     </div>
                     <div className='list-jobDetail'>
-                        {response.jobDetail.length > 0 ? (
-                            response.jobDetail.map((response, index) => (
+                        {response.job.length > 0 ? (
+                            response.job.map((response, index) => (
                                 index < 5 ? (
                                     response + ' '
                                 ) : null
