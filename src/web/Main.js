@@ -8,6 +8,7 @@ import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 import { useRef, useEffect, useState } from 'react';
 import Join from './components/Join';
 import Profile from './components/Profile';
+import Notice from './components/Notice';
 
 import mem1 from '../web/images/mem1.jpg';
 import mem2 from '../web/images/mem2.jpg';
@@ -25,6 +26,18 @@ const Main = () => {
     };
 
     const { isLogged } = useAuth();
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
+    const [isModalOpen, setIsModalOpen] = useState(false); // 모달 표시 여부 관리
+    
+    function handleMenuClick() {
+        if (!isLoggedIn) {
+          // 로그인하지 않았다면 모달을 표시
+          setIsModalOpen(true);
+        } else {
+          // 로그인했다면 페이지 이동 로직 구현
+        }
+    }
 
     return (
         <div className="main-container">
@@ -47,16 +60,16 @@ const Main = () => {
 
             <div className="menu-container">
                 <nav>
-                    <a href="" className='menu-box menu-box1'>
+                    <div className='menu-box menu-box1' onClick={handleMenuClick}>
                         <h3>관심공고</h3>
                         <p>관심 키워드 등록 후, 공고를 확인해보세요</p>
                         <div><span>📌</span></div>
-                    </a>
-                    <a href="/allrecruit" className='menu-box menu-box2'>
+                    </div>
+                    <div className='menu-box menu-box2' onClick={handleMenuClick}>
                         <h3>전체공고</h3>
                         <p>IT 직무 전체 공고를 확인해보세요</p>
                         <div><span>📑</span></div>
-                    </a>
+                    </div>
                     <a href="" className='menu-box menu-box3'>
                         <h3>즐겨찾기</h3>
                         <p>즐겨찾기 목록을 확인해보세요</p>
@@ -67,6 +80,7 @@ const Main = () => {
                         <p>캘린더로 일정을 한눈에 확인해보세요</p>
                         <div><span>📆</span></div>
                     </a>
+                    <Notice isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
                 </nav>
             </div>
 
