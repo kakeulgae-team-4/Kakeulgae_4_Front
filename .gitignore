@@ -26,3 +26,4 @@ src/config/firebaseKey.json
 
 .idea/
 package-lock.json
+yarn.lock
