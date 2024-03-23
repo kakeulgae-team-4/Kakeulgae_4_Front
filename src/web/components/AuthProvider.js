@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
           if(data.code === -13000) {
             setRegisterFormOpen(true); // setRegisterFormOpen 함수를 사용하여 registerFormOpen 상태를 true로 변경
           }
-        } 
+        }
       } else {
         delete defaultHeaders.Authorizations; // defaultHeaders의 Authorization을 삭제
         setUser(null);

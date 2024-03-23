@@ -1,0 +1,148 @@
+.mainLocation{
+    padding-left: 5%;
+}
+
+.customer{
+    padding: 10px;
+    display: flex;
+    padding-left: 5%;
+}
+
+.customer1{
+    font-weight: bold;
+    color: gray;
+}
+
+.customer2{
+    font-weight: bold;
+    color: violet;
+}
+
+.gelleryandlist{
+    padding-left: 5%;
+    padding-top: 3%;
+    display: flex;
+}
+
+.colorless-button{
+    background-color: transparent;
+    border: none;
+    color:gray;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 200%;
+    font-family: Arial, sans-serif;
+    outline: none;
+    position: relative;
+    display: inline-block;
+}
+
+.colorless-button::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: gray;
+    transition: width 0.3s ease;
+}
+
+.colorless-button:hover::after{
+    width: 100%;
+}
+
+.colorless-button.active::after {
+    content: "";
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: gray;
+}
+
+.search{
+    margin-left:55%;
+    background-color: lightgray;
+    color: gray;
+    border-radius: 7px;
+    width: 250px;
+    height: 32px;
+    border: none;
+    outline-color: darkgray;
+    float: left;
+    margin-top: 2%;
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+
+.divider{
+    border-top : 1px solid lightgray;
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-bottom: 1%;
+}
+
+.search-icon{
+    background-color: transparent;
+    border: none;
+    color:gray;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 25px;
+    font-family: Arial, sans-serif;
+    outline: none;
+    margin-top: 1%;
+    position: relative;
+    display: inline-block;
+}
+
+
+.noBookmark {
+    font-size: 20px;
+    font-weight: 500px;
+    margin-top: 3%;
+}
+
+.bottomShape { 
+    margin-bottom: 10%;
+}
+
+.bookmark-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* 왼쪽부터 정렬 */
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.bookmark-container > div {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+}
+
+.bookmark-container-inline{
+    display: initial;
+}
+
+@media screen and (min-width: 650px) and (max-width: 1300px) {
+    .colorless-button {
+        font-size: 170%;
+    }
+    .search{
+        margin-left: 40%;
+        width: 220px;
+    }
+}
+
+@media screen and (min-width: 375px) and (max-width: 650px) {
+    .colorless-button {
+        font-size: 140%;
+    }
+    .search{
+        margin-left: 30%;
+        width: 180%;
+    }
+}
