@@ -2,13 +2,24 @@ import React, {useContext} from 'react'
 import './Profile.css';
 import profile from '../images/cute.jpg';
 import { useAuth } from '../AuthProvider';
+import { UserContext } from '../AuthProvider';
 
 
 const Profile = () => {
-    const name = '우루루파도';
-    const email = 'injung940202@gmail.com';
+    const { user }  = useContext(UserContext);
+
+    const name = user.nickname;
+    const email = user.email;
+    const image = user.image;
     const bookmark = 13;
     const prefer = 159;
+
+    const { setIsLogged } = useAuth();
+
+    const handleLogout = () => {
+      setIsLogged(false);
+    };
+
     return (
         <div className="profile-container">
             <div>
@@ -20,7 +31,7 @@ const Profile = () => {
 
             <div className='profile-btn'>
                 <a href="/mypage">My Page</a>
-                <a href="/" onClick={signOut}>Log out</a>
+                <a href="/" onClick={handleLogout}>Log out</a>
             </div>
 
             <div className='profile-info'>
