@@ -1,4 +1,5 @@
-import {React, useState, useContext, useEffect } from 'react';
+import React from 'react';
+import {useState, useContext, useEffect } from 'react';
 import './Header.css';
 import textLogo from '../images/text_logo.png';
 import { FaUser, FaBell } from "react-icons/fa";
