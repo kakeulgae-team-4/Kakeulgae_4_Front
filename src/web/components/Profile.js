@@ -1,8 +1,8 @@
 import React, {useContext} from 'react'
 import './Profile.css';
 import profile from '../images/cute.jpg';
-import { useAuth } from '../AuthProvider';
-import { UserContext } from '../AuthProvider';
+import { UserContext } from '../components/AuthProvider';
+import {signOut} from "../routes/firebaseAuth";
 
 
 const Profile = () => {
@@ -13,12 +13,6 @@ const Profile = () => {
     const image = user.image;
     const bookmark = 13;
     const prefer = 159;
-
-    const { setIsLogged } = useAuth();
-
-    const handleLogout = () => {
-      setIsLogged(false);
-    };
 
     return (
         <div className="profile-container">
@@ -31,7 +25,7 @@ const Profile = () => {
 
             <div className='profile-btn'>
                 <a href="/mypage">My Page</a>
-                <a href="/" onClick={handleLogout}>Log out</a>
+                <a href="/" onClick={signOut}>Log out</a>
             </div>
 
             <div className='profile-info'>

@@ -17,9 +17,8 @@ import mem4 from '../web/images/mem4.jpg';
 import mem5 from '../web/images/mem5.png';
 import mem6 from '../web/images/mem6.jpg';
 
-import { useAuth } from './AuthProvider';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from './AuthProvider';
+import { UserContext } from './components/AuthProvider';
 
 const Main = () => {
     const { user }  = useContext(UserContext);
@@ -28,15 +27,15 @@ const Main = () => {
         move1.current.scrollIntoView({ behavior: 'smooth', block: 'start' });  
     };
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 표시 여부 관리
     
     const navigate = useNavigate();
     function handleMenuClick(path) {
-        if (!isLoggedIn) {
-          // 로그인하지 않았다면 모달을 표시
-          setIsModalOpen(true);
+        if (!user) {
+            // 로그인하지 않았다면 모달을 표시
+            setIsModalOpen(true);
         } else {
+            // 로그인을 했다면 해당 메뉴 경로로 이동
             navigate(path);
         }
     }
@@ -71,7 +70,7 @@ const Main = () => {
                         <p>IT 직무 전체 공고를 확인해보세요</p>
                         <div><span>📑</span></div>
                     </div>
-                    <div className='menu-box menu-box3' onClick={() => handleMenuClick('/3')}>
+                    <div className='menu-box menu-box3' onClick={() => handleMenuClick('/bookmark')}>
                         <h3>즐겨찾기</h3>
                         <p>즐겨찾기 목록을 확인해보세요</p>
                         <div><span>⭐</span></div>
