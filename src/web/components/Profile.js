@@ -1,4 +1,5 @@
-import React, {useContext} from 'react'
+import React from 'react';
+import {useContext} from 'react'
 import './Profile.css';
 import profile from '../images/cute.jpg';
 import { UserContext } from '../components/AuthProvider';
