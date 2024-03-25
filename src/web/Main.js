@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './Main.css';
 import mainImg from '../web/images/logo1_1.png';
 import logoImg from '../web/images/logo1.png';
@@ -18,29 +18,15 @@ import mem5 from '../web/images/mem5.png';
 import mem6 from '../web/images/mem6.jpg';
 
 import { useAuth } from './AuthProvider';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
+    const { user }  = useContext(UserContext);
     const move1 = useRef();  //특정 DOM을 가리킬 때 사용하는 Hook함수
     const moveScroll = () => {    
         move1.current.scrollIntoView({ behavior: 'smooth', block: 'start' });  
     };
 
     const { isLogged } = useAuth();
-
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
-    const [isModalOpen, setIsModalOpen] = useState(false); // 모달 표시 여부 관리
-    
-    const navigate = useNavigate();
-    function handleMenuClick(path) {
-        if (!isLoggedIn) {
-          // 로그인하지 않았다면 모달을 표시
-          setIsModalOpen(true);
-        } else {
-            navigate(path);
-        }
-    }
 
     return (
         <div className="main-container">
@@ -51,11 +37,10 @@ const Main = () => {
                 <p className='scrollBtn' onClick={moveScroll}><MdOutlineKeyboardDoubleArrowDown /></p>
             </div>
 
-            
-            { isLogged ? 
+            { user ?
                 <div ref={move1}>
-                    <Profile/> 
-                </div> : 
+                    <Profile/>
+                </div> :
                 <div ref={move1}>
                     <Join />
                 </div>
