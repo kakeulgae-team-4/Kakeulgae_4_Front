@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
 
+export const UserContext = React.createContext( null ); // UserContext 생성
+
 export function useAuth() {
     return useContext(AuthContext);
 }

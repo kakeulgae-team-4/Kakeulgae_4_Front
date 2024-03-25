@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import './Notice.css';
 import { IoClose } from "react-icons/io5";
 import noticeImg from '../images/notice.png';

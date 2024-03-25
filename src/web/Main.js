@@ -18,6 +18,8 @@ import mem5 from '../web/images/mem5.png';
 import mem6 from '../web/images/mem6.jpg';
 
 import { useAuth } from './AuthProvider';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
     const move1 = useRef();  //특정 DOM을 가리킬 때 사용하는 Hook함수
@@ -30,12 +32,13 @@ const Main = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 표시 여부 관리
     
-    function handleMenuClick() {
+    const navigate = useNavigate();
+    function handleMenuClick(path) {
         if (!isLoggedIn) {
           // 로그인하지 않았다면 모달을 표시
           setIsModalOpen(true);
         } else {
-          // 로그인했다면 페이지 이동 로직 구현
+            navigate(path);
         }
     }
 
@@ -60,26 +63,26 @@ const Main = () => {
 
             <div className="menu-container">
                 <nav>
-                    <div className='menu-box menu-box1' onClick={handleMenuClick}>
+                    <div className='menu-box menu-box1' onClick={() => handleMenuClick('/1')}>
                         <h3>관심공고</h3>
                         <p>관심 키워드 등록 후, 공고를 확인해보세요</p>
                         <div><span>📌</span></div>
                     </div>
-                    <div className='menu-box menu-box2' onClick={handleMenuClick}>
+                    <div className='menu-box menu-box2' onClick={() => handleMenuClick('/allrecruit')}>
                         <h3>전체공고</h3>
                         <p>IT 직무 전체 공고를 확인해보세요</p>
                         <div><span>📑</span></div>
                     </div>
-                    <a href="" className='menu-box menu-box3'>
+                    <div className='menu-box menu-box3' onClick={() => handleMenuClick('/3')}>
                         <h3>즐겨찾기</h3>
                         <p>즐겨찾기 목록을 확인해보세요</p>
                         <div><span>⭐</span></div>
-                    </a>
-                    <a href="" className='menu-box menu-box4'>
+                    </div>
+                    <div className='menu-box menu-box4' onClick={() => handleMenuClick('/calendar')}>
                         <h3>캘린더</h3>
                         <p>캘린더로 일정을 한눈에 확인해보세요</p>
                         <div><span>📆</span></div>
-                    </a>
+                    </div>
                     <Notice isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
                 </nav>
             </div>
