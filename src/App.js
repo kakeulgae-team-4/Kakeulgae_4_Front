@@ -9,6 +9,7 @@ import Mypage from './web/routes/Mypage';
 import Allrecruit from './web/routes/Allrecruit';
 import { AuthProvider } from './web/AuthProvider';
 import Calendar from './web/routes/Calendar';
+import Bookmark from './web/routes/Bookmark';
 
 const App = () => {
     return (
@@ -21,11 +22,9 @@ const App = () => {
                         <Route path='/signup' element={<Signup />} />
                         <Route path='/mypage' element={<Mypage />}/>
                         <Route path='/allrecruit' element={<Allrecruit />}/>
-                        <Route path='/calendar' element={<Calendar />} />
                     </Routes>
                     <Footer />
                 </AuthProvider>
-
             </div>
         </BrowserRouter>
     )
