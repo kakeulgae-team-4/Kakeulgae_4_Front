@@ -1,12 +1,15 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './Profile.css';
 import profile from '../images/cute.jpg';
-import { useAuth } from '../AuthProvider';
+import { useAuth, UserContext } from '../AuthProvider';
 
 
 const Profile = () => {
-    const name = '우루루파도';
-    const email = 'injung940202@gmail.com';
+    const { user }  = useContext(UserContext);
+
+    const name = user.nickname;
+    const email = user.email;
+    const image = user.image;
     const bookmark = 13;
     const prefer = 159;
 
