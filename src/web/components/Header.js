@@ -8,11 +8,7 @@ import { UserContext } from '../components/AuthProvider';
 import {signOut} from "../routes/firebaseAuth";
 
 const Header = () => {
-    // const { user }  = useContext(UserContext);
-
-    // const name = user.nickname;
-
-     const name = '최혜빈';
+    const { user }  = useContext(UserContext);
 
     const location = useLocation();
     const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -49,8 +45,8 @@ const Header = () => {
                 
                 <div className="user-info">
                     <p><a href="/" onClick={signOut}>로그아웃</a></p>
-                    <p className='myname'><FaUser /> {name}님</p>
-                    <p className='bell-icon'><FaBell /></p>
+                    <a href="/mypage" className='myname'><FaUser /> {/*옵셔널 체이닝*/user?.nickname}님</a>
+                    <a href='/3' className='bell-icon'><FaBell /></a>
                 </div>
             </div>
 
