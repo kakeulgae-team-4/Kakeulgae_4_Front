@@ -1,13 +1,14 @@
 import React from 'react'
 import './Signup.css';
+import text_logo from '../images/text_logo2.png';
 
 const Signup = () => {
     return (
         <div className="signup-container">
 
-            <form action="">
-                <h1>GOAL KEEPER</h1>
-                <p>회원가입</p>
+            <div id='signup-form'>
+                <img src={text_logo} alt="" className='signin_logo'/>
+                <b>회원가입</b>
 
                 <div className="signup-form">
                     <div className="name-form">
@@ -29,7 +30,7 @@ const Signup = () => {
                 </div>
 
                 <div className="next-btn"><button>다음</button></div>
-            </form>
+            </div>
             
         </div>
     )
