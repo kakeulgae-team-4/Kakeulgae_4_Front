@@ -60,7 +60,7 @@ const Main = () => {
                         <p>즐겨찾기 목록을 확인해보세요</p>
                         <div><span>⭐</span></div>
                     </a>
-                    <a href="" className='menu-box menu-box4'>
+                    <a href="calendar" className='menu-box menu-box4'>
                         <h3>캘린더</h3>
                         <p>캘린더로 일정을 한눈에 확인해보세요</p>
                         <div><span>📆</span></div>

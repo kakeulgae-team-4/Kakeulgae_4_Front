@@ -23,6 +23,7 @@ const App = () => {
                         <Route path='/mypage' element={<Mypage />}/>
                         <Route path='/allrecruit' element={<Allrecruit />}/>
                         <Route path='/bookmark' element={<Bookmark />}/>
+                        <Route path='/calendar' element={<Calendar />}/>
                     </Routes>
                     <Footer />
                 </AuthProvider>
