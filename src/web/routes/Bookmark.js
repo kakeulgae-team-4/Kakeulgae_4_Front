@@ -11,7 +11,7 @@ const Bookmark = () => {
     const [bookmarkList, setBookmarkList] = useState([]);
     const [userList, setUserList] = useState([]);
     const [showGallery, setShowGallery] = useState(true);
-    const accessToken = localStorage.getItem('idToken');
+    const accessToken = '토큰';
     console.log(accessToken);
 
     useEffect(() => {
