@@ -22,9 +22,10 @@
   display: flex;
   gap: 15px;
   padding: 30px;
+  position: relative;
 }
 
-.select-box > div {
+.select-box > div:not(.multi-selector) {
   display: flex;
   background-color: white;
   width: 7rem;
@@ -106,7 +107,6 @@
   border: 1px solid #289DDF; /* 선택된 체크마크의 테두리 색 변경 */
 }
 .selected-keywords {
-  width:50%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -127,7 +127,7 @@
 
 .clear-button {
   position: absolute;
-  top: 10;
+  top: 10px;
   right:0;
   align-self: flex-end; /* 버튼을 우측 하단에 위치시킴 */
   padding: 5px 10px;
@@ -139,10 +139,11 @@
   cursor: pointer;
   outline: none;
 }
-.btn-box{
+.filter-btn-box{
   display: flex;
   justify-content: flex-end;
   padding: 0 30px 15px 0;
+  gap: 10px;
 }
 .applyBtn {
   border: 0;
@@ -152,3 +153,30 @@
   font-weight: 600;
   border-radius: 5px;
 }
+
+/*multi-selector*/
+.multi-selector{
+  background-color: white;
+  width: 25rem;
+  height: auto;
+  border-radius: 5px;
+  border: 1px solid #CCCCCC;
+  padding: 20px;
+  index:100; /*위에 뜨도록*/
+  position: absolute;
+  top: 90px;
+}
+.button-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.resetBtn, .clearBtn {
+  border: 0;
+  background-color: #f8f8f8;
+  padding: 10px;
+  font-weight: 600;
+  border-radius: 5px;
+  border: 1px solid #ACACAC;
+}
+

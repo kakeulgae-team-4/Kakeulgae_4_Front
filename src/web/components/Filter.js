@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Filter.css';
 import arrowUp from '../images/arrow-up.png';
+import arrowDown from '../images/arrow-down.png';
 import { auth } from "../routes/firebaseAuth";
 import { defaultHeaders } from "../../config/clientConfig";
 
@@ -56,14 +57,21 @@ const Filter = () => {
           <span>근무형태</span>
           <img src={arrowUp} alt=""/>
         </div>
+        <div className="multi-selector">
+          <div className="item-list-box"></div>
+          <div className="button-box">
+            <button className="resetBtn">초기화</button>
+            <button className="applyBtn">적용하기</button>
+          </div>
+        </div>
       </div>
       <div className="filter">
         <div className="category">
           {Object.keys(categories).map((category, index) => (
-            <button
-              key={index}
-              className={selectedCategory === category ? 'active' : ''}
-              onClick={() => handleCategoryClick(category)}
+              <button
+                  key={index}
+                  className={selectedCategory === category ? 'active' : ''}
+                  onClick={() => handleCategoryClick(category)}
             >
               {category}
             </button>
@@ -88,14 +96,14 @@ const Filter = () => {
             #{keyword}
           </div>
         ))}
-        {selectedKeywords.length > 0 && ( // 선택된 키워드가 있을 때만 초기화 버튼 표시
-          <button onClick={clearSelectedItems} className="clear-button">초기화</button>
-        )}
       </div>
-      <div className="btn-box">
+      <div className="filter-btn-box">
+        {selectedKeywords.length > 0 && ( // 선택된 키워드가 있을 때만 초기화 버튼 표시
+            <button onClick={clearSelectedItems} className="clearBtn">초기화</button>
+        )}
         <button className="applyBtn">적용하기</button>
       </div>
-      
+
     </div>
   );
 };
