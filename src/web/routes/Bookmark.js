@@ -12,6 +12,7 @@ const Bookmark = () => {
     const [userList, setUserList] = useState([]);
     const [showGallery, setShowGallery] = useState(true);
     const accessToken = '토큰';
+    console.log(accessToken);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,7 +21,7 @@ const Bookmark = () => {
                     {
                         headers: {
                           Authorization: `Bearer ${accessToken}`
-                        },                                                                                                                                                            
+                        },                                                                                     
                     }
                 );
                 const user = await axios.get('http://localhost:8080/api/v1/member/info',

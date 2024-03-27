@@ -123,6 +123,9 @@
     position: relative;
     width: 100%;
 }
+.menu-box {
+    cursor: pointer;
+}
 .menu-box:hover {
     outline: 3px solid lightgray;
 }

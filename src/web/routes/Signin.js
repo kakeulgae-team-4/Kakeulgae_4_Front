@@ -16,7 +16,7 @@ const Signin = () => {
     return (
         <div className="signin-container">
 
-            <form action="">
+            <div id='signin-form'>
                 <img src={text_logo} alt="" className='signin_logo'/>
                 <b>로그인</b>
 
@@ -36,13 +36,14 @@ const Signin = () => {
                         <li><a href="">비밀번호 찾기</a></li>
                     </ul>
                 </div>
-            </form>
+
                 <div className="signin-btn">
                     <button>로그인</button>
                     <button className='g-signin' onClick={signInGoogle}>
                         <FcGoogle className='g-icon'/>구글로 로그인
                     </button>
                 </div>
+            </div>
         </div>
     )
 }
