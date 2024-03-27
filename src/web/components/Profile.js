@@ -1,15 +1,20 @@
-import React, {useContext} from 'react'
+import React from 'react';
+import {useContext} from 'react'
 import './Profile.css';
 import profile from '../images/cute.jpg';
-import {UserContext} from "./AuthProvider";
+import { UserContext } from '../components/AuthProvider';
 import {signOut} from "../routes/firebaseAuth";
+
 
 const Profile = () => {
     const { user }  = useContext(UserContext);
+
     const name = user.nickname;
     const email = user.email;
+    const image = user.image;
     const bookmark = 13;
     const prefer = 159;
+
     return (
         <div className="profile-container">
             <div>

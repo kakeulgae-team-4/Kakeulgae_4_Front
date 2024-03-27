@@ -1,17 +1,34 @@
-import {React, useState} from 'react';
+import React from 'react';
+import {useState, useContext, useEffect } from 'react';
 import './Header.css';
 import textLogo from '../images/text_logo.png';
 import { FaUser, FaBell } from "react-icons/fa";
-import { FiMenu } from "react-icons/fi";
-import { IoClose } from "react-icons/io5";
+import { IoMdArrowDropdown } from "react-icons/io";
+import { NavLink, useLocation } from 'react-router-dom';
+import { UserContext } from '../components/AuthProvider';
+import {signOut} from "../routes/firebaseAuth";
 
 const Header = () => {
-    const[menu, setMenu] = useState(false); // 메뉴의 초기값을 false로 설정
-    const toggleMenu = () => {
-    setMenu(menu=>!menu); // on, off
-}
+    const { user }  = useContext(UserContext);
 
-    const name = '최혜빈';
+    const location = useLocation();
+    const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [activeMenu, setActiveMenu] = useState('');
+
+    const menuItems = [
+        { name: '관심공고', path: '/1' },
+        { name: '채용공고', path: '/allrecruit' },
+        { name: '즐겨찾기', path: '/bookmark' },
+        { name: '캘린더', path: '/calendar' },
+        { name: '마이페이지', path: '/mypage' },
+        { name: '알림함', path: '/3' },
+        { name: '로그아웃', path: '/' },
+    ];
+
+    useEffect(() => {
+        const currentMenu = menuItems.find(menu => location.pathname.includes(menu.path));
+        setActiveMenu(currentMenu ? currentMenu.name : '메뉴');
+    }, [location]);
 
     return (
         <header>
@@ -19,47 +36,49 @@ const Header = () => {
                 <a href="/"><img src={textLogo} alt="" /></a>
             </div>
 
-
-            <span className='navbar-icon' onClick={()=>{
-                toggleMenu()
-            }}>
-                {
-                    menu ? (
-                        <span className='close-btn'>
-                            <IoClose />
-                        </span>
-                    ) : (
-                        <span className='menu-btn'>
-                            <FiMenu />
-                        </span>
-                    )
-                }
-                <div className={menu ? "toggle-nav" : "hide-nav"}>
-                    <ul>
-                        <li><a href="">관심공고</a></li>
-                        <li><a href="/allrecruit">채용공고</a></li>
-                        <li><a href="">즐겨찾기</a></li>
-                        <li><a href="/calendar">캘린더</a></li>
-                        <li><a href="">마이페이지</a></li>
-                        <li><a href="">로그아웃</a></li>
-                    </ul>
-                </div>
-            </span>
-
             <div className="navbar">
                 <ul>
                     <li><a href="">관심공고</a></li>
-                    <li><a href="">채용공고</a></li>
-                    <li><a href="">즐겨찾기</a></li>
-                    <li><a href="">캘린더</a></li>
+                    <li><a href="/allrecruit">채용공고</a></li>
+                    <li><a href="/bookmark">즐겨찾기</a></li>
+                    <li><a href="/calendar">캘린더</a></li>
                 </ul>
                 
                 <div className="user-info">
-                    <p><a href="/">로그아웃</a></p>
-                    <p className='myname'><FaUser /> {name}님</p>
-                    <p className='bell-icon'><FaBell /></p>
+                    <p><a href="/" onClick={signOut}>로그아웃</a></p>
+                    <a href="/mypage" className='myname'><FaUser /> {/*옵셔널 체이닝*/user?.nickname}님</a>
+                    <a href='/3' className='bell-icon'><FaBell /></a>
                 </div>
             </div>
+
+            <div className="mini-nav" onClick={() => setDropdownVisible(!dropdownVisible)}>
+                <div className='mini-content'>
+                    {activeMenu}
+                    <IoMdArrowDropdown />
+                </div>
+                {dropdownVisible && (
+                    <ul className="dropdown">
+                    {menuItems.map((item, index) => {
+                        // 로그아웃에 대한 특별 처리
+                        if(item.name === '로그아웃') {
+                            return (
+                                <li key={index} onClick={signOut}>
+                                    <a href="/" onClick={signOut}>{item.name}</a>
+                                </li>
+                            );
+                        }
+                        return(
+                            <li key={index}>
+                            <NavLink to={item.path} onClick={() => setDropdownVisible(false)}>
+                                {item.name}
+                            </NavLink>
+                            </li>
+                        );
+                    })}
+                    </ul>
+                )}
+            </div>
+
         </header>
     )
 }
