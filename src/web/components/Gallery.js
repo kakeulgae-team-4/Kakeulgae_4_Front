@@ -2,7 +2,7 @@ import './Gallery.css';
 import React from 'react';
 import HeartButton from './HeartButton';
 
-const Gallery = ({response, token}) => { // 매개변수로 response를 받음
+const Gallery = ({response, token, status}) => { // 매개변수로 response를 받음
     
     const parseDeadline = parseDateString(response.deadline);
     const checkToday = dateIsTodayChecking(response.deadline);
@@ -43,19 +43,19 @@ const Gallery = ({response, token}) => { // 매개변수로 response를 받음
     }
 
     return (
-        <div className='gt-startBox'  onClick={handleRedirect}>
+        <div className='gt-startBox'>
             <div className='gt-firstBox'>
                 <button className='gallery-heart'>
-                    <HeartButton postId={response.id} token={token} status={true}/>
+                    <HeartButton postId={response.id} token={token} status={status}/>
                 </button>
             </div>
             <div className='gt-secondBox'>
             <div className='gallery-container'>
-                <div className='gallery-postName'>
+                <div className='gallery-postName' onClick={handleRedirect}>
                     {response.postName + '(' + response.companyName + ')'}
                 </div>
                 <div className='gallery-deadline'>
-                    {'~ ' + parseDeadline}
+                    {'~' + parseDeadline}
                 </div>
             </div>
                 <div className='gallery-career'>

@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../routes/Bookmark.css';
+import emptyStar from '../images/emptyStar.png';
+import realStart from '../images/realStart.png';
 
-function HeartButton({ postId, token, status }) {
-    let [clicked, setClicked] = useState(false);
-
-    if(status === true){
-        clicked = true;
-    }
-
+function HeartButton({ postId, token, status }) { // status에는 현재 하트가 빨강이어야 하면 true, 비어있어야하면 false를 담는다
+    let [clicked, setClicked] = useState(status);
+    
     const toggleHeart = async () => {
         setClicked(!clicked);
         if (!clicked) {
@@ -49,7 +47,7 @@ const deleteHeart = async (postId, token) => {
 
     return (
         <button className={clicked ? 'list-heart clicked' : 'list-heart'} onClick={toggleHeart}>
-            {clicked ? '❤️' : '🤍'}
+            <img src={clicked ? realStart : emptyStar} alt="heart" />
         </button>
     );
 }

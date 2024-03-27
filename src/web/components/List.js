@@ -2,8 +2,8 @@ import './List.css';
 import React from 'react';
 import HeartButton from './HeartButton';
 
-const List = ({response, token}) => { // 매개변수로 response를 받음
-    
+const List = ({response, token, status}) => { // 매개변수로 response를 받음
+
     const parseStartline = parseDateString(response.createdAt);
     const parseDeadline = parseDateString(response.deadline);
     const checkToday = dateIsTodayChecking(response.deadline);
@@ -44,7 +44,7 @@ const List = ({response, token}) => { // 매개변수로 response를 받음
     }
 
     return (
-        <div className='list-layout' onClick={handleRedirect}>
+        <div className='list-layout'>
             <div className='list-container'>
                 <div className='list-companyname'>
                     {response.companyName}
@@ -53,8 +53,12 @@ const List = ({response, token}) => { // 매개변수로 response를 받음
                 </div>
                 <div className='list-subContainer'>
                     <div className='list-postname'>
-                        <HeartButton postId={response.id} token={token} status={true}/>
-                        {' ' + response.postName}
+                        <div>
+                            <HeartButton postId={response.id} token={token} status={status}/>
+                        </div>
+                        <div className='list-postname-right' onClick={handleRedirect}>
+                            {' ' + response.postName}
+                        </div>
                     </div>
                     <div className='list-career'>
                         {response.careers.length > 0 ? (

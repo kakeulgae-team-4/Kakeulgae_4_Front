@@ -63,8 +63,8 @@
 }
 
 .search{
-    margin-left:55%;
-    background-color: lightgray;
+    margin-left:45.4%;
+     background-color: lightgray;
     color: gray;
     border-radius: 7px;
     width: 250px;
@@ -72,8 +72,7 @@
     border: none;
     outline-color: darkgray;
     float: left;
-    margin-top: 2%;
-    line-height: 30px;
+    margin-top: 1.5%;
     padding-left: 10px;
 }
 
@@ -116,6 +115,7 @@
     justify-content: flex-start; /* 왼쪽부터 정렬 */
     margin-left: 10%;
     margin-right: 10%;
+    
 }
 
 .bookmark-container > div {
@@ -125,6 +125,11 @@
 
 .bookmark-container-inline{
     display: initial;
+}
+
+.selectBox-container{
+    height: 60px;
+    line-height: 68px;
 }
 
 @media screen and (min-width: 650px) and (max-width: 1300px) {

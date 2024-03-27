@@ -25,3 +25,5 @@ yarn-error.log*
 src/config/firebaseKey.json
 
 .idea/
+
+src/package-lock.json
