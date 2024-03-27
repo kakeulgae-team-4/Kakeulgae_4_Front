@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { UserContext } from '../components/AuthProvider';
 import { defaultHeaders } from '../../config/clientConfig';
+import './RegisterForm.css';
 
 const RegisterForm =  ({ setRegisterFormOpen }) => { 
   const { setUser } = useContext(UserContext); // UserContext에서 setUser를 가져옴
@@ -24,18 +25,19 @@ const RegisterForm =  ({ setRegisterFormOpen }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className='register-container'>
+      <form onSubmit={handleSubmit} className='register-form'>
+        <h3>구글 로그인</h3>
         <input type='hidden' name='idToken' value={localStorage.getItem('idToken')} />
-        <label className='nickname'>
-             Enter your nickname
-        </label>
-        <input className='nickname' type='text' name='nickname' />
-        <label className='email'>
-             Enter your email
-        </label>
-        <input className='email' type='email' name='email' />
-        <input className='signup' type='submit' value='Sign up' />
+        <div className="nickname-form">
+          <p>닉네임</p>
+          <input className='nickname' type='text' name='nickname' placeholder='사용할 닉네임을 입력해주세요.'/>
+        </div>
+        <div className="email-form">
+          <p>이메일</p>
+          <input className='email' type='email' name='email' placeholder='알림 받을 이메일을 입력해주세요.'/>
+        </div>
+        <button className='register-btn'>가입하기</button>
       </form>
     </div>
   );
