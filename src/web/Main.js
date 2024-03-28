@@ -8,6 +8,7 @@ import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 import { useRef, useEffect, useState } from 'react';
 import Join from './components/Join';
 import Profile from './components/Profile';
+import Notice from './components/Notice';
 
 import mem1 from '../web/images/mem1.jpg';
 import mem2 from '../web/images/mem2.jpg';
@@ -16,7 +17,8 @@ import mem4 from '../web/images/mem4.jpg';
 import mem5 from '../web/images/mem5.png';
 import mem6 from '../web/images/mem6.jpg';
 
-import {UserContext} from "./components/AuthProvider";
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from './components/AuthProvider';
 
 const Main = () => {
     const { user }  = useContext(UserContext);
@@ -24,6 +26,19 @@ const Main = () => {
     const moveScroll = () => {    
         move1.current.scrollIntoView({ behavior: 'smooth', block: 'start' });  
     };
+
+    const [isModalOpen, setIsModalOpen] = useState(false); // 모달 표시 여부 관리
+    
+    const navigate = useNavigate();
+    function handleMenuClick(path) {
+        if (!user) {
+            // 로그인하지 않았다면 모달을 표시
+            setIsModalOpen(true);
+        } else {
+            // 로그인을 했다면 해당 메뉴 경로로 이동
+            navigate(path);
+        }
+    }
 
     return (
         <div className="main-container">
@@ -45,26 +60,27 @@ const Main = () => {
 
             <div className="menu-container">
                 <nav>
-                    <a href="" className='menu-box menu-box1'>
+                    <div className='menu-box menu-box1' onClick={() => handleMenuClick('/1')}>
                         <h3>관심공고</h3>
                         <p>관심 키워드 등록 후, 공고를 확인해보세요</p>
                         <div><span>📌</span></div>
-                    </a>
-                    <a href="/allrecruit" className='menu-box menu-box2'>
+                    </div>
+                    <div className='menu-box menu-box2' onClick={() => handleMenuClick('/allrecruit')}>
                         <h3>전체공고</h3>
                         <p>IT 직무 전체 공고를 확인해보세요</p>
                         <div><span>📑</span></div>
-                    </a>
-                    <a href="" className='menu-box menu-box3'>
+                    </div>
+                    <div className='menu-box menu-box3' onClick={() => handleMenuClick('/bookmark')}>
                         <h3>즐겨찾기</h3>
                         <p>즐겨찾기 목록을 확인해보세요</p>
                         <div><span>⭐</span></div>
-                    </a>
-                    <a href="" className='menu-box menu-box4'>
+                    </div>
+                    <div className='menu-box menu-box4' onClick={() => handleMenuClick('/calendar')}>
                         <h3>캘린더</h3>
                         <p>캘린더로 일정을 한눈에 확인해보세요</p>
                         <div><span>📆</span></div>
-                    </a>
+                    </div>
+                    <Notice isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
                 </nav>
             </div>
 

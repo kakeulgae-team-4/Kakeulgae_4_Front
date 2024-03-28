@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { auth } from "../routes/firebaseAuth";
-import RegisterForm from "./RegisterForm";
-import { defaultHeaders } from "../../config/clientConfig";
+import React, { useEffect, useState } from 'react';
+import { auth } from '../routes/firebaseAuth';
+import RegisterForm from './RegisterForm';
+import { defaultHeaders } from '../../config/clientConfig';
 
 export const UserContext = React.createContext( null ); // UserContext 생성
 export const AuthProvider = ({ children }) => {
@@ -13,11 +13,11 @@ export const AuthProvider = ({ children }) => {
       if(firebaseUser) { // firebaseUser가 존재하면
         const token = await firebaseUser.getIdToken(); // firebaseUser의 토큰을 가져와서 token 변수에 할당
         defaultHeaders.Authorization = `Bearer ${token}`; // defaultHeaders의 Authorization에 token을 넣어줌
-        const res = await fetch("http://localhost:8080/api/v1/member/info", {
-          method: "GET",
+        const res = await fetch('http://localhost:8080/api/v1/member/info', {
+          method: 'GET',
           headers: defaultHeaders,
         });
-        localStorage.setItem("idToken", token); // token을 localStorage에 저장
+        localStorage.setItem('idToken', token); // token을 localStorage에 저장
         if(res.status === 200) {
           const user = await res.json(); // res의 json을 user 변수에 할당
           setUser(user); // setUser 함수를 사용하여 user 상태를 user로 변경
