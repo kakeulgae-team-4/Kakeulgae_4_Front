@@ -50,6 +50,7 @@ const Bookmark = () => {
                     setHasMore(!cnt.data.last);
                 }
             } catch (error) {
+                //setPage(0);
                 console.log('에러 발생:', error);
             }
         });
@@ -109,6 +110,8 @@ const Bookmark = () => {
     //     };
 
     // }, [hasMoreSearch, loardingSearch])
+    //  함수를 선언하고 useEffect 내에서 함수를 넣는다
+    //  함수를 선언하고 useEffect 내에서 함수를 넣는다
 
     const handleSortChange = (criteria) => {
         setSortCriteria(criteria);
