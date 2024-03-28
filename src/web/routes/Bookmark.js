@@ -24,6 +24,12 @@ const Bookmark = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const observer = useRef();
 
+    const [pageSearch, setPageSearch] = useState(0);
+    // const [hasMoreSearch, setHasMoreSearch] = useState(true);
+    // const [initialRenderSearch, setInitialRenderSearch] = useState(true);
+    // const [loardingSearch, setLoadingSearch] = useState(false);
+    // const [bookmarkListSearch, setBookmarkListSearch] = useState([]);
+
     useEffect(() => {
         auth.onAuthStateChanged(async (firebaseUser) => {
             try {
@@ -76,6 +82,34 @@ const Bookmark = () => {
         };
     }, [hasMore, loading]);
 
+    // useEffect(()=>{
+    //     setInitialRenderSearch(false);
+    //     const options = {
+    //         root: null,
+    //         rootMargin: '0px',
+    //         threshold: 0.5
+    //     };
+
+    //     const handleObserver = (entities) => {
+    //         const target = entities[0];
+    //         if (target.isIntersecting && hasMoreSearch && !loardingSearch) {
+    //             setPageSearch(prevPage => prevPage + 1);
+    //         }
+    //     };
+
+    //     observer.current = new IntersectionObserver(handleObserver, options);
+    //     if(observer.current && !loardingSearch) {
+    //         observer.current.observe(document.getElementById('bottom'));
+    //     }
+
+    //     return () => {
+    //         if(observer.current) {
+    //             observer.current.disconnect();
+    //         }
+    //     };
+
+    // }, [hasMoreSearch, loardingSearch])
+
     const handleSortChange = (criteria) => {
         setSortCriteria(criteria);
         setPage(0);
@@ -88,16 +122,17 @@ const handleSearchClick = async () => {
         try {
             const res = await axios.get('http://localhost:8080/bookmarks/search',{
                 headers: defaultHeaders,
-                params: { keyword: searchTerm, page: 0, size: 5, sort: sortCriteria } // 페이지를 0으로 설정하여 새로운 검색 시작
+                params: { keyword: searchTerm, page: 0, size: 100, sort: sortCriteria }
             });
-
-            console.log("현재 page : 0"); // 페이지를 0으로 설정했으므로 로그에도 0 출력
+            console.log("현재 page : 0");
             console.log("정렬방식 : " + sortCriteria);
             console.log("검색어 : " + searchTerm);
             console.log(res.data.content);
 
             setBookmarkList([]);
-            setBookmarkList(res.data.content); // 새로운 검색 결과로 업데이트
+            setBookmarkList(res.data.content);
+            
+            console.log(pageSearch);
             setHasMore(!res.data.last);
         } catch (error) {
             console.error('검색 요청 오류:', error);
@@ -139,7 +174,6 @@ const handleSearchClick = async () => {
                             </div>
                         ))}
                     </div>
-
                 ) : (
                     null
                 )
