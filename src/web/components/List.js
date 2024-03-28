@@ -2,9 +2,9 @@ import './List.css';
 import React from 'react';
 import HeartButton from './HeartButton';
 
-const List = ({response}) => { // 매개변수로 response를 받음
-    
-    const parseStartline = parseDateString(response.createAt);
+const List = ({response, token, status}) => { // 매개변수로 response를 받음
+
+    const parseStartline = parseDateString(response.createdAt);
     const parseDeadline = parseDateString(response.deadline);
     const checkToday = dateIsTodayChecking(response.deadline);
 
@@ -39,6 +39,10 @@ const List = ({response}) => { // 매개변수로 response를 받음
         return dDate === currentDate;
     }
 
+    const handleRedirect = () => {
+        window.open(`http://${response.url}`, '_blank');
+    }
+
     return (
         <div className='list-layout'>
             <div className='list-container'>
@@ -49,12 +53,16 @@ const List = ({response}) => { // 매개변수로 response를 받음
                 </div>
                 <div className='list-subContainer'>
                     <div className='list-postname'>
-                        <HeartButton />
-                        {' ' + response.postName}
+                        <div>
+                            <HeartButton postId={response.id} token={token} status={status}/>
+                        </div>
+                        <div className='list-postname-right' onClick={handleRedirect}>
+                            {' ' + response.postName}
+                        </div>
                     </div>
                     <div className='list-career'>
-                        {response.career.length > 0 ? (
-                            response.career.map((response, index) => (
+                        {response.careers.length > 0 ? (
+                            response.careers.map((response, index) => (
                                 index < 3 ? (
                                     '#' + response + ' '
                                 ) : null
@@ -62,7 +70,7 @@ const List = ({response}) => { // 매개변수로 response를 받음
                         ) : (
                             null
                         )}
-                        #{response.education + ' '}
+                        #{response.educationType + ' '}
                         {response.workTypes.length > 0 ? (
                             response.workTypes.map((response, index) => (
                                 index < 3 ? (
@@ -74,8 +82,8 @@ const List = ({response}) => { // 매개변수로 response를 받음
                         )}
                     </div>
                     <div className='list-jobDetail'>
-                        {response.job.length > 0 ? (
-                            response.job.map((response, index) => (
+                        {response.jobDetailTypes.length > 0 ? (
+                            response.jobDetailTypes.map((response, index) => (
                                 index < 5 ? (
                                     response + ' '
                                 ) : null

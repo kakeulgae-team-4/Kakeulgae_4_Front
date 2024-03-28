@@ -7,18 +7,22 @@
     font-size: 130%;
     font-weight: bold;
     margin-left: 3%;
-    
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .gallery-deadline{
-    font-size: 15px;
+    font-size: 14px;
+    margin-top: 1%;
     margin-right: 2%;
 }
 
 
 .gallery-heart{
     font-size: 200%;
-    margin-left: 90%;
+    margin-left: 91%;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -77,8 +81,9 @@
 }
 
 .gt-startBox{
-    margin: 0.5%;
-    cursor: pointer;
+    margin-top: 0.5%;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 @media screen and (min-width: 650px) and (max-width: 1300px) {
