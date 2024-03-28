@@ -72,7 +72,7 @@ const Bookmark = () => {
 
         observer.current = new IntersectionObserver(handleObserver, options);
         if (observer.current && !loading) {
-            observer.current.observe(document.getElementById('bottom'));
+            observer.current.observe(document.getElementById('bottom'))
         }
 
         return () => {
