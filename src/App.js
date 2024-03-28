@@ -10,6 +10,7 @@ import Allrecruit from './web/routes/Allrecruit';
 import { AuthProvider } from './web/components/AuthProvider';
 import Calendar from './web/routes/Calendar';
 import Bookmark from './web/routes/Bookmark';
+import Preference from './web/routes/Preference';
 
 const App = () => {
     return (
@@ -24,6 +25,7 @@ const App = () => {
                         <Route path='/allrecruit' element={<Allrecruit />}/>
                         <Route path='/calendar' element={<Calendar />} />
                         <Route path='/bookmark' element={<Bookmark />} />
+                        <Route path='/preference' element={<Preference />}/>
                     </Routes>
                     <Footer />
                 </AuthProvider>
