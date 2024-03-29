@@ -108,7 +108,7 @@ const Main = () => {
                     <li>
                         <a href="https://github.com/inyujeongsang"><img src={mem2} alt="" /></a>
                         <h3>Admit</h3>
-                        <p>front-end</p>
+                        <p>developer</p>
                     </li>
                     <li>
                         <a href="https://github.com/uiheonn"><img src={mem3} alt=""/></a>
@@ -118,7 +118,7 @@ const Main = () => {
                     <li>
                         <a href="https://github.com/ChoiHyebin"><img src={mem4} alt="" /></a>
                         <h3>Bini</h3>
-                        <p>front-end</p>
+                        <p>developer</p>
                     </li>
                     <li>
                         <a href="https://github.com/lin-chae"><img src={mem5} alt="" /></a>
@@ -128,7 +128,7 @@ const Main = () => {
                     <li>
                         <a href="https://github.com/koosco"><img src={mem6} alt="" /></a>
                         <h3>kt-brother</h3>
-                        <p>crawling</p>
+                        <p>developer</p>
                     </li>
                 </ul>
             </div>

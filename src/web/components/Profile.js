@@ -28,17 +28,6 @@ const Profile = () => {
                 <a href="/mypage">My Page</a>
                 <a href="/" onClick={signOut}>Log out</a>
             </div>
-
-            <div className='profile-info'>
-                <div>
-                    <h3>즐겨찾기</h3>
-                    <p><span>{bookmark}</span>건</p>
-                </div>
-                <div>
-                    <h3>관심공고</h3>
-                    <p><span>{prefer}</span>건</p>
-                </div>
-            </div>
         </div>
     )
 }
