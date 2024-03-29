@@ -109,7 +109,7 @@ return (
                 <button className="mypage-btn">수정 완료</button>
             </div>
 
-        <h2>{user?.nickname}님의 관심 키워드를 설정해보세요!</h2>
+        <h2><span className="nickname">{user?.nickname}</span>님의 관심 키워드를 설정해보세요!</h2>
         <Filter />
         </div>
 
