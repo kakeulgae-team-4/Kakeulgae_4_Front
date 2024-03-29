@@ -40,7 +40,16 @@
 }
 .profile-img {
   width: 150px;
+  height: 150px;
   border-radius: 50%;
+  object-fit: cover;
+}
+.file-btn {
+  background-color: #F0F0F0;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
 }
 
 .setting-box {

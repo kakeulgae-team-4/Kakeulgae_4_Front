@@ -66,7 +66,10 @@ return (
                 <div className='mypage-box2'>
                     <div className='image-box'>
                         <img src={Image} alt="" className='profile-img'/>
-                        <button className='image-btn'>변경</button>
+                        <label className="file-btn" for="input-file">
+                        사진 선택
+                        </label>
+                        <input type="file" id="input-file" style={{display:"none"}} onChange={onChange} ref={fileInput}/>
                     </div>
 
                     <div className="setting-box">
