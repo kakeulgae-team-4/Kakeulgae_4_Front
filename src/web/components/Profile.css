@@ -55,18 +55,6 @@
     background-color: #62AB7F;
 }
 
-.profile-info {
-    display: flex;
-    gap: 70px;
-}
-.profile-info>div>p {
-    margin-top: 10px;
-}
-.profile-info>div span {
-    color: #FB6A3D;
-    font-weight: bold;
-}
-
 
 @media screen and (max-width: 1100px) {
     .profile-container {
