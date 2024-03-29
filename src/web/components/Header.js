@@ -16,7 +16,7 @@ const Header = () => {
     const [activeMenu, setActiveMenu] = useState('');
 
     const menuItems = [
-        { name: '관심공고', path: '/1' },
+        { name: '관심공고', path: '/preference' },
         { name: '채용공고', path: '/allrecruit' },
         { name: '즐겨찾기', path: '/bookmark' },
         { name: '캘린더', path: '/calendar' },
@@ -38,7 +38,7 @@ const Header = () => {
 
             <div className="navbar">
                 <ul>
-                    <li><a href="">관심공고</a></li>
+                    <li><a href="/preference">관심공고</a></li>
                     <li><a href="/allrecruit">채용공고</a></li>
                     <li><a href="/bookmark">즐겨찾기</a></li>
                     <li><a href="/calendar">캘린더</a></li>
