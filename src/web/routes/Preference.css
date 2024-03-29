@@ -133,6 +133,21 @@
     line-height: 68px;
 }
 
+.topTag{
+    background-color: gainsboro;
+    margin-top: 2.5%;
+    margin-left: 6%;
+    margin-right: 6%;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 5px;
+}
+
+.tagItem{
+    margin-left: 2%;
+    color: lightslategray;
+}
+
 @media screen and (min-width: 650px) and (max-width: 1300px) {
     .colorless-button {
         font-size: 170%;
