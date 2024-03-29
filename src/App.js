@@ -10,12 +10,14 @@ import Allrecruit from './web/routes/Allrecruit';
 import { AuthProvider } from './web/components/AuthProvider';
 import Calendar from './web/routes/Calendar';
 import Bookmark from './web/routes/Bookmark';
+import ScrollToTop from './web/components/ScrollToTop';
 
 const App = () => {
     return (
         <BrowserRouter>
             <div className="App">
                 <AuthProvider>
+                    <ScrollToTop />
                     <Routes>
                         <Route path='/' element={<Main />} />
                         <Route path='/signin' element={<Signin />} />
