@@ -60,7 +60,7 @@ const Main = () => {
 
             <div className="menu-container">
                 <nav>
-                    <div className='menu-box menu-box1' onClick={() => handleMenuClick('/1')}>
+                    <div className='menu-box menu-box1' onClick={() => handleMenuClick('/preference')}>
                         <h3>관심공고</h3>
                         <p>관심 키워드 등록 후, 공고를 확인해보세요</p>
                         <div><span>📌</span></div>

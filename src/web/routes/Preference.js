@@ -15,6 +15,7 @@ const Preference = () => {
 
     const [preferenceList, setPreferenceList] = useState([]);
     const [bookmarkList, setBookmarkList] = useState([]);
+    const [jobDetailList, setJobDetailList] = useState([]);
     const [showGallery, setShowGallery] = useState(true);
     const [token, setToken] = useState([]);
     const [user, setUser] = useState([]);
@@ -26,6 +27,7 @@ const Preference = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const observer = useRef();
     const [pageSearch, setPageSearch] = useState(0);
+    let trueArray = [];
 
     useEffect(() => {
         auth.onAuthStateChanged(async (firebaseUser) => {
@@ -43,12 +45,15 @@ const Preference = () => {
                     const temp = await axios.get('http://localhost:8080/jobs/preference', {
                         headers: defaultHeaders
                     });
+                    const elle = await axios.get('http://localhost:8080/bookmarks/likes', {
+                        headers: defaultHeaders
+                    })
 
                     setUser(tmp.data);
                     setToken(defaultHeaders);
-                    console.log(temp.data.preference);
                     setPreferenceList(temp.data.preference);
                     setBookmarkList(prevList => [...prevList, ...cnt.data.content]);
+                    setJobDetailList(elle.data.content);
                     setHasMore(!cnt.data.last);
                 }
             } catch (error) {
@@ -91,33 +96,50 @@ const Preference = () => {
         setBookmarkList([]);
     };
 
-const handleSearchClick = async () => {
-    if (searchTerm.trim() !== '') {
-        try {
-            const res = await axios.get('http://localhost:8080/bookmarks/search',{
-                headers: defaultHeaders,
-                params: { keyword: searchTerm, page: 0, size: 100, sort: sortCriteria }
-            });
-            console.log("현재 page : 0");
-            console.log("정렬방식 : " + sortCriteria);
-            console.log("검색어 : " + searchTerm);
-            console.log(res.data.content);
+    const handleSearchClick = async () => {
+        if (searchTerm.trim() !== '') {
+            try {
+                const res = await axios.get('http://localhost:8080/bookmarks/search',{
+                    headers: defaultHeaders,
+                    params: { keyword: searchTerm, page: 0, size: 100, sort: sortCriteria }
+                });
+                console.log("현재 page : 0");
+                console.log("정렬방식 : " + sortCriteria);
+                console.log("검색어 : " + searchTerm);
+                console.log(res.data.content);
 
-            setBookmarkList([]);
-            setBookmarkList(res.data.content);
-            
-            console.log(pageSearch);
-            setHasMore(!res.data.last);
-        } catch (error) {
-            console.error('검색 요청 오류:', error);
+                setBookmarkList([]);
+                setBookmarkList(res.data.content);
+                
+                console.log(pageSearch);
+                setHasMore(!res.data.last);
+            } catch (error) {
+                console.error('검색 요청 오류:', error);
+            }
         }
-    }
-};
+    };
 
 
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
     };
+
+    function checkDataEquality(bookmark, jobDetail) {
+        trueArray = [];
+    
+        for (let i = 0; i < bookmark.length; i++) {
+            let foundMatch = false;
+    
+            for (let j = 0; j < jobDetail.length; j++) {
+                if (bookmark[i].postName === jobDetail[j].postName) {
+                    foundMatch = true;
+                    break;
+                }
+            }
+            trueArray.push(foundMatch);
+        }
+    }
+    checkDataEquality(bookmarkList, jobDetailList);
 
     return (
         <div>
@@ -152,7 +174,7 @@ const handleSearchClick = async () => {
                     <div className='bookmark-container'>
                         {bookmarkList.map((response, index) => (
                             <div className={index % 2 === 0 && 'bookmark-container-inline'}>
-                                <Gallery key={index} response={response} token={token} status={true}/>
+                                <Gallery key={index} response={response} token={token} status={trueArray[index]}/>
                             </div>
                         ))}
                     </div>
@@ -162,7 +184,7 @@ const handleSearchClick = async () => {
             ) : (
                 bookmarkList.length > 0 ? (
                     bookmarkList.map((response, index) => (
-                        <List key={index} response={response} token={token} status={true}/>
+                        <List key={index} response={response} token={token} status={trueArray[index]}/>
                     ))
                 ) : (
                     null
