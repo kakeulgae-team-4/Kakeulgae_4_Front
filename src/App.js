@@ -12,6 +12,8 @@ import Calendar from './web/routes/Calendar';
 import Bookmark from './web/routes/Bookmark';
 import Preference from './web/routes/Preference';
 import ScrollToTop from './web/components/ScrollToTop';
+import BookmarkSearch from './web/routes/BookmarkSearch';
+import PreferenceSearch from './web/routes/PreferenceSearch';
 import Notification from './web/routes/Notification';
 
 const App = () => {
@@ -28,7 +30,9 @@ const App = () => {
                         <Route path='/allrecruit' element={<Allrecruit />}/>
                         <Route path='/calendar' element={<Calendar />} />
                         <Route path='/bookmark' element={<Bookmark />} />
-                        <Route path='/preference' element={<Preference />}/>
+                        <Route path='/bookmark/keyword/:searchTerm' element={<BookmarkSearch />} />
+                        <Route path='/preference' element={<Preference />} />
+                        <Route path='/preference/keyword/:searchTerm' element={<PreferenceSearch />} />
                         <Route path='/notification' element={<Notification />} />
                     </Routes>
                     <Footer />
