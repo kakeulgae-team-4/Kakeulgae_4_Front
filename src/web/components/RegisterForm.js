@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import { UserContext } from '../components/AuthProvider';
+import { UserContext } from './AuthProvider';
 import { defaultHeaders } from '../../config/clientConfig';
 import './RegisterForm.css';
 
@@ -16,6 +16,7 @@ const RegisterForm =  ({ setRegisterFormOpen }) => {
         idToken: event.target.idToken.value,
         nickname: event.target.nickname.value,
         email: event.target.email.value,
+        phoneNumber: event.target.phoneNum.value,
       }),
     });
     const user = await res.json();
@@ -28,14 +29,22 @@ const RegisterForm =  ({ setRegisterFormOpen }) => {
     <div className='register-container'>
       <form onSubmit={handleSubmit} className='register-form'>
         <h3>구글 로그인</h3>
-        <input type='hidden' name='idToken' value={localStorage.getItem('idToken')} />
+        <input type='hidden' name='idToken'
+               value={localStorage.getItem('idToken')}/>
         <div className="nickname-form">
           <p>닉네임</p>
-          <input className='nickname' type='text' name='nickname' placeholder='사용할 닉네임을 입력해주세요.'/>
+          <input className='nickname' type='text' name='nickname'
+                 placeholder='사용할 닉네임을 입력해주세요.'/>
         </div>
         <div className="email-form">
           <p>이메일</p>
-          <input className='email' type='email' name='email' placeholder='알림 받을 이메일을 입력해주세요.'/>
+          <input className='email' type='email' name='email'
+                 placeholder='알림 받을 이메일을 입력해주세요.'/>
+        </div>
+        <div className="phoneNum-form">
+          <p>전화번호</p>
+          <input className='phoneNum' type='text' name='phoneNum'
+                 placeholder='전화번호를 입력해주세요.(ex 101-1234-1234)'/>
         </div>
         <button className='register-btn'>가입하기</button>
       </form>

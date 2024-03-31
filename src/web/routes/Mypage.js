@@ -2,55 +2,37 @@ import React from 'react';
 import {useState, useEffect, useContext, useRef} from 'react';
 import './Mypage.css';
 import Header from '../components/Header';
-import { auth } from './firebaseAuth';
 import { UserContext } from '../components/AuthProvider';
 import Filter from '../components/Filter';
+import axios from 'axios';
 
 
 const Mypage = () => {
-    const [currentUser, setCurrentUser] = useState(null); // 사용자 정보를 저장할 상태 변수
+    const { user } = useContext(UserContext);
     const [loading, setLoading] = useState(true); // 로딩 상태를 저장할 상태 변수
     const [error, setError] = useState(null); // 오류 정보를 저장할 상태 변수
-    const { user } = useContext(UserContext);
 
-//   useEffect(() => {
-//     const fetchUserData = async () => {
-//       try {
-//         if (user) {
-//           const email = user.email;
-//           const nickName = user.nickname;
-//           const phoneNumber = user.phoneNumber;
-//           setCurrentUser({ email, displayName: nickName, phoneNumber });
-//         } else {
-//           setCurrentUser(null);
-//         }
-//       } catch (error) {
-//         setError(error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchUserData();
-//   }, [user]);
     const [Image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
-    const fileInput = useRef(null);
+    useEffect(() => {
+        setImage(user?.url);
+    }, [user]);
 
+    const fileInput = useRef(null);
     const onChange = (e) => {
         if(e.target.files[0]){
-            setImage(e.target.files[0])
-        } else{ //업로드 취소할 시
-            setImage("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
-            return
+            const formData = new FormData();
+            formData.append('profile', e.target.files[0]);
+            axios.post('http://localhost:8080/api/v1/member/profile', formData, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('idToken')}`
+                },
+                data : formData
+            })
+            .then((res) => {
+                // 서버 응답에서 새로운 프로필 이미지 URL을 가져와 상태를 업데이트
+                setImage(res.data);
+            })
         }
-        //화면에 프로필 사진 표시
-        const reader = new FileReader();
-        reader.onload = () => {
-            if(reader.readyState === 2){
-                setImage(reader.result)
-            }
-        }
-        reader.readAsDataURL(e.target.files[0])
     }
 
 return (
@@ -75,12 +57,12 @@ return (
                     <div className="setting-box">
                         <div className="mypage-nickname">
                             <p>닉네임</p>
-                            <input type="text" />
+                            <input type="text" value={user?.nickname}/>
                         </div>
                         <div className="mypage-email">
                             <p>이메일</p>
                             <div>
-                                <input type="email" />
+                                <input type="email" value={user?.email}/>
                                 <select>
                                     <option value="" selected disabled hidden>선택하세요</option>
                                     <option value="0">naver.com</option>
@@ -93,7 +75,7 @@ return (
                         <div className="mypage-phone">
                             <p>휴대폰 번호</p>
                             <div>
-                                <input type="text" />
+                                <input type="text" value={user?.phoneNumber}/>
                                 <button className='save-btn'>저장</button>
                             </div>
                         </div>
