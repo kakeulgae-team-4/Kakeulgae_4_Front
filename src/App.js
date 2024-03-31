@@ -12,6 +12,7 @@ import Calendar from './web/routes/Calendar';
 import Bookmark from './web/routes/Bookmark';
 import Preference from './web/routes/Preference';
 import ScrollToTop from './web/components/ScrollToTop';
+import Notification from './web/routes/Notification';
 
 const App = () => {
     return (
@@ -28,6 +29,7 @@ const App = () => {
                         <Route path='/calendar' element={<Calendar />} />
                         <Route path='/bookmark' element={<Bookmark />} />
                         <Route path='/preference' element={<Preference />}/>
+                        <Route path='/notification' element={<Notification />} />
                     </Routes>
                     <Footer />
                 </AuthProvider>
