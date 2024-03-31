@@ -118,11 +118,10 @@
 }
 .selected-keywords .keyword {
   margin-bottom: 5px;
-  padding: 5px;
+  padding: 0 15px;
   border-radius: 5px;
   color: #646464;
   font-weight: 600;
-  padding: 15px;
 }
 
 .clear-button {

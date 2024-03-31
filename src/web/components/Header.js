@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import React , {useState} from 'react';
 import './Header.css';
 import textLogo from '../images/text_logo.png';
 import { FaUser, FaBell } from "react-icons/fa";
