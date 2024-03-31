@@ -1,0 +1,28 @@
+.notification-container{
+    margin-top: 1%;
+    display: flex;
+}
+
+.first{
+    margin-top: 7%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 10%;
+}
+
+.border{
+    margin-top: 0.5%;
+    border: 1px solid gainsboro;
+}
+
+.jobDetail{
+    cursor: pointer;
+    margin-left: 0.5%;
+    font-weight: bold;
+}
+
+.day{
+    color: gray;
+    margin-left: auto;
+    margin-right: 0.5%;
+}
