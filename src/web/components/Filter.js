@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import './Filter.css';
 import {defaultHeaders} from "../../config/clientConfig";
 import axios from "axios";
+import {json} from "react-router-dom";
 
-
-const Filter =({handleSaveKeywords}) => {
-  const [selectedCategory, setSelectedCategory] = useState('직무');
-  const [items, setItems] = useState(categories[selectedCategory]);
+const Filter = ({handleSaveKeywords}) => {
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [items, setItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState({});
   const [keywords, setKeywords] = useState([]);
+
+  const [selectedCategoryItemMap, setSelectedCategoryItemMap] = useState({});
 
   useEffect(() => {
     const fetchKeywords = async () => {
@@ -27,15 +29,45 @@ const Filter =({handleSaveKeywords}) => {
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
-    setItems(categories[category]);
+    setItems(keywords[category]);
   };
 
   const handleItemClick = (item) => {
-    setSelectedItems(prevSelectedItems => ({
-      ...prevSelectedItems,
-      [item]: !prevSelectedItems[item],
-    }));
+    if (selectedItems[item.type]) {
+      setSelectedItems(prevSelectedItems => {
+        const copy = {...prevSelectedItems}
+        delete copy[item.type]
+        return copy;
+      })
+
+      const index = selectedCategoryItemMap[selectedCategory].indexOf(item.id);
+      if (index > -1) {
+        selectedCategoryItemMap[selectedCategory].splice(index, 1);
+      }
+    } else {
+      setSelectedItems(prevSelectedItems => ({
+            ...prevSelectedItems,
+            [item.type]: true
+          })
+      );
+
+      if (!selectedCategoryItemMap[selectedCategory]) {
+        selectedCategoryItemMap[selectedCategory] = []
+      }
+      selectedCategoryItemMap[selectedCategory].push(item.id)
+    }
+
+    setSelectedCategoryItemMap(selectedCategoryItemMap)
   };
+
+  const  saveInterest=async () => {
+    await axios.post('http://localhost:8080/interest/create',JSON.stringify(selectedCategoryItemMap), {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('idToken')}`,
+        "Content-Type": `application/json`
+      },
+    });
+  }
 
   const selectedKeywords = Object.entries(selectedItems)
   .filter(([, isSelected]) => isSelected)
@@ -45,19 +77,15 @@ const Filter =({handleSaveKeywords}) => {
     setSelectedItems({});
   };
 
-  // 선택된 키워드를 부모 컴포넌트로 전달
-  const saveKeywords = () => {
-    handleSaveKeywords(selectedKeywords);
-  };
-
   return (
       <div className="filter-container">
         <div className="filter">
           <div className="category-selector">
-            {Object.keys(categories).map((category, index) => (
+            {Object.keys(keywords).map((category, index) => (
                 <button
                     key={index}
-                    className={selectedCategory === category ? 'active' : ''}
+                    className={selectedCategory === category ? 'active'
+                        : ''} // 선택된 카테고리에 active 클래스를 추가
                     onClick={() => handleCategoryClick(category)}
                 >
                   {category}
@@ -65,17 +93,17 @@ const Filter =({handleSaveKeywords}) => {
             ))}
           </div>
           <div className="items-display">
-            {items.map((item, index) => (
-                <div
-                    key={index}
-                    className={`item ${selectedItems[item] ? 'selected' : ''}`}
-                    onClick={() => handleItemClick(item)}
-                >
-                  <span>{item}</span>
-                  <span className="checkmark">{selectedItems[item] ? '✓'
-                      : '+'}</span>
-                </div>
-            ))}
+            {items.map((item, index) =>
+                (
+                    <div
+                        key={index}
+                        className={`item `}
+                        onClick={() => handleItemClick(item)}
+                    >
+                      <span>{item.type ? item.type : item.region1st}</span>
+                    </div>
+                ))
+            }
           </div>
         </div>
         <div className="selected-keywords">
@@ -89,7 +117,7 @@ const Filter =({handleSaveKeywords}) => {
                       className="clear-button">초기화</button>
           )}
           {/* 저장 버튼 추가 */}
-          <button onClick={saveKeywords} className="save-button">저장</button>
+          <button onClick={saveInterest} className="save-button">저장</button>
         </div>
       </div>
   );
