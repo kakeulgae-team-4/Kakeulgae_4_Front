@@ -9,10 +9,7 @@ const Notification = () => {
     const [notificationList, setNotificationList] = useState([]);
     const [page, setPage] = useState(0);
     const [token, setToken] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [hasMore, setHasMore] = useState(true);
-    const [sortCriteria, setSortCriteria] = useState('createdAt');
-    const observer = useRef(null);
+
     useEffect(() => {
         auth.onAuthStateChanged(async (firebaseUser) => {
             try {
@@ -20,50 +17,17 @@ const Notification = () => {
                     const token = await firebaseUser.getIdToken();
                     defaultHeaders.Authorization = `Bearer ${token}`;
                     const cnt = await axios.get('http://localhost:8080/api/v1/notifications/list', {
-                        headers: defaultHeaders,
-                        params: { page: page, size: 5, sort: sortCriteria }
+                        headers: defaultHeaders
                     });
-    
+                    
                     setToken(defaultHeaders);
                     setNotificationList(cnt.data.content);
-                    setHasMore(!cnt.data.last);
-                    setLoading(false);
                 }
             } catch (error) {
                 console.log('에러 발생:', error);
-                setLoading(false);
             }
         });
-    }, [page, sortCriteria]);
-
-    useEffect(() => {
-        const options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5
-        };
-
-        const handleObserver = (entities) => {
-            const target = entities[0];
-            if (target && target.isIntersecting && hasMore && !loading && window.scrollY >= 300) {
-                setPage(prevPage => prevPage + 1);
-            }
-        };
-
-        observer.current = new IntersectionObserver(handleObserver, options);
-
-        return () => {
-            if (observer.current) {
-                observer.current.disconnect();
-            }
-        };
-    }, [hasMore, loading]);
-
-    const handleSortChange = (criteria) => {
-        setSortCriteria(criteria);
-        setPage(0);
-        setNotificationList([]);
-    };
+    }, [page]);
 
     const currentDate = new Date();
 
