@@ -24,6 +24,8 @@ const Bookmark = () => {
     const [pageSearch, setPageSearch] = useState(0);
     const observer = useRef();
 
+    
+
     useEffect(() => {
         auth.onAuthStateChanged(async (firebaseUser) => {
             try {
@@ -35,7 +37,7 @@ const Bookmark = () => {
                     });
                     const cnt = await axios.get('http://localhost:8080/bookmarks/likes', {
                         headers: defaultHeaders,
-                        params: { page: page, size: 4, sort: sortCriteria }
+                        params: { page: page, size: 5, sort: sortCriteria }
                     });
 
                     setUser(tmp.data);
@@ -82,42 +84,15 @@ const Bookmark = () => {
         setBookmarkList([]);
     };
 
-    const handleSearchButtonClick = () => {
-        if (!initialRender) {
-            setPage(0);
-            setBookmarkList([]);
-            handleSearchClick();
-        }
-    };
-
-    const handleSearchClick = async () => {
-        if (searchTerm.trim() !== '') {
-            try {
-                if(window.scrollY <= 300){
-                    setPage(0);
-                }
-                const res = await axios.get('http://localhost:8080/bookmarks/search', {
-                    headers: defaultHeaders,
-                    params: { keyword: searchTerm, page: pageSearch, size: 5, sort: sortCriteria }
-                });
-                console.log("현재 page : " + page);
-                console.log("현재 scrollY는 : " + window.scrollY);
-                console.log("정렬방식 : " + sortCriteria);
-                console.log("검색어 : " + searchTerm);
-                console.log(res.data.content);
-                
-                setBookmarkList(prevList => [...prevList, ...res.data.content]);
-                setHasMore(!res.data.last);
-                // setPageSearch(prevPage => prevPage + 1);
-                } catch (error) {
-                    console.error('검색 요청 오류:', error);
-            }
-        }
-    };
-    
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
     };
+
+    const redirectToKeyword = () => {
+        if(searchTerm.trim() !== '') {
+            window.location.href = `http://localhost:3000/bookmark/keyword/${encodeURIComponent(searchTerm)}`;
+        }
+    }
 
     return (
         <div>
@@ -133,7 +108,7 @@ const Bookmark = () => {
                 <button className={`colorless-button ${!showGallery ? 'active' : ''}`} onClick={() => setShowGallery(false)}>List</button>
 
                 <input type="text" className='search' placeholder='검색어를 입력하세요' onChange={handleInputChange}></input>
-                <button className='search-icon' onClick={handleSearchButtonClick}>
+                <button className='search-icon' onClick={redirectToKeyword}>
                     <img src={real_search} alt=""/>
                 </button>
                 

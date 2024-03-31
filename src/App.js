@@ -11,8 +11,9 @@ import { AuthProvider } from './web/components/AuthProvider';
 import Calendar from './web/routes/Calendar';
 import Bookmark from './web/routes/Bookmark';
 import Preference from './web/routes/Preference';
-import Notification from './web/routes/Notification';
 import ScrollToTop from './web/components/ScrollToTop';
+import BookmarkSearch from './web/routes/BookmarkSearch';
+import PreferenceSearch from './web/routes/PreferenceSearch';
 
 const App = () => {
     return (
@@ -28,8 +29,9 @@ const App = () => {
                         <Route path='/allrecruit' element={<Allrecruit />}/>
                         <Route path='/calendar' element={<Calendar />} />
                         <Route path='/bookmark' element={<Bookmark />} />
-                        <Route path='/preference' element={<Preference />}/>
-                        <Route path='/mynotification' element={<Notification />}/>
+                        <Route path='/bookmark/keyword/:searchTerm' element={<BookmarkSearch />} />
+                        <Route path='/preference' element={<Preference />} />
+                        <Route path='/preference/keyword/:searchTerm' element={<PreferenceSearch />} />
                     </Routes>
                     <Footer />
                 </AuthProvider>
