@@ -21,6 +21,7 @@ const Bookmark = () => {
     const [sortCriteria, setSortCriteria] = useState('createdAt');
     const [initialRender, setInitialRender] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [pageSearch, setPageSearch] = useState(0);
     const observer = useRef();
 
     useEffect(() => {
@@ -34,7 +35,7 @@ const Bookmark = () => {
                     });
                     const cnt = await axios.get('http://localhost:8080/bookmarks/likes', {
                         headers: defaultHeaders,
-                        params: { page: page, size: 5, sort: sortCriteria }
+                        params: { page: page, size: 4, sort: sortCriteria }
                     });
 
                     setUser(tmp.data);
@@ -97,7 +98,7 @@ const Bookmark = () => {
                 }
                 const res = await axios.get('http://localhost:8080/bookmarks/search', {
                     headers: defaultHeaders,
-                    params: { keyword: searchTerm, page: page, size: 5, sort: sortCriteria }
+                    params: { keyword: searchTerm, page: pageSearch, size: 5, sort: sortCriteria }
                 });
                 console.log("현재 page : " + page);
                 console.log("현재 scrollY는 : " + window.scrollY);
@@ -107,6 +108,7 @@ const Bookmark = () => {
                 
                 setBookmarkList(prevList => [...prevList, ...res.data.content]);
                 setHasMore(!res.data.last);
+                // setPageSearch(prevPage => prevPage + 1);
                 } catch (error) {
                     console.error('검색 요청 오류:', error);
             }
@@ -129,10 +131,12 @@ const Bookmark = () => {
             <div className='gelleryandlist'>
                 <button className={`colorless-button ${showGallery ? 'active' : ''}`} onClick={() => setShowGallery(true)}>Gallery</button>
                 <button className={`colorless-button ${!showGallery ? 'active' : ''}`} onClick={() => setShowGallery(false)}>List</button>
+
                 <input type="text" className='search' placeholder='검색어를 입력하세요' onChange={handleInputChange}></input>
                 <button className='search-icon' onClick={handleSearchButtonClick}>
                     <img src={real_search} alt=""/>
                 </button>
+                
                 <div className='selectBox-container'>
                     <SelectBox handleSortChange={handleSortChange} />
                 </div>
