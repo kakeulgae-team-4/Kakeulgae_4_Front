@@ -1,22 +1,24 @@
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import './Bookmark.css';
+import React from 'react'
+import { useContext, useState, useEffect, useRef } from 'react';
+import './Allrecruit.css';
+import Header from '../components/Header';
+import SelectBox from '../components/SelectBox.js';
 import Gallery from '../components/Gallery.js';
 import List from '../components/List.js';
-import Header from '../components/Header';
-import real_search from '../images/realSearch.png';
-import { auth } from "../routes/firebaseAuth";
+import axios from 'axios';
 import { defaultHeaders } from "../../config/clientConfig";
-import SelectBox from '../components/SelectBox.js';
 import './Allrecruit.css';
+import { auth } from "../routes/firebaseAuth";
+import real_search from '../images/realSearch.png';
+import Filter from '../components/Filter';
 
 const Allrecruit = () => {
     const [bookmarkList, setBookmarkList] = useState([]);
     const [jobDetailList, setJobDetailList] = useState([]);
     const [showGallery, setShowGallery] = useState(true);
     const [token, setToken] = useState([]);
-    const [user, setUser] = useState([]);
     const [page, setPage] = useState(0);
+    const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [sortCriteria, setSortCriteria] = useState('createdAt');
@@ -129,6 +131,7 @@ const Allrecruit = () => {
                 <div className='customer1'>{user.nickname}</div>
                 <div className='customer2'>님이 원하는 공고를 찾아보세요!</div>
             </div>
+            <Filter/>
             <div className='gelleryandlist'>
                 <button className={`colorless-button ${showGallery ? 'active' : ''}`} onClick={() => setShowGallery(true)}>Gallery</button>
                 <button className={`colorless-button ${!showGallery ? 'active' : ''}`} onClick={() => setShowGallery(false)}>List</button>
