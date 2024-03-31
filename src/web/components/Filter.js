@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './Filter.css';
-import {defaultHeaders} from "../../config/clientConfig";
 import axios from "axios";
-import {json} from "react-router-dom";
 
 const Filter = ({handleSaveKeywords}) => {
   const [selectedCategory, setSelectedCategory] = useState();
