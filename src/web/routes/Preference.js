@@ -4,7 +4,6 @@ import './Preference.css';
 import Gallery from '../components/Gallery.js';
 import List from '../components/List.js';
 import Header from '../components/Header';
-import search_icon from '../images/search_icon.png';
 import real_search from '../images/realSearch.png';
 import { auth } from "../routes/firebaseAuth";
 import { defaultHeaders } from "../../config/clientConfig";
@@ -26,7 +25,6 @@ const Preference = () => {
     const [initialRender, setInitialRender] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const observer = useRef();
-    const [pageSearch, setPageSearch] = useState(0);
     let trueArray = [];
 
     useEffect(() => {
@@ -57,7 +55,6 @@ const Preference = () => {
                     setHasMore(!cnt.data.last);
                 }
             } catch (error) {
-                //setPage(0);
                 console.log('에러 발생:', error);
             }
         });
@@ -96,22 +93,28 @@ const Preference = () => {
         setBookmarkList([]);
     };
 
+    const handleSearchButtonClick = () => {
+        if (!initialRender) {
+            setPage(0);
+            setBookmarkList([]);
+            handleSearchClick();
+        }
+    };
+
     const handleSearchClick = async () => {
         if (searchTerm.trim() !== '') {
             try {
                 const res = await axios.get('http://localhost:8080/bookmarks/search',{
                     headers: defaultHeaders,
-                    params: { keyword: searchTerm, page: 0, size: 100, sort: sortCriteria }
+                    params: { keyword: searchTerm, page: page, size: 100, sort: sortCriteria }
                 });
                 console.log("현재 page : 0");
                 console.log("정렬방식 : " + sortCriteria);
                 console.log("검색어 : " + searchTerm);
                 console.log(res.data.content);
 
-                setBookmarkList([]);
-                setBookmarkList(res.data.content);
-                
-                console.log(pageSearch);
+            
+                setBookmarkList(prevList => [...prevList, ...res.data.content]);
                 setHasMore(!res.data.last);
             } catch (error) {
                 console.error('검색 요청 오류:', error);
@@ -163,7 +166,9 @@ const Preference = () => {
                 <button className={`colorless-button ${showGallery ? 'active' : ''}`} onClick={() => setShowGallery(true)}>Gallery</button>
                 <button className={`colorless-button ${!showGallery ? 'active' : ''}`} onClick={() => setShowGallery(false)}>List</button>
                 <input type="text" className='search' placeholder='검색어를 입력하세요' onChange={handleInputChange}></input>
-                <button className='search-icon' onClick={handleSearchClick}><img src={real_search} alt=""/></button>
+                <button className='search-icon' onClick={handleSearchButtonClick}>
+                    <img src={real_search} alt=""/>
+                </button>
                 <div className='selectBox-container'>
                     <SelectBox handleSortChange={handleSortChange} />
                 </div>
