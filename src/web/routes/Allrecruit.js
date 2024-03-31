@@ -1,11 +1,7 @@
 import React from 'react'
+import { useContext, useState, useEffect, useRef } from 'react';
 import './Allrecruit.css';
 import Header from '../components/Header';
-import real_search from '../images/realSearch.png';
-import { auth } from "../routes/firebaseAuth";
-import { defaultHeaders } from "../../config/clientConfig";
-import SelectBox from '../components/SelectBox.js';
-import './Allrecruit.css';
 import Filter from '../components/Filter';
 import { UserContext } from '../components/AuthProvider';
 import { IoSearch } from "react-icons/io5";
@@ -17,7 +13,80 @@ import { defaultHeaders } from "../../config/clientConfig";
 import { MdOutlineGridView, MdViewList } from "react-icons/md";
 
 const Allrecruit = () => {
-    const name = '변인정';
+    const { user } = useContext(UserContext);
+
+    const [bookmarkList, setBookmarkList] = useState([]);
+    const [showGallery, setShowGallery] = useState(true);
+    const [token, setToken] = useState([]);
+    const [page, setPage] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [hasMore, setHasMore] = useState(true);
+    const [sortCriteria, setSortCriteria] = useState('createdAt');
+    const [initialRender, setInitialRender] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
+    const observer = useRef();
+    const [pageSearch, setPageSearch] = useState(0);
+
+    useEffect(() => {
+        setInitialRender(false);
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const handleObserver = (entities) => {
+            const target = entities[0];
+            if (target.isIntersecting && hasMore && !loading) {
+                setPage(prevPage => prevPage + 1);
+            }
+        };
+
+        observer.current = new IntersectionObserver(handleObserver, options);
+        if (observer.current && !loading) {
+            observer.current.observe(document.getElementById('bottom'))
+        }
+
+        return () => {
+            if (observer.current) {
+                observer.current.disconnect();
+            }
+        };
+    }, [hasMore, loading]);
+
+    const handleSortChange = (criteria) => {
+        setSortCriteria(criteria);
+        setPage(0);
+        setBookmarkList([]);
+    };
+
+    const handleInputChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleSearchClick = async () => {
+        // 검색어가 변경되었을 때만 검색을 수행하도록 조건 추가
+        if (searchTerm.trim() !== '') {
+            try {
+                const res = await axios.get('http://localhost:8080/bookmarks/search',{
+                    headers: defaultHeaders,
+                    params: { keyword: searchTerm, page: 0, size: 100, sort: sortCriteria }
+                });
+                console.log("현재 page : 0");
+                console.log("정렬방식 : " + sortCriteria);
+                console.log("검색어 : " + searchTerm);
+                console.log(res.data.content);
+
+                setBookmarkList([]);
+                setBookmarkList(res.data.content);
+
+                console.log(pageSearch);
+                setHasMore(!res.data.last);
+            } catch (error) {
+                console.error('검색 요청 오류:', error);
+            }
+        }
+    };
 
     return (
         <div className="allrecruit-container">
