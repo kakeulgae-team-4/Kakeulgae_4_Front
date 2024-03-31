@@ -14,6 +14,7 @@ import Preference from './web/routes/Preference';
 import ScrollToTop from './web/components/ScrollToTop';
 import BookmarkSearch from './web/routes/BookmarkSearch';
 import PreferenceSearch from './web/routes/PreferenceSearch';
+import Notification from './web/routes/Notification';
 
 const App = () => {
     return (
@@ -32,6 +33,7 @@ const App = () => {
                         <Route path='/bookmark/keyword/:searchTerm' element={<BookmarkSearch />} />
                         <Route path='/preference' element={<Preference />} />
                         <Route path='/preference/keyword/:searchTerm' element={<PreferenceSearch />} />
+                        <Route path='/notification' element={<Notification />} />
                     </Routes>
                     <Footer />
                 </AuthProvider>

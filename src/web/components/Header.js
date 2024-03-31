@@ -21,7 +21,7 @@ const Header = () => {
         { name: '즐겨찾기', path: '/bookmark' },
         { name: '캘린더', path: '/calendar' },
         { name: '마이페이지', path: '/mypage' },
-        { name: '알림함', path: '/3' },
+        { name: '알림함', path: '/notification' },
         { name: '로그아웃', path: '/' },
     ];
 
@@ -47,7 +47,7 @@ const Header = () => {
                 <div className="user-info">
                     <p><a href="/" onClick={signOut}>로그아웃</a></p>
                     <a href="/mypage" className='myname'><FaUser /> {/*옵셔널 체이닝*/user?.nickname}님</a>
-                    <a href='/3' className='bell-icon'><FaBell /></a>
+                    <a href='/notification' className='bell-icon'><FaBell /></a>
                 </div>
             </div>
 
