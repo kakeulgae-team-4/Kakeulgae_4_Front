@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import './Preference.css';
+import './Bookmark.css';
 import Gallery from '../components/Gallery.js';
 import List from '../components/List.js';
 import Header from '../components/Header';
@@ -9,9 +9,7 @@ import { auth } from "../routes/firebaseAuth";
 import { defaultHeaders } from "../../config/clientConfig";
 import SelectBox from '../components/SelectBox.js';
 
-
-const Preference = () => {
-
+const PreferenceSearch = () => {
     const [preferenceList, setPreferenceList] = useState([]);
     const [bookmarkList, setBookmarkList] = useState([]);
     const [jobDetailList, setJobDetailList] = useState([]);
@@ -70,7 +68,7 @@ const Preference = () => {
 
         const handleObserver = (entities) => {
             const target = entities[0];
-            if (target.isIntersecting && hasMore && !loading) {
+            if (target.isIntersecting && hasMore && !loading && window.scrollY >= 300) {
                 setPage(prevPage => prevPage + 1);
             }
         };
@@ -87,15 +85,14 @@ const Preference = () => {
         };
     }, [hasMore, loading]);
 
+    const handleInputChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
     const handleSortChange = (criteria) => {
         setSortCriteria(criteria);
         setPage(0);
         setBookmarkList([]);
-    };
-
-
-    const handleInputChange = (event) => {
-        setSearchTerm(event.target.value);
     };
 
     function checkDataEquality(bookmark, jobDetail) {
@@ -177,4 +174,4 @@ const Preference = () => {
     )
 }
 
-export default Preference;
+export default PreferenceSearch;

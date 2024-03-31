@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import './Preference.css';
+import './Bookmark.css';
 import Gallery from '../components/Gallery.js';
 import List from '../components/List.js';
 import Header from '../components/Header';
@@ -9,12 +9,8 @@ import { auth } from "../routes/firebaseAuth";
 import { defaultHeaders } from "../../config/clientConfig";
 import SelectBox from '../components/SelectBox.js';
 
-
-const Preference = () => {
-
-    const [preferenceList, setPreferenceList] = useState([]);
+const BookmarkSearch = () => {
     const [bookmarkList, setBookmarkList] = useState([]);
-    const [jobDetailList, setJobDetailList] = useState([]);
     const [showGallery, setShowGallery] = useState(true);
     const [token, setToken] = useState([]);
     const [user, setUser] = useState([]);
@@ -25,7 +21,10 @@ const Preference = () => {
     const [initialRender, setInitialRender] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const observer = useRef();
-    let trueArray = [];
+
+    const strurl = window.location.pathname;
+    const lastSegment = strurl.substring(strurl.lastIndexOf('/') + 1);
+    const decodedData = decodeURIComponent(lastSegment);
 
     useEffect(() => {
         auth.onAuthStateChanged(async (firebaseUser) => {
@@ -36,23 +35,16 @@ const Preference = () => {
                     const tmp = await axios.get('http://localhost:8080/api/v1/member/info', {
                         headers: defaultHeaders
                     });
-                    const cnt = await axios.get('http://localhost:8080/jobs/details', {
+                    const cnt = await axios.get('http://localhost:8080/bookmarks/search', {
                         headers: defaultHeaders,
-                        params: { page: page, size: 5, sort: sortCriteria }
+                        params: { keyword: decodedData, page: page, size: 100, sort: sortCriteria }
                     });
-                    const temp = await axios.get('http://localhost:8080/jobs/preference', {
-                        headers: defaultHeaders
-                    });
-                    const elle = await axios.get('http://localhost:8080/bookmarks/likes', {
-                        headers: defaultHeaders
-                    })
 
                     setUser(tmp.data);
                     setToken(defaultHeaders);
-                    setPreferenceList(temp.data.preference);
                     setBookmarkList(prevList => [...prevList, ...cnt.data.content]);
-                    setJobDetailList(elle.data.content);
                     setHasMore(!cnt.data.last);
+                    console.log("page : " + page);
                 }
             } catch (error) {
                 console.log('에러 발생:', error);
@@ -70,7 +62,7 @@ const Preference = () => {
 
         const handleObserver = (entities) => {
             const target = entities[0];
-            if (target.isIntersecting && hasMore && !loading) {
+            if (target.isIntersecting && hasMore && !loading && window.scrollY >= 300) {
                 setPage(prevPage => prevPage + 1);
             }
         };
@@ -87,65 +79,40 @@ const Preference = () => {
         };
     }, [hasMore, loading]);
 
+    const handleInputChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
     const handleSortChange = (criteria) => {
         setSortCriteria(criteria);
         setPage(0);
         setBookmarkList([]);
     };
 
-
-    const handleInputChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
-
-    function checkDataEquality(bookmark, jobDetail) {
-        trueArray = [];
-    
-        for (let i = 0; i < bookmark.length; i++) {
-            let foundMatch = false;
-    
-            for (let j = 0; j < jobDetail.length; j++) {
-                if (bookmark[i].postName === jobDetail[j].postName) {
-                    foundMatch = true;
-                    break;
-                }
-            }
-            trueArray.push(foundMatch);
-        }
-    }
-    checkDataEquality(bookmarkList, jobDetailList);
-
     const redirectToKeyword = () => {
         if(searchTerm.trim() !== '') {
-            window.location.href = `http://localhost:3000/preference/keyword/${encodeURIComponent(searchTerm)}`;
+            window.location.href = `http://localhost:3000/bookmark/keyword/${encodeURIComponent(searchTerm)}`;
         }
     }
 
-    return (
+  return (
         <div>
             <Header />
             <br></br>
-            <h1 className='mainLocation'>관심 공고</h1>
+            <h1 className='mainLocation'>즐겨찾기</h1>
             <div className='customer'>
                 <div className='customer1'>{user.nickname}</div>
-                <div className='customer2'>님이 설정해둔 관심키워드로 찾아봤어요!</div>
+                <div className='customer2'>님의 즐겨찾기 목록을 확인해보세요!</div>
             </div>
-
-            <div className='topTag'>
-                {preferenceList.length > 0 && (
-                    preferenceList.slice(0, 10).map((preference, index) => (
-                    <span key={index} className='tagItem'>{'#' + preference}</span>
-                    ))
-                )}
-            </div>
-
             <div className='gelleryandlist'>
                 <button className={`colorless-button ${showGallery ? 'active' : ''}`} onClick={() => setShowGallery(true)}>Gallery</button>
                 <button className={`colorless-button ${!showGallery ? 'active' : ''}`} onClick={() => setShowGallery(false)}>List</button>
+                
                 <input type="text" className='search' placeholder='검색어를 입력하세요' onChange={handleInputChange}></input>
                 <button className='search-icon' onClick={redirectToKeyword}>
                     <img src={real_search} alt=""/>
                 </button>
+                
                 <div className='selectBox-container'>
                     <SelectBox handleSortChange={handleSortChange} />
                 </div>
@@ -156,7 +123,7 @@ const Preference = () => {
                     <div className='bookmark-container'>
                         {bookmarkList.map((response, index) => (
                             <div className={index % 2 === 0 && 'bookmark-container-inline'}>
-                                <Gallery key={index} response={response} token={token} status={trueArray[index]}/>
+                                <Gallery key={index} response={response} token={token} status={true}/>
                             </div>
                         ))}
                     </div>
@@ -166,15 +133,15 @@ const Preference = () => {
             ) : (
                 bookmarkList.length > 0 ? (
                     bookmarkList.map((response, index) => (
-                        <List key={index} response={response} token={token} status={trueArray[index]}/>
+                        <List key={index} response={response} token={token} status={true}/>
                     ))
                 ) : (
                     null
                 )
             )}
             <div id="bottom" className='bottomShape'></div>
-        </div>
-    )
-}
+    </div>
+  );
+};
 
-export default Preference;
+export default BookmarkSearch;
