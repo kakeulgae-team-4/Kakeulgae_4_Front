@@ -38,7 +38,7 @@ const Preference = () => {
                     });
                     const cnt = await axios.get('http://localhost:8080/jobs/details', {
                         headers: defaultHeaders,
-                        params: { page: page, size: 5, sort: sortCriteria }
+                        params: { page: page, size: 500, sort: sortCriteria }
                     });
                     const temp = await axios.get('http://localhost:8080/jobs/preference', {
                         headers: defaultHeaders
