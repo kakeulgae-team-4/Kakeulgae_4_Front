@@ -12,11 +12,13 @@ const Mypage = () => {
   const [loading, setLoading] = useState(true);
   const { user } = useContext(UserContext);
   const [Image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
-  const [jobDetails, setJobDetails] = useState([]); // 상세직무 ID 리스트
-  const [region2ndIds, setRegion2ndIds] = useState([]); // 지역 ID 리스트
-  const [careerIds, setCareerIds] = useState([]); // 경력 ID 리스트
-  const [educations, setEducations] = useState([]); // 학력 ID 리스트
-  const [workTypeIds, setWorkTypeIds] = useState([]); // 근무 형태 ID 리스트
+  const [userData, setUserData] = useState({
+    jobDetails: [],
+    region2nds: [],
+    careers: [],
+    educations: [],
+    workTypes: []
+  });
 
   const fileInput = useRef(null);
 
@@ -42,37 +44,29 @@ const Mypage = () => {
 
   useEffect(() => {
     // 로컬 스토리지에서 데이터를 불러와서 상태로 설정합니다.
-    const storedKeywords = JSON.parse(localStorage.getItem('selectedKeywords'));
-    const storedJobDetails = JSON.parse(localStorage.getItem('jobDetails'));
-    const storedRegion2ndIds = JSON.parse(localStorage.getItem('region2ndIds'));
-    const storedCareerIds = JSON.parse(localStorage.getItem('careerIds'));
-    const storedEducations = JSON.parse(localStorage.getItem('educations'));
-    const storedWorkTypeIds = JSON.parse(localStorage.getItem('workTypeIds'));
+    const storedData = JSON.parse(localStorage.getItem('userData'));
 
-    if (storedKeywords) {
-      setJobDetails(storedKeywords);
+    if (storedData) {
+      setUserData({
+        jobDetails: storedData.jobDetails || [],
+        region2nds: storedData.region2nds || [],
+        careers: storedData.careers || [],
+        educations: storedData.educations || [],
+        workTypes: storedData.workTypes || []
+      });
     }
+  }, []);
 
-    if (storedJobDetails) {
-      setJobDetails(storedJobDetails);
-    }
+  useEffect(() => {
+    localStorage.setItem('userData', JSON.stringify(userData));
+  }, [userData]);
 
-    if (storedRegion2ndIds) {
-      setRegion2ndIds(storedRegion2ndIds);
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem('userData'));
+    if (storedData) {
+      setUserData(storedData);
     }
-
-    if (storedCareerIds) {
-      setCareerIds(storedCareerIds);
-    }
-
-    if (storedEducations) {
-      setEducations(storedEducations);
-    }
-
-    if (storedWorkTypeIds) {
-      setWorkTypeIds(storedWorkTypeIds);
-    }
-  }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 실행되도록 설정합니다.
+  }, []);
 
   const onChange = (e) => {
     if (e.target.files[0]) {
@@ -101,11 +95,11 @@ const Mypage = () => {
               nickname: currentUser.displayName,
               email: currentUser.email,
               keywords: selectedKeywords,
-              jobDetails: jobDetails, // 상세직무 ID 리스트 전달
-              region2ndIds: region2ndIds, // 지역 ID 리스트 전달
-              careerIds: careerIds, // 경력 ID 리스트 전달
-              educations: educations, // 학력 ID 리스트 전달
-              workTypeIds: workTypeIds // 근무 형태 ID 리스트 전달
+              jobDetails: userData.jobDetails, // 상세직무 ID 리스트 전달
+              region2ndIds: userData.region2nds, // 지역 ID 리스트 전달
+              careerIds: userData.careers, // 경력 ID 리스트 전달
+              educations: userData.educations, // 학력 ID 리스트 전달
+              workTypeIds: userData.workTypes // 근무 형태 ID 리스트 전달
             },
             {
               headers: defaultHeaders
@@ -113,19 +107,23 @@ const Mypage = () => {
         );
         console.log('관심 키워드 저장 완료:', res.data);
 
-        // 관심 키워드를 로컬 스토리지에 저장합니다.
-        localStorage.setItem('selectedKeywords', JSON.stringify(selectedKeywords));
-        localStorage.setItem('jobDetails', JSON.stringify(jobDetails));
-        localStorage.setItem('region2ndIds', JSON.stringify(region2ndIds));
-        localStorage.setItem('careerIds', JSON.stringify(careerIds));
-        localStorage.setItem('educations', JSON.stringify(educations));
-        localStorage.setItem('workTypeIds', JSON.stringify(workTypeIds));
+        // userData 상태 업데이트
+        setUserData({
+          ...userData,
+          jobDetails: userData.jobDetails,
+          region2nds: userData.region2nds,
+          careers: userData.careers,
+          educations: userData.educations,
+          workTypes: userData.workTypes
+        });
+
+        // userData 상태가 완전히 업데이트된 후에 localStorage에 저장
+        localStorage.setItem('userData', JSON.stringify(userData));
       }
     } catch (error) {
       console.error('관심 키워드 저장 실패:', error);
     }
   };
-
 
   return (
       <div className='mypage'>

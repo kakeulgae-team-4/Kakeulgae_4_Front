@@ -78,8 +78,7 @@
 // };
 //
 // export default Filter;
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Filter.css';
 
 const categories = {
@@ -93,7 +92,14 @@ const categories = {
 const Filter = ({ handleSaveKeywords }) => {
   const [selectedCategory, setSelectedCategory] = useState('직무');
   const [items, setItems] = useState(categories[selectedCategory]);
-  const [selectedItems, setSelectedItems] = useState({});
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  useEffect(() => {
+    const storedKeywords = JSON.parse(localStorage.getItem('selectedKeywords'));
+    if (storedKeywords) {
+      setSelectedItems(storedKeywords);
+    }
+  }, []);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -101,23 +107,23 @@ const Filter = ({ handleSaveKeywords }) => {
   };
 
   const handleItemClick = (item) => {
-    setSelectedItems(prevSelectedItems => ({
-      ...prevSelectedItems,
-      [item]: !prevSelectedItems[item],
-    }));
+    setSelectedItems(prevSelectedItems => {
+      if (prevSelectedItems.includes(item)) {
+        return prevSelectedItems.filter(selectedItem => selectedItem !== item);
+      } else {
+        return [...prevSelectedItems, item];
+      }
+    });
   };
 
-  const selectedKeywords = Object.entries(selectedItems)
-  .filter(([, isSelected]) => isSelected)
-  .map(([item]) => item);
-
   const clearSelectedItems = () => {
-    setSelectedItems({});
+    setSelectedItems([]);
   };
 
   // 선택된 키워드를 부모 컴포넌트로 전달
   const saveKeywords = () => {
-    handleSaveKeywords(selectedKeywords);
+    handleSaveKeywords(selectedItems);
+    localStorage.setItem('selectedKeywords', JSON.stringify(selectedItems));
   };
 
   return (
@@ -138,22 +144,22 @@ const Filter = ({ handleSaveKeywords }) => {
             {items.map((item, index) => (
                 <div
                     key={index}
-                    className={`item ${selectedItems[item] ? 'selected' : ''}`}
+                    className={`item ${selectedItems.includes(item) ? 'selected' : ''}`}
                     onClick={() => handleItemClick(item)}
                 >
                   <span>{item}</span>
-                  <span className="checkmark">{selectedItems[item] ? '✓' : '+'}</span>
+                  <span className="checkmark">{selectedItems.includes(item) ? '✓' : '+'}</span>
                 </div>
             ))}
           </div>
         </div>
         <div className="selected-keywords">
-          {selectedKeywords.map((keyword, index) => (
+          {selectedItems.map((keyword, index) => (
               <div key={index} className="keyword">
                 #{keyword}
               </div>
           ))}
-          {selectedKeywords.length > 0 && (
+          {selectedItems.length > 0 && (
               <button onClick={clearSelectedItems} className="clear-button">초기화</button>
           )}
           {/* 저장 버튼 추가 */}
@@ -164,3 +170,4 @@ const Filter = ({ handleSaveKeywords }) => {
 };
 
 export default Filter;
+
