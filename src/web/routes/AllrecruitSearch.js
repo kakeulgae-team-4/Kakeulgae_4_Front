@@ -9,6 +9,7 @@ import { auth } from "../routes/firebaseAuth";
 import { defaultHeaders } from "../../config/clientConfig";
 import SelectBox from '../components/SelectBox.js';
 import './Allrecruit.css';
+import Filter from '../components/Filter';
 
 const Allrecruit = () => {
     const [bookmarkList, setBookmarkList] = useState([]);
@@ -25,6 +26,10 @@ const Allrecruit = () => {
     const observer = useRef();
     let trueArray = [];
 
+    const strurl = window.location.pathname;
+    const lastSegment = strurl.substring(strurl.lastIndexOf('/') + 1);
+    const decodedData = decodeURIComponent(lastSegment);
+
     useEffect(() => {
         auth.onAuthStateChanged(async (firebaseUser) => {
             try {
@@ -34,13 +39,13 @@ const Allrecruit = () => {
                     const tmp = await axios.get('http://localhost:8080/api/v1/member/info', {
                         headers: defaultHeaders
                     });
-                    const cnt = await axios.get('http://localhost:8080/jobs', {
+                    const cnt = await axios.get('http://localhost:8080/bookmarks/search', {
                         headers: defaultHeaders,
-                        params: { page: page, size: 5, sort: sortCriteria }
+                        params: { keyword: decodedData, page: page, size: 1000, sort: sortCriteria }
                     });
                     const elle = await axios.get('http://localhost:8080/bookmarks/likes', {
                         headers: defaultHeaders
-                    })
+                    });
 
                     setUser(tmp.data);
                     setToken(defaultHeaders);
