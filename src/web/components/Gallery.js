@@ -1,6 +1,7 @@
 import './Gallery.css';
 import React from 'react';
 import HeartButton from './HeartButton';
+import goalkeeper from '../images/goalkeeper.png';
 
 const Gallery = ({response, token, status}) => { // 매개변수로 response를 받음
     
@@ -48,6 +49,9 @@ const Gallery = ({response, token, status}) => { // 매개변수로 response를 
                 <button className='gallery-heart'>
                     <HeartButton postId={response.id} token={token} status={status}/>
                 </button>
+                <div className='keeper'>
+                    <img src={goalkeeper}></img>
+                </div>
             </div>
             <div className='gt-secondBox'>
             <div className='gallery-container'>

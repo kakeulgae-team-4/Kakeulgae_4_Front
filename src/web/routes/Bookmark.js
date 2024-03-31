@@ -4,7 +4,6 @@ import './Bookmark.css';
 import Gallery from '../components/Gallery.js';
 import List from '../components/List.js';
 import Header from '../components/Header';
-import search_icon from '../images/search_icon.png';
 import real_search from '../images/realSearch.png';
 import { auth } from "../routes/firebaseAuth";
 import { defaultHeaders } from "../../config/clientConfig";
@@ -23,11 +22,8 @@ const Bookmark = () => {
     const [initialRender, setInitialRender] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const observer = useRef();
-    const [pageSearch, setPageSearch] = useState(0);
-    // const [hasMoreSearch, setHasMoreSearch] = useState(true);
-    // const [initialRenderSearch, setInitialRenderSearch] = useState(true);
-    // const [loardingSearch, setLoadingSearch] = useState(false);
-    // const [bookmarkListSearch, setBookmarkListSearch] = useState([]);
+
+    
 
     useEffect(() => {
         auth.onAuthStateChanged(async (firebaseUser) => {
@@ -49,7 +45,6 @@ const Bookmark = () => {
                     setHasMore(!cnt.data.last);
                 }
             } catch (error) {
-                //setPage(0);
                 console.log('에러 발생:', error);
             }
         });
@@ -65,7 +60,7 @@ const Bookmark = () => {
 
         const handleObserver = (entities) => {
             const target = entities[0];
-            if (target.isIntersecting && hasMore && !loading) {
+            if (target.isIntersecting && hasMore && !loading && window.scrollY >= 300) {
                 setPage(prevPage => prevPage + 1);
             }
         };
@@ -82,70 +77,28 @@ const Bookmark = () => {
         };
     }, [hasMore, loading]);
 
-    // useEffect(()=>{
-    //     setInitialRenderSearch(false);
-    //     const options = {
-    //         root: null,
-    //         rootMargin: '0px',
-    //         threshold: 0.5
-    //     };
-
-    //     const handleObserver = (entities) => {
-    //         const target = entities[0];
-    //         if (target.isIntersecting && hasMoreSearch && !loardingSearch) {
-    //             setPageSearch(prevPage => prevPage + 1);
-    //         }
-    //     };
-
-    //     observer.current = new IntersectionObserver(handleObserver, options);
-    //     if(observer.current && !loardingSearch) {
-    //         observer.current.observe(document.getElementById('bottom'));
-    //     }
-
-    //     return () => {
-    //         if(observer.current) {
-    //             observer.current.disconnect();
-    //         }
-    //     };
-
-    // }, [hasMoreSearch, loardingSearch])
-    //  함수를 선언하고 useEffect 내에서 함수를 넣는다
-    //  함수를 선언하고 useEffect 내에서 함수를 넣는다
-
     const handleSortChange = (criteria) => {
         setSortCriteria(criteria);
         setPage(0);
         setBookmarkList([]);
     };
 
-const handleSearchClick = async () => {
-    // 검색어가 변경되었을 때만 검색을 수행하도록 조건 추가
-    if (searchTerm.trim() !== '') {
-        try {
-            const res = await axios.get('http://localhost:8080/bookmarks/search',{
-                headers: defaultHeaders,
-                params: { keyword: searchTerm, page: 0, size: 100, sort: sortCriteria }
-            });
-            console.log("현재 page : 0");
-            console.log("정렬방식 : " + sortCriteria);
-            console.log("검색어 : " + searchTerm);
-            console.log(res.data.content);
-
-            setBookmarkList([]);
-            setBookmarkList(res.data.content);
-            
-            console.log(pageSearch);
-            setHasMore(!res.data.last);
-        } catch (error) {
-            console.error('검색 요청 오류:', error);
-        }
-    }
-};
-
-
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
     };
+
+    const redirectToKeyword = () => {
+        if(searchTerm.trim() !== '') {
+            window.location.href = `http://localhost:3000/bookmark/keyword/${encodeURIComponent(searchTerm)}`;
+        }
+    }
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            redirectToKeyword();
+        }
+    };
+
 
     return (
         <div>
@@ -159,12 +112,15 @@ const handleSearchClick = async () => {
             <div className='gelleryandlist'>
                 <button className={`colorless-button ${showGallery ? 'active' : ''}`} onClick={() => setShowGallery(true)}>Gallery</button>
                 <button className={`colorless-button ${!showGallery ? 'active' : ''}`} onClick={() => setShowGallery(false)}>List</button>
-                <input type="text" className='search' placeholder='검색어를 입력하세요' onChange={handleInputChange}></input>
-                <button className='search-icon' onClick={handleSearchClick}><img src={real_search} alt=""/></button>
+
+                <input type="text" className='search' placeholder='검색어를 입력하세요' onChange={handleInputChange} onKeyPress={handleKeyPress}></input>
+                <button className='search-icon' onClick={redirectToKeyword}>
+                    <img src={real_search} alt=""/>
+                </button>
+                
                 <div className='selectBox-container'>
                     <SelectBox handleSortChange={handleSortChange} />
                 </div>
-                
             </div>
             <div className='divider'></div>
             {showGallery ? (
