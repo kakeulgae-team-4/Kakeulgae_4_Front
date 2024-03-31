@@ -37,7 +37,7 @@ const BookmarkSearch = () => {
                     });
                     const cnt = await axios.get('http://localhost:8080/bookmarks/search', {
                         headers: defaultHeaders,
-                        params: { keyword: decodedData, page: page, size: 100, sort: sortCriteria }
+                        params: { keyword: decodedData, page: page, size: 500, sort: sortCriteria }
                     });
 
                     setUser(tmp.data);
@@ -95,6 +95,12 @@ const BookmarkSearch = () => {
         }
     }
 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            redirectToKeyword();
+        }
+    };
+
   return (
         <div>
             <Header />
@@ -108,7 +114,7 @@ const BookmarkSearch = () => {
                 <button className={`colorless-button ${showGallery ? 'active' : ''}`} onClick={() => setShowGallery(true)}>Gallery</button>
                 <button className={`colorless-button ${!showGallery ? 'active' : ''}`} onClick={() => setShowGallery(false)}>List</button>
                 
-                <input type="text" className='search' placeholder='검색어를 입력하세요' onChange={handleInputChange}></input>
+                <input type="text" className='search' placeholder='검색어를 입력하세요' onChange={handleInputChange} onKeyPress={handleKeyPress}></input>
                 <button className='search-icon' onClick={redirectToKeyword}>
                     <img src={real_search} alt=""/>
                 </button>

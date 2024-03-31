@@ -21,7 +21,6 @@ const Bookmark = () => {
     const [sortCriteria, setSortCriteria] = useState('createdAt');
     const [initialRender, setInitialRender] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
-    const [pageSearch, setPageSearch] = useState(0);
     const observer = useRef();
 
     
@@ -94,6 +93,13 @@ const Bookmark = () => {
         }
     }
 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            redirectToKeyword();
+        }
+    };
+
+
     return (
         <div>
             <Header />
@@ -107,7 +113,7 @@ const Bookmark = () => {
                 <button className={`colorless-button ${showGallery ? 'active' : ''}`} onClick={() => setShowGallery(true)}>Gallery</button>
                 <button className={`colorless-button ${!showGallery ? 'active' : ''}`} onClick={() => setShowGallery(false)}>List</button>
 
-                <input type="text" className='search' placeholder='검색어를 입력하세요' onChange={handleInputChange}></input>
+                <input type="text" className='search' placeholder='검색어를 입력하세요' onChange={handleInputChange} onKeyPress={handleKeyPress}></input>
                 <button className='search-icon' onClick={redirectToKeyword}>
                     <img src={real_search} alt=""/>
                 </button>
