@@ -1,11 +1,4 @@
 .select-button{
-    margin-left: 10%;
     border: 2px solid skyblue;
     border-radius: 5px;
-    font-size: 80%;
-    padding-left: 8%;
-    outline-color: darkgray;
-    width: 130%;
-    height: 32px;
-    padding-top: 5%;
 }
