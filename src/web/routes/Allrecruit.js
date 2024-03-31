@@ -38,6 +38,7 @@ const Allrecruit = () => {
                     const tmp = await axios.get('http://localhost:8080/api/v1/member/info', {
                         headers: defaultHeaders
                     });
+                    // 전체공고 API로 교체
                     const cnt = await axios.get('http://localhost:8080/bookmarks/likes', {
                         headers: defaultHeaders,
                         params: { page: page, size: 5, sort: sortCriteria }
