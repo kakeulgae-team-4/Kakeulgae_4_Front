@@ -75,6 +75,14 @@ const Filter = ({handleSaveKeywords}) => {
     setSelectedItems({});
   };
 
+  // API 키와 사용자에게 보여줄 텍스트 간의 매핑
+  const categoryNames = {
+    jobDetails: '직무',
+    career: '경력',
+    education: '학력',
+    work_type: '직무 형태',
+  };
+
   return (
       <div className="filter-container">
         <div className="filter">
@@ -82,12 +90,12 @@ const Filter = ({handleSaveKeywords}) => {
             {Object.keys(keywords).map((category, index) => (
                 <button
                     key={index}
-                    className={selectedCategory === category ? 'active'
-                        : ''} // 선택된 카테고리에 active 클래스를 추가
+                    className={selectedCategory === category ? 'active':''} // 선택된 카테고리에 active 클래스를 추가
                     onClick={() => handleCategoryClick(category)}
                 >
-                  {category}
+                  {categoryNames[category]}
                 </button>
+                // 매핑된 한글 이름을 사용
             ))}
           </div>
           <div className="items-display">
