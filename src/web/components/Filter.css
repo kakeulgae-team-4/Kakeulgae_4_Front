@@ -139,3 +139,18 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+@media screen and (max-width: 1200px) {
+  .filter-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .filter {
+    width: 100%;
+  }
+  .selected-keywords {
+    width: 100%;
+    height: 200px;
+  }
+}
