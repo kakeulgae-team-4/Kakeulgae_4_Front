@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Filter.css';
 import axios from "axios";
+import { FaCheckCircle } from "react-icons/fa";
 
 const Filter = ({handleSaveKeywords}) => {
   const [selectedCategory, setSelectedCategory] = useState();
@@ -75,6 +76,28 @@ const Filter = ({handleSaveKeywords}) => {
     setSelectedItems({});
   };
 
+  // API 키와 사용자에게 보여줄 텍스트 간의 매핑
+  const categoryNames = {
+    jobDetails: '직무',
+    career: '경력',
+    education: '학력',
+    work_type: '직무 형태',
+  };
+
+  
+  // 체크 표시 상태를 관리하는 상태 변수
+  const [showCheck, setShowCheck] = useState(false);
+
+  // 저장 버튼 클릭 핸들러
+  const handleSaveClick = () => {
+    setShowCheck(true); // 체크 표시를 보여줌
+
+    // 1초 후에 체크 표시를 다시 숨김
+    setTimeout(() => {
+      setShowCheck(false);
+    }, 1000); // 1000ms = 1초
+  };
+
   return (
       <div className="filter-container">
         <div className="filter">
@@ -82,12 +105,12 @@ const Filter = ({handleSaveKeywords}) => {
             {Object.keys(keywords).map((category, index) => (
                 <button
                     key={index}
-                    className={selectedCategory === category ? 'active'
-                        : ''} // 선택된 카테고리에 active 클래스를 추가
+                    className={selectedCategory === category ? 'active':''} // 선택된 카테고리에 active 클래스를 추가
                     onClick={() => handleCategoryClick(category)}
                 >
-                  {category}
+                  {categoryNames[category]}
                 </button>
+                // 매핑된 한글 이름을 사용
             ))}
           </div>
           <div className="items-display">
@@ -115,7 +138,11 @@ const Filter = ({handleSaveKeywords}) => {
                       className="clear-button">초기화</button>
           )}
           {/* 저장 버튼 추가 */}
-          <button onClick={saveInterest} className="save-button">저장</button>
+          <button onClick={()=> {
+            saveInterest();
+            handleSaveClick();
+          }} className="save-button">저장</button>
+          {showCheck && <span className='check-icon'><FaCheckCircle /></span>} {/* showCheck 상태가 true일 때만 체크 표시를 렌더링 */}
         </div>
       </div>
   );

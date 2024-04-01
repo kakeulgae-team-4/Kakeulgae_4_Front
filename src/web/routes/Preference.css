@@ -1,103 +1,15 @@
-.mainLocation{
-    padding-left: 5%;
-}
-
-.customer{
-    padding: 10px;
+.preference {
     display: flex;
-    padding-left: 5%;
+    flex-direction: column;
+    gap: 10px;
+    padding: 100px;
 }
 
-.customer1{
+.preference>p {
+    color: #5EAEDB;
     font-weight: bold;
-    color: gray;
 }
 
-.customer2{
-    font-weight: bold;
-    color: violet;
-}
-
-.gelleryandlist{
-    padding-left: 5%;
-    padding-top: 3%;
-    display: flex;
-}
-
-.colorless-button{
-    background-color: transparent;
-    border: none;
-    color:gray;
-    padding: 8px 16px;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 200%;
-    font-family: Arial, sans-serif;
-    outline: none;
-    position: relative;
-    display: inline-block;
-}
-
-.colorless-button::after{
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background-color: gray;
-    transition: width 0.3s ease;
-}
-
-.colorless-button:hover::after{
-    width: 100%;
-}
-
-.colorless-button.active::after {
-    content: "";
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: gray;
-}
-
-.search{
-    margin-left:46.4%;
-    background-color: lightgray;
-    color: gray;
-    border-radius: 7px;
-    width: 250px;
-    height: 32px;
-    border: none;
-    outline-color: darkgray;
-    float: left;
-    margin-top: 1.4%;
-    padding-left: 10px;
-}
-
-
-.divider{
-    border-top : 1px solid lightgray;
-    margin-left: 6%;
-    margin-right: 6%;
-    margin-bottom: 1%;
-}
-
-.search-icon{
-    background-color: transparent;
-    border: none;
-    color:gray;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 25px;
-    font-family: Arial, sans-serif;
-    outline: none;
-    margin-top: 1.2%;
-    margin-left: 0.4%;
-    position: relative;
-    display: inline-block;
-}
 
 
 .noBookmark {
@@ -114,9 +26,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start; /* 왼쪽부터 정렬 */
-    margin-left: 10%;
-    margin-right: 10%;
-    
+    width: 100%;
 }
 
 .bookmark-container > div {
@@ -136,8 +46,6 @@
 .topTag{
     background-color: gainsboro;
     margin-top: 2.5%;
-    margin-left: 6%;
-    margin-right: 6%;
     height: 80px;
     line-height: 80px;
     border-radius: 5px;

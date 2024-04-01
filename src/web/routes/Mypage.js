@@ -57,12 +57,12 @@ return (
                     <div className="setting-box">
                         <div className="mypage-nickname">
                             <p>닉네임</p>
-                            <input type="text" value={user?.nickname}/>
+                            <input type="text" defaultValue={user?.nickname}/>
                         </div>
                         <div className="mypage-email">
                             <p>이메일</p>
                             <div>
-                                <input type="email" value={user?.email}/>
+                                <input type="email" defaultValue={user?.email}/>
                                 <select>
                                     <option value="" selected disabled hidden>선택하세요</option>
                                     <option value="0">naver.com</option>
@@ -75,7 +75,7 @@ return (
                         <div className="mypage-phone">
                             <p>휴대폰 번호</p>
                             <div>
-                                <input type="text" value={user?.phoneNumber}/>
+                                <input type="text" defaultValue={user?.phoneNumber}/>
                                 <button className='save-btn'>저장</button>
                             </div>
                         </div>

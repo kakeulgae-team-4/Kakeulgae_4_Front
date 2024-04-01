@@ -2,6 +2,7 @@
   display: flex;
   width: 100%;
   gap: 20px;
+  color: #4e4e4e;
 }
 
 .filter {
@@ -29,17 +30,21 @@
 .category-selector {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  width: 50%;
 }
 
 .category-selector button {
   padding: 10px;
-  margin-bottom: 10px;
   background-color: #F8F8F8;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   outline: none;
-  font-weight: 600;
+  font-weight: bold;
+  color: #4e4e4e;
+  width: 100%;
 }
 
 .category-selector button.active {
@@ -53,6 +58,8 @@
   align-items: flex-start;
   max-height: 250px; /* 최대 높이 설정 */
   overflow-y: auto; /* 높이를 넘어서면 스크롤 생성 */
+  width: 50%;
+  text-align: center;
 }
 
 .items-display .item {
@@ -106,17 +113,29 @@
   padding: 15px;
 }
 
-.clear-button {
+.clear-button, .save-button {
+  border: 1px solid rgb(173, 173, 173);
+  border-radius: 10px;
+  background-color: #fafafa;
+  width: 100px;
+  padding: 10px;
   position: absolute;
-  top: 10;
-  right:0;
-  align-self: flex-end; /* 버튼을 우측 하단에 위치시킴 */
-  padding: 5px 10px;
-  margin: 10px;
-  background-color: #F8F8F8; /* 버튼 배경색 */
-  color: #646464; /* 버튼 글자색 */
-  border: 1px solid #646464;
-  border-radius: 5px;
-  cursor: pointer;
+  bottom: 10px;
+}
+.clear-button {
+  right: 120px;
+}
+.save-button {
+  right: 10px;
+}
+.save-button:focus {
   outline: none;
+}
+.check-icon {
+  color: rgb(57, 197, 57);
+  font-size: 30px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

@@ -2,15 +2,16 @@ import React from 'react'
 import { useContext, useState, useEffect, useRef } from 'react';
 import './Allrecruit.css';
 import Header from '../components/Header';
+import Filter from '../components/Filter';
+import { UserContext } from '../components/AuthProvider';
 import SelectBox from '../components/SelectBox.js';
 import Gallery from '../components/Gallery.js';
 import List from '../components/List.js';
 import axios from 'axios';
 import { defaultHeaders } from "../../config/clientConfig";
-import './Allrecruit.css';
+import { MdOutlineGridView, MdViewList } from "react-icons/md";
+import { IoSearch } from "react-icons/io5";
 import { auth } from "../routes/firebaseAuth";
-import real_search from '../images/realSearch.png';
-import Filter from '../components/Filter';
 
 const Allrecruit = () => {
     const [bookmarkList, setBookmarkList] = useState([]);
@@ -25,6 +26,7 @@ const Allrecruit = () => {
     const [initialRender, setInitialRender] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const observer = useRef();
+
     let trueArray = [];
 
     useEffect(() => {
@@ -96,7 +98,7 @@ const Allrecruit = () => {
             let foundMatch = false;
     
             for (let j = 0; j < jobDetail.length; j++) {
-                if (bookmark[i].postName === jobDetail[j].postName) {
+                if (bookmark[i].postName === jobDetail[j].postName && bookmark[i].companyName === jobDetail[j].companyName) {
                     foundMatch = true;
                     break;
                 }
@@ -120,32 +122,38 @@ const Allrecruit = () => {
         if (event.key === 'Enter') {
             redirectToKeyword();
         }
-    };
+    }
+
+    // const handleKeyPress = (event) => {
+    //     if (event.key === 'Enter') {
+    //         redirectToKeyword();
+    //     }
+    // };
 
     return (
-        <div>
-            <Header />
-            <br></br>
-            <h1 className='mainLocation'>채용공고</h1>
-            <div className='customer'>
-                <div className='customer1'>{user.nickname}</div>
-                <div className='customer2'>님이 원하는 공고를 찾아보세요!</div>
-            </div>
-            <Filter/>
-            <div className='gelleryandlist'>
-                <button className={`colorless-button ${showGallery ? 'active' : ''}`} onClick={() => setShowGallery(true)}>Gallery</button>
-                <button className={`colorless-button ${!showGallery ? 'active' : ''}`} onClick={() => setShowGallery(false)}>List</button>
+        <div className="allrecruit-container">
+            <Header/>
+            <div className='container-box'>
+              <h1>채용공고</h1>
+              <p><span>{user?.nickname}</span>님의 원하는 공고를 찾아보세요!</p>
+              <Filter/>
 
-                <input type="text" className='search' placeholder='검색어를 입력하세요' onChange={handleInputChange} onKeyPress={handleKeyPress}></input>
-                <button className='search-icon' onClick={redirectToKeyword}>
-                    <img src={real_search} alt=""/>
-                </button>
-                
-                <div className='selectBox-container'>
+
+            <div className='galleryandlist'>
+                <div>
+                    <span className={`view-btn ${showGallery ? 'blue-btn' : ''}`} onClick={() => setShowGallery(true)}><MdOutlineGridView /></span>
+                    <span className={`view-btn ${!showGallery ? 'blue-btn' : ''}`} onClick={() => setShowGallery(false)}><MdViewList /></span>
+                </div>
+
+                <div className='search-container'>
+                    <div className='search-box'>
+                        <input type="text" placeholder='검색어를 입력하세요' onChange={handleInputChange}></input>
+                        <span id='search-icon' onClick={redirectToKeyword}><IoSearch /></span>
+                    </div>
                     <SelectBox handleSortChange={handleSortChange} />
                 </div>
             </div>
-            <div className='divider'></div>
+            <hr/>
             {showGallery ? (
                 bookmarkList.length > 0 ? (
                     <div className='bookmark-container'>
@@ -169,7 +177,8 @@ const Allrecruit = () => {
             )}
             <div id="bottom" className='bottomShape'></div>
         </div>
+        </div>
     )
 }
 
-export default Allrecruit
+export default Allrecruit;
