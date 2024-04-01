@@ -74,3 +74,10 @@ hr {
 #all-list {
   width: 100%;
 }
+
+#bookmark-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* 왼쪽부터 정렬 */
+  gap: 20px;
+}
