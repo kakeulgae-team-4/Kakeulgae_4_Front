@@ -15,6 +15,7 @@ import ScrollToTop from './web/components/ScrollToTop';
 import BookmarkSearch from './web/routes/BookmarkSearch';
 import PreferenceSearch from './web/routes/PreferenceSearch';
 import Notification from './web/routes/Notification';
+import AllrecruitSearch from './web/routes/AllrecruitSearch';
 
 const App = () => {
     return (
@@ -28,6 +29,7 @@ const App = () => {
                         <Route path='/signup' element={<Signup />} />
                         <Route path='/mypage' element={<Mypage />}/>
                         <Route path='/allrecruit' element={<Allrecruit />}/>
+                        <Route path='/allrecruit/keyword/:searchTerm' element={<AllrecruitSearch />} />
                         <Route path='/calendar' element={<Calendar />} />
                         <Route path='/bookmark' element={<Bookmark />} />
                         <Route path='/bookmark/keyword/:searchTerm' element={<BookmarkSearch />} />

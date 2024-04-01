@@ -1,15 +1,14 @@
-import React from 'react'
-import { useContext, useState, useEffect, useRef } from 'react';
-import './Allrecruit.css';
-import Header from '../components/Header';
-import SelectBox from '../components/SelectBox.js';
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import './Bookmark.css';
 import Gallery from '../components/Gallery.js';
 import List from '../components/List.js';
-import axios from 'axios';
-import { defaultHeaders } from "../../config/clientConfig";
-import './Allrecruit.css';
-import { auth } from "../routes/firebaseAuth";
+import Header from '../components/Header';
 import real_search from '../images/realSearch.png';
+import { auth } from "../routes/firebaseAuth";
+import { defaultHeaders } from "../../config/clientConfig";
+import SelectBox from '../components/SelectBox.js';
+import './Allrecruit.css';
 import Filter from '../components/Filter';
 
 const Allrecruit = () => {
@@ -17,8 +16,8 @@ const Allrecruit = () => {
     const [jobDetailList, setJobDetailList] = useState([]);
     const [showGallery, setShowGallery] = useState(true);
     const [token, setToken] = useState([]);
-    const [page, setPage] = useState(0);
     const [user, setUser] = useState([]);
+    const [page, setPage] = useState(0);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [sortCriteria, setSortCriteria] = useState('createdAt');
@@ -26,6 +25,10 @@ const Allrecruit = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const observer = useRef();
     let trueArray = [];
+
+    const strurl = window.location.pathname;
+    const lastSegment = strurl.substring(strurl.lastIndexOf('/') + 1);
+    const decodedData = decodeURIComponent(lastSegment);
 
     useEffect(() => {
         auth.onAuthStateChanged(async (firebaseUser) => {
@@ -36,13 +39,13 @@ const Allrecruit = () => {
                     const tmp = await axios.get('http://localhost:8080/api/v1/member/info', {
                         headers: defaultHeaders
                     });
-                    const cnt = await axios.get('http://localhost:8080/jobs', {
+                    const cnt = await axios.get('http://localhost:8080/bookmarks/search', {
                         headers: defaultHeaders,
-                        params: { page: page, size: 5, sort: sortCriteria }
+                        params: { keyword: decodedData, page: page, size: 1000, sort: sortCriteria }
                     });
                     const elle = await axios.get('http://localhost:8080/bookmarks/likes', {
                         headers: defaultHeaders
-                    })
+                    });
 
                     setUser(tmp.data);
                     setToken(defaultHeaders);
@@ -131,7 +134,6 @@ const Allrecruit = () => {
                 <div className='customer1'>{user.nickname}</div>
                 <div className='customer2'>님이 원하는 공고를 찾아보세요!</div>
             </div>
-            <Filter/>
             <div className='gelleryandlist'>
                 <button className={`colorless-button ${showGallery ? 'active' : ''}`} onClick={() => setShowGallery(true)}>Gallery</button>
                 <button className={`colorless-button ${!showGallery ? 'active' : ''}`} onClick={() => setShowGallery(false)}>List</button>
