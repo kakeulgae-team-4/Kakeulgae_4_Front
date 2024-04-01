@@ -32,6 +32,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 10px;
+  width: 50%;
 }
 
 .category-selector button {
@@ -43,6 +44,7 @@
   outline: none;
   font-weight: bold;
   color: #4e4e4e;
+  width: 100%;
 }
 
 .category-selector button.active {
@@ -56,6 +58,8 @@
   align-items: flex-start;
   max-height: 250px; /* 최대 높이 설정 */
   overflow-y: auto; /* 높이를 넘어서면 스크롤 생성 */
+  width: 50%;
+  text-align: center;
 }
 
 .items-display .item {
