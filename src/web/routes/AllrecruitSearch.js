@@ -1,51 +1,34 @@
-import React from 'react'
-import { useContext, useState, useEffect, useRef } from 'react';
-import './Allrecruit.css';
-import Header from '../components/Header';
-<<<<<<< HEAD
-import Filter from '../components/Filter';
-import { UserContext } from '../components/AuthProvider';
-=======
->>>>>>> origin/main
-import SelectBox from '../components/SelectBox.js';
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import './Bookmark.css';
 import Gallery from '../components/Gallery.js';
 import List from '../components/List.js';
-import axios from 'axios';
-import { defaultHeaders } from "../../config/clientConfig";
-<<<<<<< HEAD
-import { MdOutlineGridView, MdViewList } from "react-icons/md";
-import { IoSearch } from "react-icons/io5";
-import { auth } from "../routes/firebaseAuth";
-
-const Allrecruit = () => {
-    // const { user } = useContext(UserContext);
-
-=======
-import './Allrecruit.css';
-import { auth } from "../routes/firebaseAuth";
+import Header from '../components/Header';
 import real_search from '../images/realSearch.png';
+import { auth } from "../routes/firebaseAuth";
+import { defaultHeaders } from "../../config/clientConfig";
+import SelectBox from '../components/SelectBox.js';
+import './Allrecruit.css';
 import Filter from '../components/Filter';
 
 const Allrecruit = () => {
->>>>>>> origin/main
     const [bookmarkList, setBookmarkList] = useState([]);
     const [jobDetailList, setJobDetailList] = useState([]);
     const [showGallery, setShowGallery] = useState(true);
     const [token, setToken] = useState([]);
     const [user, setUser] = useState([]);
     const [page, setPage] = useState(0);
-    const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [sortCriteria, setSortCriteria] = useState('createdAt');
     const [initialRender, setInitialRender] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const observer = useRef();
-<<<<<<< HEAD
-
-=======
     let trueArray = [];
->>>>>>> origin/main
+
+    const strurl = window.location.pathname;
+    const lastSegment = strurl.substring(strurl.lastIndexOf('/') + 1);
+    const decodedData = decodeURIComponent(lastSegment);
 
     useEffect(() => {
         auth.onAuthStateChanged(async (firebaseUser) => {
@@ -56,29 +39,18 @@ const Allrecruit = () => {
                     const tmp = await axios.get('http://localhost:8080/api/v1/member/info', {
                         headers: defaultHeaders
                     });
-<<<<<<< HEAD
-                    // 전체공고 API로 교체
-                    const cnt = await axios.get('http://localhost:8080/bookmarks/likes', {
+                    const cnt = await axios.get('http://localhost:8080/bookmarks/search', {
                         headers: defaultHeaders,
-                        params: { page: page, size: 5, sort: sortCriteria }
-                    });
-=======
-                    const cnt = await axios.get('http://localhost:8080/jobs', {
-                        headers: defaultHeaders,
-                        params: { page: page, size: 5, sort: sortCriteria }
+                        params: { keyword: decodedData, page: page, size: 1000, sort: sortCriteria }
                     });
                     const elle = await axios.get('http://localhost:8080/bookmarks/likes', {
                         headers: defaultHeaders
-                    })
->>>>>>> origin/main
+                    });
 
                     setUser(tmp.data);
                     setToken(defaultHeaders);
                     setBookmarkList(prevList => [...prevList, ...cnt.data.content]);
-<<<<<<< HEAD
-=======
                     setJobDetailList(elle.data.content);
->>>>>>> origin/main
                     setHasMore(!cnt.data.last);
                 }
             } catch (error) {
@@ -86,10 +58,6 @@ const Allrecruit = () => {
             }
         });
     }, [page, initialRender, sortCriteria]);
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
 
     useEffect(() => {
         setInitialRender(false);
@@ -147,9 +115,6 @@ const Allrecruit = () => {
 
     const redirectToKeyword = () => {
         if(searchTerm.trim() !== '') {
-<<<<<<< HEAD
-            window.location.href = `http://localhost:3000/bookmark/keyword/${encodeURIComponent(searchTerm)}`;
-=======
             window.location.href = `http://localhost:3000/allrecruit/keyword/${encodeURIComponent(searchTerm)}`;
         }
     }
@@ -157,42 +122,10 @@ const Allrecruit = () => {
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             redirectToKeyword();
->>>>>>> origin/main
         }
-    }
-
-    // const handleKeyPress = (event) => {
-    //     if (event.key === 'Enter') {
-    //         redirectToKeyword();
-    //     }
-    // };
+    };
 
     return (
-<<<<<<< HEAD
-        <div className="allrecruit-container">
-            <Header/>
-            <div className='container-box'>
-              <h1>채용공고</h1>
-              <p><span>{user?.nickname}</span>님의 원하는 공고를 찾아보세요!</p>
-              <Filter/>
-
-
-            <div className='galleryandlist'>
-                <div>
-                    <span className={`view-btn ${showGallery ? 'blue-btn' : ''}`} onClick={() => setShowGallery(true)}><MdOutlineGridView /></span>
-                    <span className={`view-btn ${!showGallery ? 'blue-btn' : ''}`} onClick={() => setShowGallery(false)}><MdViewList /></span>
-                </div>
-
-                <div className='search-container'>
-                    <div className='search-box'>
-                        <input type="text" placeholder='검색어를 입력하세요' onChange={handleInputChange}></input>
-                        <span id='search-icon' onClick={redirectToKeyword}><IoSearch /></span>
-                    </div>
-                    <SelectBox handleSortChange={handleSortChange} />
-                </div>
-            </div>
-            <hr/>
-=======
         <div>
             <Header />
             <br></br>
@@ -201,7 +134,6 @@ const Allrecruit = () => {
                 <div className='customer1'>{user.nickname}</div>
                 <div className='customer2'>님이 원하는 공고를 찾아보세요!</div>
             </div>
-            <Filter/>
             <div className='gelleryandlist'>
                 <button className={`colorless-button ${showGallery ? 'active' : ''}`} onClick={() => setShowGallery(true)}>Gallery</button>
                 <button className={`colorless-button ${!showGallery ? 'active' : ''}`} onClick={() => setShowGallery(false)}>List</button>
@@ -216,7 +148,6 @@ const Allrecruit = () => {
                 </div>
             </div>
             <div className='divider'></div>
->>>>>>> origin/main
             {showGallery ? (
                 bookmarkList.length > 0 ? (
                     <div className='bookmark-container'>
@@ -232,11 +163,7 @@ const Allrecruit = () => {
             ) : (
                 bookmarkList.length > 0 ? (
                     bookmarkList.map((response, index) => (
-<<<<<<< HEAD
-                        <List key={index} response={response} token={token} status={true} id='all-list'/>
-=======
                         <List key={index} response={response} token={token} status={trueArray[index]}/>
->>>>>>> origin/main
                     ))
                 ) : (
                     null
