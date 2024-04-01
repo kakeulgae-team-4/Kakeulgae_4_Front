@@ -77,7 +77,7 @@ const Notification = () => {
     };
 
     const handleRedirect = (url) => {
-        window.open(`http://www.${url}`, '_blank');
+        window.open(`${url}`, '_blank');
     };
 
     return (
