@@ -2,37 +2,22 @@ import React from 'react'
 import { useContext, useState, useEffect, useRef } from 'react';
 import './Allrecruit.css';
 import Header from '../components/Header';
-<<<<<<< HEAD
 import Filter from '../components/Filter';
 import { UserContext } from '../components/AuthProvider';
-=======
->>>>>>> origin/main
 import SelectBox from '../components/SelectBox.js';
 import Gallery from '../components/Gallery.js';
 import List from '../components/List.js';
 import axios from 'axios';
 import { defaultHeaders } from "../../config/clientConfig";
-<<<<<<< HEAD
 import { MdOutlineGridView, MdViewList } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import { auth } from "../routes/firebaseAuth";
 
 const Allrecruit = () => {
-    // const { user } = useContext(UserContext);
-
-=======
-import './Allrecruit.css';
-import { auth } from "../routes/firebaseAuth";
-import real_search from '../images/realSearch.png';
-import Filter from '../components/Filter';
-
-const Allrecruit = () => {
->>>>>>> origin/main
     const [bookmarkList, setBookmarkList] = useState([]);
     const [jobDetailList, setJobDetailList] = useState([]);
     const [showGallery, setShowGallery] = useState(true);
     const [token, setToken] = useState([]);
-    const [user, setUser] = useState([]);
     const [page, setPage] = useState(0);
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -41,11 +26,8 @@ const Allrecruit = () => {
     const [initialRender, setInitialRender] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const observer = useRef();
-<<<<<<< HEAD
 
-=======
     let trueArray = [];
->>>>>>> origin/main
 
     useEffect(() => {
         auth.onAuthStateChanged(async (firebaseUser) => {
@@ -56,13 +38,6 @@ const Allrecruit = () => {
                     const tmp = await axios.get('http://localhost:8080/api/v1/member/info', {
                         headers: defaultHeaders
                     });
-<<<<<<< HEAD
-                    // 전체공고 API로 교체
-                    const cnt = await axios.get('http://localhost:8080/bookmarks/likes', {
-                        headers: defaultHeaders,
-                        params: { page: page, size: 5, sort: sortCriteria }
-                    });
-=======
                     const cnt = await axios.get('http://localhost:8080/jobs', {
                         headers: defaultHeaders,
                         params: { page: page, size: 5, sort: sortCriteria }
@@ -70,15 +45,11 @@ const Allrecruit = () => {
                     const elle = await axios.get('http://localhost:8080/bookmarks/likes', {
                         headers: defaultHeaders
                     })
->>>>>>> origin/main
 
                     setUser(tmp.data);
                     setToken(defaultHeaders);
                     setBookmarkList(prevList => [...prevList, ...cnt.data.content]);
-<<<<<<< HEAD
-=======
                     setJobDetailList(elle.data.content);
->>>>>>> origin/main
                     setHasMore(!cnt.data.last);
                 }
             } catch (error) {
@@ -86,10 +57,6 @@ const Allrecruit = () => {
             }
         });
     }, [page, initialRender, sortCriteria]);
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
 
     useEffect(() => {
         setInitialRender(false);
@@ -131,7 +98,7 @@ const Allrecruit = () => {
             let foundMatch = false;
     
             for (let j = 0; j < jobDetail.length; j++) {
-                if (bookmark[i].postName === jobDetail[j].postName) {
+                if (bookmark[i].postName === jobDetail[j].postName && bookmark[i].companyName === jobDetail[j].companyName) {
                     foundMatch = true;
                     break;
                 }
@@ -147,9 +114,6 @@ const Allrecruit = () => {
 
     const redirectToKeyword = () => {
         if(searchTerm.trim() !== '') {
-<<<<<<< HEAD
-            window.location.href = `http://localhost:3000/bookmark/keyword/${encodeURIComponent(searchTerm)}`;
-=======
             window.location.href = `http://localhost:3000/allrecruit/keyword/${encodeURIComponent(searchTerm)}`;
         }
     }
@@ -157,7 +121,6 @@ const Allrecruit = () => {
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             redirectToKeyword();
->>>>>>> origin/main
         }
     }
 
@@ -168,7 +131,6 @@ const Allrecruit = () => {
     // };
 
     return (
-<<<<<<< HEAD
         <div className="allrecruit-container">
             <Header/>
             <div className='container-box'>
@@ -192,31 +154,6 @@ const Allrecruit = () => {
                 </div>
             </div>
             <hr/>
-=======
-        <div>
-            <Header />
-            <br></br>
-            <h1 className='mainLocation'>채용공고</h1>
-            <div className='customer'>
-                <div className='customer1'>{user.nickname}</div>
-                <div className='customer2'>님이 원하는 공고를 찾아보세요!</div>
-            </div>
-            <Filter/>
-            <div className='gelleryandlist'>
-                <button className={`colorless-button ${showGallery ? 'active' : ''}`} onClick={() => setShowGallery(true)}>Gallery</button>
-                <button className={`colorless-button ${!showGallery ? 'active' : ''}`} onClick={() => setShowGallery(false)}>List</button>
-
-                <input type="text" className='search' placeholder='검색어를 입력하세요' onChange={handleInputChange} onKeyPress={handleKeyPress}></input>
-                <button className='search-icon' onClick={redirectToKeyword}>
-                    <img src={real_search} alt=""/>
-                </button>
-                
-                <div className='selectBox-container'>
-                    <SelectBox handleSortChange={handleSortChange} />
-                </div>
-            </div>
-            <div className='divider'></div>
->>>>>>> origin/main
             {showGallery ? (
                 bookmarkList.length > 0 ? (
                     <div className='bookmark-container'>
@@ -232,11 +169,7 @@ const Allrecruit = () => {
             ) : (
                 bookmarkList.length > 0 ? (
                     bookmarkList.map((response, index) => (
-<<<<<<< HEAD
-                        <List key={index} response={response} token={token} status={true} id='all-list'/>
-=======
                         <List key={index} response={response} token={token} status={trueArray[index]}/>
->>>>>>> origin/main
                     ))
                 ) : (
                     null
@@ -244,7 +177,8 @@ const Allrecruit = () => {
             )}
             <div id="bottom" className='bottomShape'></div>
         </div>
+        </div>
     )
 }
 
-export default Allrecruit
+export default Allrecruit;

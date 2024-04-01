@@ -107,7 +107,7 @@ const Preference = () => {
             let foundMatch = false;
     
             for (let j = 0; j < jobDetail.length; j++) {
-                if (bookmark[i].postName === jobDetail[j].postName) {
+                if (bookmark[i].postName === jobDetail[j].postName && bookmark[i].companyName === jobDetail[j].companyName) {
                     foundMatch = true;
                     break;
                 }
