@@ -1,7 +1,7 @@
 import './Gallery.css';
 import React from 'react';
 import HeartButton from './HeartButton';
-import goalkeeper from '../images/goalkeeper.png';
+import goalkeeper from '../images/logo1.png';
 
 const Gallery = ({response, token, status}) => { // 매개변수로 response를 받음
     
