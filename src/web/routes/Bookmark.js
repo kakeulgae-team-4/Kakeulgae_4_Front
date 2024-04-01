@@ -4,10 +4,11 @@ import './Bookmark.css';
 import Gallery from '../components/Gallery.js';
 import List from '../components/List.js';
 import Header from '../components/Header';
-import real_search from '../images/realSearch.png';
 import { auth } from "../routes/firebaseAuth";
 import { defaultHeaders } from "../../config/clientConfig";
 import SelectBox from '../components/SelectBox.js';
+import { MdOutlineGridView, MdViewList } from "react-icons/md";
+import { IoSearch } from "react-icons/io5";
 
 const Bookmark = () => {
 
@@ -103,48 +104,49 @@ const Bookmark = () => {
     return (
         <div>
             <Header />
-            <br></br>
-            <h1 className='mainLocation'>즐겨찾기</h1>
-            <div className='customer'>
-                <div className='customer1'>{user.nickname}</div>
-                <div className='customer2'>님의 즐겨찾기 목록을 확인해보세요!</div>
-            </div>
-            <div className='gelleryandlist'>
-                <button className={`colorless-button ${showGallery ? 'active' : ''}`} onClick={() => setShowGallery(true)}>Gallery</button>
-                <button className={`colorless-button ${!showGallery ? 'active' : ''}`} onClick={() => setShowGallery(false)}>List</button>
-
-                <input type="text" className='search' placeholder='검색어를 입력하세요' onChange={handleInputChange} onKeyPress={handleKeyPress}></input>
-                <button className='search-icon' onClick={redirectToKeyword}>
-                    <img src={real_search} alt=""/>
-                </button>
-                
-                <div className='selectBox-container'>
-                    <SelectBox handleSortChange={handleSortChange} />
+            <div className='bookmark'>
+                <div>
+                    <h1>즐겨찾기</h1>
+                    <p><span className='nickname'>{user.nickname}</span>님의 즐겨찾기 목록을 확인해보세요!</p>
                 </div>
-            </div>
-            <div className='divider'></div>
-            {showGallery ? (
-                bookmarkList.length > 0 ? (
-                    <div className='bookmark-container'>
-                        {bookmarkList.map((response, index) => (
-                            <div className={index % 2 === 0 && 'bookmark-container-inline'}>
-                                <Gallery key={index} response={response} token={token} status={true}/>
-                            </div>
-                        ))}
+
+                <div className='galleryandlist'>
+                    <div>
+                        <span className={`view-btn ${showGallery ? 'blue-btn' : ''}`} onClick={() => setShowGallery(true)}><MdOutlineGridView /></span>
+                        <span className={`view-btn ${!showGallery ? 'blue-btn' : ''}`} onClick={() => setShowGallery(false)}><MdViewList /></span>
                     </div>
+                    <div className='search-container'>
+                        <div className='search-box'>
+                            <input type="text" placeholder='검색어를 입력하세요' onChange={handleInputChange}></input>
+                            <span id='search-icon' onClick={redirectToKeyword}><IoSearch /></span>
+                        </div>
+                        <SelectBox handleSortChange={handleSortChange} />
+                    </div>
+                </div>
+                <hr/>
+                {showGallery ? (
+                    bookmarkList.length > 0 ? (
+                        <div className='bookmark-container'>
+                            {bookmarkList.map((response, index) => (
+                                <div className={index % 2 === 0 && 'bookmark-container-inline'}>
+                                    <Gallery key={index} response={response} token={token} status={true}/>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        null
+                    )
                 ) : (
-                    null
-                )
-            ) : (
-                bookmarkList.length > 0 ? (
-                    bookmarkList.map((response, index) => (
-                        <List key={index} response={response} token={token} status={true}/>
-                    ))
-                ) : (
-                    null
-                )
-            )}
-            <div id="bottom" className='bottomShape'></div>
+                    bookmarkList.length > 0 ? (
+                        bookmarkList.map((response, index) => (
+                            <List key={index} response={response} token={token} status={true}/>
+                        ))
+                    ) : (
+                        null
+                    )
+                )}
+                <div id="bottom" className='bottomShape'></div>
+            </div>
         </div>
     )
 }

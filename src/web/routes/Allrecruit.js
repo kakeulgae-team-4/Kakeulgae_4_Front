@@ -4,13 +4,13 @@ import './Allrecruit.css';
 import Header from '../components/Header';
 import Filter from '../components/Filter';
 import { UserContext } from '../components/AuthProvider';
-import { IoSearch } from "react-icons/io5";
 import SelectBox from '../components/SelectBox.js';
 import Gallery from '../components/Gallery.js';
 import List from '../components/List.js';
 import axios from 'axios';
 import { defaultHeaders } from "../../config/clientConfig";
 import { MdOutlineGridView, MdViewList } from "react-icons/md";
+import { IoSearch } from "react-icons/io5";
 import { auth } from "../routes/firebaseAuth";
 
 const Allrecruit = () => {
@@ -132,9 +132,9 @@ const Allrecruit = () => {
             <div className='divider'></div>
             {showGallery ? (
                 bookmarkList.length > 0 ? (
-                    <div className='bookmark-container'>
+                    <div id='bookmark-container'>
                         {bookmarkList.map((response, index) => (
-                            <div className={index % 2 === 0 && 'bookmark-container-inline'}>
+                            <div id={index % 2 === 0 && 'bookmark-container-inline'}>
                                 <Gallery key={index} response={response} token={token} status={true}/>
                             </div>
                         ))}
@@ -145,7 +145,7 @@ const Allrecruit = () => {
             ) : (
                 bookmarkList.length > 0 ? (
                     bookmarkList.map((response, index) => (
-                        <List key={index} response={response} token={token} status={true}/>
+                        <List key={index} response={response} token={token} status={true} id='all-list'/>
                     ))
                 ) : (
                     null
