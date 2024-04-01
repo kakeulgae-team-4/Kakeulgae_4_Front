@@ -5,35 +5,16 @@ import Header from '../components/Header';
 import { UserContext } from '../components/AuthProvider';
 import Filter from '../components/Filter';
 import axios from 'axios';
-import { auth } from "../routes/firebaseAuth";
-import { defaultHeaders } from "../../config/clientConfig";
+
 
 const Mypage = () => {
     const { user } = useContext(UserContext);
     const [loading, setLoading] = useState(true); // 로딩 상태를 저장할 상태 변수
     const [error, setError] = useState(null); // 오류 정보를 저장할 상태 변수
-    const [response1, setResponse1] = useState(null);
 
     const [Image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
     useEffect(() => {
         setImage(user?.url);
-        auth.onAuthStateChanged(async (firebaseUser) => {
-            try{
-                if(firebaseUser) {
-                        const token = await firebaseUser.getIdToken();
-                        defaultHeaders.Authorization = `Bearer ${token}`;
-                        const response = await axios.get('http://localhost:8080/categories', {
-                        headers: defaultHeaders,
-                    });
-                    setResponse1(response);
-                    console.log(response.data);
-                }
-                
-            } catch (error) {
-                console.log('에러 발생:', error);
-            }
-        });
-
     }, [user]);
 
     const fileInput = useRef(null);
@@ -114,7 +95,7 @@ return (
             </div>
 
         <h2><span className="nickname">{user?.nickname}</span>님의 관심 키워드를 설정해보세요!</h2>
-        <Filter response={response1}/>
+        <Filter />
         </div>
 
     </div>
