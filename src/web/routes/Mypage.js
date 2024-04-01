@@ -57,7 +57,10 @@ return (
                     <div className="setting-box">
                         <div className="mypage-nickname">
                             <p>닉네임</p>
-                            <input type="text" defaultValue={user?.nickname}/>
+                            <div>
+                                <input type="text" defaultValue={user?.nickname}/>
+                                <button className='save-btn'>저장</button>
+                            </div>
                         </div>
                         <div className="mypage-email">
                             <p>이메일</p>
