@@ -113,28 +113,29 @@
   padding: 15px;
 }
 
-.clear-button {
-  position: absolute;
-  top: 10;
-  right:0;
-  align-self: flex-end; /* 버튼을 우측 하단에 위치시킴 */
-  padding: 5px 10px;
-  margin: 10px;
-  background-color: #F8F8F8; /* 버튼 배경색 */
-  color: #646464; /* 버튼 글자색 */
-  border: 1px solid #646464;
-  border-radius: 5px;
-  cursor: pointer;
-  outline: none;
-}
-
-.save-button {
+.clear-button, .save-button {
   border: 1px solid rgb(173, 173, 173);
   border-radius: 10px;
   background-color: #fafafa;
   width: 100px;
   padding: 10px;
   position: absolute;
-  right: 10px;
   bottom: 10px;
+}
+.clear-button {
+  right: 120px;
+}
+.save-button {
+  right: 10px;
+}
+.save-button:focus {
+  outline: none;
+}
+.check-icon {
+  color: rgb(57, 197, 57);
+  font-size: 30px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

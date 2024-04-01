@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Filter.css';
 import axios from "axios";
+import { FaCheckCircle } from "react-icons/fa";
 
 const Filter = ({handleSaveKeywords}) => {
   const [selectedCategory, setSelectedCategory] = useState();
@@ -83,6 +84,20 @@ const Filter = ({handleSaveKeywords}) => {
     work_type: '직무 형태',
   };
 
+  
+  // 체크 표시 상태를 관리하는 상태 변수
+  const [showCheck, setShowCheck] = useState(false);
+
+  // 저장 버튼 클릭 핸들러
+  const handleSaveClick = () => {
+    setShowCheck(true); // 체크 표시를 보여줌
+
+    // 1초 후에 체크 표시를 다시 숨김
+    setTimeout(() => {
+      setShowCheck(false);
+    }, 1000); // 1000ms = 1초
+  };
+
   return (
       <div className="filter-container">
         <div className="filter">
@@ -123,7 +138,11 @@ const Filter = ({handleSaveKeywords}) => {
                       className="clear-button">초기화</button>
           )}
           {/* 저장 버튼 추가 */}
-          <button onClick={saveInterest} className="save-button">저장</button>
+          <button onClick={()=> {
+            saveInterest();
+            handleSaveClick();
+          }} className="save-button">저장</button>
+          {showCheck && <span className='check-icon'><FaCheckCircle /></span>} {/* showCheck 상태가 true일 때만 체크 표시를 렌더링 */}
         </div>
       </div>
   );
