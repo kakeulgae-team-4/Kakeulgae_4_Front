@@ -75,9 +75,17 @@ hr {
   width: 100%;
 }
 
+
 #bookmark-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start; /* 왼쪽부터 정렬 */
   gap: 20px;
+}
+#bookmark-container > div {
+  width: calc(33.33% - 20px);
+}
+
+#bookmark-container-inline{
+  display: initial;
 }

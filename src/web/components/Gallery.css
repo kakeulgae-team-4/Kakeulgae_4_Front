@@ -39,6 +39,7 @@
     margin-top: 5%;
     margin-left: 4%;
     font-weight: bold;
+    text-align: left;
 }
 
 .gallery-jobDetail{
@@ -80,8 +81,8 @@
     border-bottom-right-radius: 5px;
 }
 
-.keeper img{
-    width: 300px;
+.keeper>img{
+    width: 100px;
     margin-left: 7%;
 }
 
@@ -105,7 +106,7 @@
         margin-left: 86%;
     }
     .keeper img{
-        width: 200px;
+        width: 100px;
         margin-left: 5%;
     }
 }
@@ -130,7 +131,7 @@
         margin-left: 78%;
     }
     .keeper img{
-        width: 120px;
+        width: 70px;
         margin-left: 3%;
     }
 }

@@ -156,9 +156,9 @@ const Allrecruit = () => {
             <hr/>
             {showGallery ? (
                 bookmarkList.length > 0 ? (
-                    <div className='bookmark-container'>
+                    <div id='bookmark-container'>
                         {bookmarkList.map((response, index) => (
-                            <div className={index % 2 === 0 && 'bookmark-container-inline'}>
+                            <div id={index % 2 === 0 && 'bookmark-container-inline'}>
                                 <Gallery key={index} response={response} token={token} status={trueArray[index]}/>
                             </div>
                         ))}
