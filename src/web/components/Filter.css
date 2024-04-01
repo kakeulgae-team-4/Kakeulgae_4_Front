@@ -2,6 +2,7 @@
   display: flex;
   width: 100%;
   gap: 20px;
+  color: #4e4e4e;
 }
 
 .filter {
@@ -119,4 +120,15 @@
   border-radius: 5px;
   cursor: pointer;
   outline: none;
+}
+
+.save-button {
+  border: 2px solid rgb(173, 173, 173);
+  border-radius: 10px;
+  background-color: #fafafa;
+  width: 100px;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
